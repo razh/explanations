@@ -10,9 +10,9 @@ requirejs.config({
   },
 
   paths: {
-    'backbone': 'lib/backbone/backbone',
-    'jquery': 'lib/jquery/jquery-2.0.2',
-    'underscore': 'lib/underscore/underscore'
+    'backbone': '../../lib/backbone/backbone',
+    'jquery': '../../lib/jquery/jquery-2.0.2',
+    'underscore': '../../lib/underscore/underscore'
   }
 });
 
