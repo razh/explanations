@@ -18,6 +18,7 @@ define(
           id: nextUid(),
           data: null,
 
+          parent: null,
           left: null,
           right: null
         };

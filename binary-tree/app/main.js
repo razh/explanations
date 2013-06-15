@@ -20,12 +20,25 @@ requirejs.config({
 define(
   [ 'jquery',
     'underscore',
-    'backbone' ],
-  function( $, _, Backbone ) {
+    'backbone',
+    'models/tree',
+    'models/tree-node' ],
+  function( $, _, Backbone, Tree, TreeNode ) {
     'use strict';
 
-    console.log( $ );
-    console.log( _ );
-    console.log( Backbone );
+    var node = new TreeNode();
+    var left = new TreeNode();
+    var right = new TreeNode();
+
+    node.set( 'left', left );
+    node.set( 'right', right );
+
+    console.log( node );
+
+
+    var tree = new Tree();
+    tree.insert( 72 );
+
+    console.log( tree );
   }
 );
