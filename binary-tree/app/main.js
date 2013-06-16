@@ -6,11 +6,15 @@ requirejs.config({
     'backbone': {
       deps: [ 'jquery', 'underscore' ],
       exports: 'Backbone'
+    },
+    'd3': {
+      exports: 'd3'
     }
   },
 
   paths: {
     'backbone': '../../lib/backbone/backbone',
+    'd3': '../../lib/d3/d3.v3',
     'jquery': '../../lib/jquery/jquery-2.0.2',
     'underscore': '../../lib/underscore/underscore'
   }
@@ -22,18 +26,10 @@ define(
     'underscore',
     'backbone',
     'models/tree',
-    'models/tree-node' ],
-  function( $, _, Backbone, Tree, TreeNode ) {
+    'models/tree-node',
+    'views/tree-view' ],
+  function( $, _, Backbone, Tree, TreeNode, TreeView ) {
     'use strict';
-
-    var node = new TreeNode();
-    var left = new TreeNode();
-    var right = new TreeNode();
-
-    node.set( 'left', left );
-    node.set( 'right', right );
-
-    // console.log( node );
 
     var tree = new Tree();
     tree.insert( 180 );
@@ -53,7 +49,14 @@ define(
     tree.delete( tree.search( 20 ) );
     console.log( tree.toArray() );
 
+    tree.delete( tree.search( 180 ) );
+    console.log( tree.toArray() );
 
-    // console.log( tree );
+    var treeView = new TreeView({
+      el: '#tree-view',
+      model: tree
+    });
+
+    treeView.render();
   }
 );

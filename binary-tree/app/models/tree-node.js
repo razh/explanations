@@ -34,6 +34,8 @@ define(
           } else {
             current = current.get( 'right' );
           }
+
+          currentData = current.get( 'data' );
         }
 
         return current;

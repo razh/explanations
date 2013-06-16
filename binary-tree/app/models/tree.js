@@ -2,6 +2,7 @@ define(
   [ 'backbone',
     'models/tree-node' ],
   function( Backbone, TreeNode ) {
+    'use strict';
 
     var Tree = Backbone.Model.extend({
       defaults: function() {
