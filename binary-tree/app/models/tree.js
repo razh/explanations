@@ -13,7 +13,7 @@ define(
 
       insert: function( data ) {
         var current = this.get( 'root' ),
-            parent = null;
+            parent  = null;
 
         while ( current !== null ) {
           parent = current;
@@ -37,7 +37,7 @@ define(
       },
 
       delete: function( node ) {
-        var left = node.get( 'left' ),
+        var left  = node.get( 'left' ),
             right = node.get( 'right' );
 
         if ( left === null ) {
@@ -63,8 +63,12 @@ define(
         return this.get( 'root' ).search( data );
       },
 
-      toArray: function( data ) {
+      toArray: function() {
         return this.get( 'root' ).toArray();
+      },
+
+      toJSON: function() {
+        return this.get( 'root' ).toJSON();
       },
 
       min: function() {

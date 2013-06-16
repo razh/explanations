@@ -3,19 +3,9 @@ define(
   function( Backbone ) {
     'use strict';
 
-    // Global unique id.
-    var uid = 0;
-
-    function nextUid() {
-      var currUid = uid;
-      uid++;
-      return currUid;
-    }
-
     var TreeNode = Backbone.Model.extend({
       defaults: function() {
         return {
-          id: nextUid(),
           data: null,
 
           parent: null,
@@ -25,7 +15,7 @@ define(
       },
 
       search: function( data ) {
-        var current = this,
+        var current     = this,
             currentData = current.get( 'data' );
 
         while ( current && data !== currentData ) {
@@ -42,7 +32,7 @@ define(
       },
 
       toArray: function() {
-        var left = this.get( 'left' ),
+        var left  = this.get( 'left' ),
             right = this.get( 'right' );
 
         var leftArray  = left  !== null ? left.toArray()  : [],
@@ -51,11 +41,22 @@ define(
         return leftArray.concat( [ this.get( 'data' ) ], rightArray );
       },
 
+      toJSON: function() {
+        var left  = this.get( 'left' ),
+            right = this.get( 'right' );
+
+        return {
+          data: this.get( 'data' ),
+          left:  left  ? left.toJSON()  : null,
+          right: right ? right.toJSON() : null
+        };
+      },
+
       /**
        * Returns the minimum value in the subtree that is rooted by this node.
        */
       min: function() {
-        var min = this,
+        var min  = this,
             left = min.get( 'left' );
 
         while ( left !== null ) {
@@ -67,7 +68,7 @@ define(
       },
 
       max: function() {
-        var max = this,
+        var max   = this,
             right = max.get( 'right' );
 
         while ( right !== null ) {

@@ -52,6 +52,8 @@ define(
     tree.delete( tree.search( 180 ) );
     console.log( tree.toArray() );
 
+    console.log( tree.toJSON() );
+
     var treeView = new TreeView({
       el: '#tree-view',
       model: tree
