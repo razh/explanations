@@ -54,6 +54,13 @@ define(
 
     console.log( tree.toJSON() );
 
+    setTimeout( function() {
+      console.log( 'added 87' );
+      tree.insert( 87 );
+      console.log( tree.toArray() );
+      treeView.render();
+    }, 1000 );
+
     var treeView = new TreeView({
       el: '#tree-view',
       model: tree

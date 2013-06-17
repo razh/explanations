@@ -17,6 +17,14 @@ define(
       return childrenArray;
     }
 
+    function x( node ) {
+      return 0.8 * node.x * window.innerWidth;
+    }
+
+    function y( node ) {
+      return 0.4 * node.y * window.innerHeight;
+    }
+
     var TreeView = Backbone.View.extend({
       initialize: function() {
         _.bindAll( this, 'render' );
@@ -25,9 +33,9 @@ define(
         // Select d3 element.
         this.vis = d3.select( this.el )
           .append( 'svg:svg' )
-          .data( this.model.toJSON() )
             .attr( 'width', window.innerWidth )
             .attr( 'height', 0.5 * window.innerHeight )
+            .style( 'background-color', 'gray' )
           .append( 'svg:g' );
 
         // d3 configuration.
@@ -38,7 +46,6 @@ define(
       render: function() {
         var nodes = this.tree.nodes( this.model.toJSON() );
 
-        console.log( nodes );
         var node = this.vis.selectAll( 'g.node' )
           .data( nodes );
 
@@ -47,15 +54,21 @@ define(
           .attr( 'class', 'node' );
 
         nodeEnter.append( 'svg:circle' )
-          .attr( 'r', 10 )
-          .style( 'top', function( node ) { return node.y * 10; } )
-          .style( 'left', function( node ) { return node.x * 10; } )
-          .style( 'fill', 'black' );
+          .attr( 'r', 40 )
+          .attr( 'cx', x )
+          .attr( 'cy', y )
+          .style( 'fill', 'white' );
 
         nodeEnter.append( 'svg:text' )
           .text( function( node ) {
             return node.data;
-          });
+          })
+          .attr( 'x', x )
+          .attr( 'y', y )
+          .style( 'fill', 'black' )
+          // Center text.
+          .style( 'text-anchor', 'middle' )
+          .style( 'dominant-baseline', 'middle' );
       }
     });
 
