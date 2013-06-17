@@ -59,6 +59,12 @@ define(
       tree.insert( 87 );
       console.log( tree.toArray() );
       treeView.render();
+
+      setTimeout( function() {
+        tree.insert( 19 );
+        treeView.render();
+        console.log( tree.toArray() );
+      }, 2000 );
     }, 1000 );
 
     var treeView = new TreeView({

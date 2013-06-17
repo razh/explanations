@@ -5,24 +5,28 @@ define(
   function( _, Backbone, d3 ) {
     'use strict';
 
-    function children( node ) {
-      if ( !node ) {
+    function children( d ) {
+      if ( !d ) {
         return null;
       }
 
       var childrenArray = [];
-      if ( node.left  ) { childrenArray.push( node.left ); }
-      if ( node.right ) { childrenArray.push( node.right ); }
+      if ( d.left  ) { childrenArray.push( d.left ); }
+      if ( d.right ) { childrenArray.push( d.right ); }
 
       return childrenArray;
     }
 
-    function x( node ) {
-      return 0.8 * node.x * window.innerWidth;
+    function x( d ) {
+      return 0.8 * d.x * window.innerWidth;
     }
 
-    function y( node ) {
-      return 0.4 * node.y * window.innerHeight;
+    function y( d ) {
+      return 0.2 * d.y * window.innerHeight;
+    }
+
+    function text( d ) {
+      return d.data;
     }
 
     var TreeView = Backbone.View.extend({
@@ -46,6 +50,7 @@ define(
       render: function() {
         var nodes = this.tree.nodes( this.model.toJSON() );
 
+        console.log( nodes );
         var node = this.vis.selectAll( 'g.node' )
           .data( nodes );
 
@@ -60,15 +65,23 @@ define(
           .style( 'fill', 'white' );
 
         nodeEnter.append( 'svg:text' )
-          .text( function( node ) {
-            return node.data;
-          })
+          .text( text )
           .attr( 'x', x )
           .attr( 'y', y )
           .style( 'fill', 'black' )
           // Center text.
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
+
+        var nodeUpdate = node.transition()
+          .duration( 1000 );
+
+        nodeUpdate.select( 'circle' )
+          .attr( 'x', x )
+          .attr( 'y', y );
+
+        nodeUpdate.select( 'text' )
+          .text( text );
       }
     });
 
