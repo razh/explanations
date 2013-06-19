@@ -70,16 +70,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 9, ../sass/screen.scss */
 .node circle {
   fill: white;
+  stroke: black;
+  stroke-width: 2px;
 }
-/* line 13, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: black;
 }
 
-/* line 19, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
 .link {
   fill: none;
-  stroke: #000;
+  stroke: black;
   stroke-width: 2px;
 }

@@ -16,6 +16,7 @@ requirejs.config({
     'backbone': '../../lib/backbone/backbone',
     'd3': '../../lib/d3/d3.v3',
     'jquery': '../../lib/jquery/jquery-2.0.2',
+    'text': '../../text',
     'underscore': '../../lib/underscore/underscore'
   }
 });
@@ -27,8 +28,9 @@ define(
     'backbone',
     'models/tree',
     'models/tree-node',
+    'views/input-view',
     'views/tree-view' ],
-  function( $, _, Backbone, Tree, TreeNode, TreeView ) {
+  function( $, _, Backbone, Tree, TreeNode, InputView, TreeView ) {
     'use strict';
 
     var tree = new Tree();
@@ -74,5 +76,12 @@ define(
     });
 
     treeView.render();
+
+    var inputView = new InputView({
+      el: '#input-view',
+      model: tree
+    });
+
+    inputView.render();
   }
 );

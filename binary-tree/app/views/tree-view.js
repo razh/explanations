@@ -2,7 +2,7 @@ define(
   [ 'underscore',
     'backbone',
     'd3' ],
-  function( _, Backbone, d3 ) {
+  function( _, Backbone, d3, treeTemplate ) {
     'use strict';
 
     function children( d ) {
@@ -18,7 +18,7 @@ define(
     }
 
     function x( d ) {
-      return 0.8 * d.x * window.innerWidth;
+      return d.x * window.innerWidth;
     }
 
     function y( d ) {
@@ -33,6 +33,16 @@ define(
       return 'translate(' + x(d) + ', ' + y(d) + ')';
     }
 
+    function translateToParent( d ) {
+      d = d.parent ? d.parent : d;
+      return translate( d );
+    }
+
+    var diagonal = d3.svg.diagonal()
+      .projection( function( d ) {
+        return [ x(d), y(d) ];
+      });
+
     var TreeView = Backbone.View.extend({
       initialize: function() {
         _.bindAll( this, 'render' );
@@ -43,7 +53,7 @@ define(
           .append( 'svg:svg' )
             .attr( 'width', window.innerWidth )
             .attr( 'height', 0.5 * window.innerHeight )
-            .style( 'background-color', 'gray' )
+            .style( 'background-color', 'gray' );
 
         this.vis.append( 'g' ).attr( 'id', 'links' );
         this.vis.append( 'g' ).attr( 'id', 'nodes' );
@@ -51,11 +61,6 @@ define(
         // d3 configuration.
         this.tree = d3.layout.tree()
           .children( children );
-
-        this.diagonal = d3.svg.diagonal()
-          .projection( function( d ) {
-            return [ x(d), y(d) ];
-          });
       },
 
       render: function() {
@@ -68,18 +73,18 @@ define(
 
         link.enter().append( 'path' )
           .attr( 'class', 'link' )
-          .attr( 'd', this.diagonal )
+          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1e-6 );
 
         link.transition()
           .duration( 800 )
-          .attr( 'd', this.diagonal )
+          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
 
         link.exit()
           .transition()
           .duration( 800 )
-          .attr( 'd', this.diagonal )
+          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1e-6 )
           .remove();
 
@@ -93,7 +98,7 @@ define(
         var nodeEnter = node.enter()
           .append( 'g' )
           .attr( 'class', 'node' )
-          .attr( 'transform', translate );
+          .attr( 'transform', translateToParent );
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 1e-6 );
@@ -129,6 +134,8 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 1e-6 );
+
+        return this;
       }
     });
 
