@@ -22,11 +22,15 @@ define(
     }
 
     function y( d ) {
-      return 0.2 * d.y * window.innerHeight;
+      return 0.25 * d.y * window.innerHeight + 50;
     }
 
-    function text( d ) {
+    function data( d ) {
       return d.data;
+    }
+
+    function translate( d ) {
+      return 'translate(' + x(d) + ', ' + y(d) + ')';
     }
 
     var TreeView = Backbone.View.extend({
@@ -40,48 +44,91 @@ define(
             .attr( 'width', window.innerWidth )
             .attr( 'height', 0.5 * window.innerHeight )
             .style( 'background-color', 'gray' )
-          .append( 'svg:g' );
+
+        this.vis.append( 'g' ).attr( 'id', 'links' );
+        this.vis.append( 'g' ).attr( 'id', 'nodes' );
 
         // d3 configuration.
         this.tree = d3.layout.tree()
           .children( children );
+
+        this.diagonal = d3.svg.diagonal()
+          .projection( function( d ) {
+            return [ x(d), y(d) ];
+          });
       },
 
       render: function() {
         var nodes = this.tree.nodes( this.model.toJSON() );
 
-        console.log( nodes );
-        var node = this.vis.selectAll( 'g.node' )
-          .data( nodes );
+        // Links.
+        var link = this.vis.select( '#links' )
+          .selectAll( '.link' )
+          .data( this.tree.links( nodes ) );
 
+        link.enter().append( 'path' )
+          .attr( 'class', 'link' )
+          .attr( 'd', this.diagonal )
+          .style( 'stroke-opacity', 1e-6 );
+
+        link.transition()
+          .duration( 800 )
+          .attr( 'd', this.diagonal )
+          .style( 'stroke-opacity', 1 );
+
+        link.exit()
+          .transition()
+          .duration( 800 )
+          .attr( 'd', this.diagonal )
+          .style( 'stroke-opacity', 1e-6 )
+          .remove();
+
+
+        // Nodes.
+        var node = this.vis.select( '#nodes' )
+          .selectAll( '.node' )
+          .data( nodes, data );
+
+        // Enter.
         var nodeEnter = node.enter()
-          .append( 'svg:g' )
-          .attr( 'class', 'node' );
+          .append( 'g' )
+          .attr( 'class', 'node' )
+          .attr( 'transform', translate );
 
-        nodeEnter.append( 'svg:circle' )
-          .attr( 'r', 40 )
-          .attr( 'cx', x )
-          .attr( 'cy', y )
-          .style( 'fill', 'white' );
+        nodeEnter.append( 'circle' )
+          .attr( 'r', 1e-6 );
 
-        nodeEnter.append( 'svg:text' )
-          .text( text )
-          .attr( 'x', x )
-          .attr( 'y', y )
-          .style( 'fill', 'black' )
+        nodeEnter.append( 'text' )
+          .text( data )
+          .style( 'fill-opacity', 1e-6 )
           // Center text.
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
+        // Update.
         var nodeUpdate = node.transition()
-          .duration( 1000 );
+          .duration( 500 )
+          .attr( 'transform', translate );
 
         nodeUpdate.select( 'circle' )
-          .attr( 'x', x )
-          .attr( 'y', y );
+          .attr( 'r', 20 );
 
         nodeUpdate.select( 'text' )
-          .text( text );
+          .text( data )
+          .style( 'fill-opacity', 1 );
+
+        // Exit.
+        var nodeExit = node.exit()
+          .transition()
+          .duration( 1000 )
+          .attr( 'transform', translate )
+          .remove();
+
+        nodeExit.select( 'circle' )
+          .attr( 'r', 1e-6 );
+
+        nodeExit.select( 'text' )
+          .style( 'fill-opacity', 1e-6 );
       }
     });
 

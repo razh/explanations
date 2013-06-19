@@ -4,3 +4,20 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+
+.node {
+  circle {
+    fill: white;
+  }
+
+  text {
+    font-family: Helvetica, Arial, sans-serif;
+    fill: black;
+  }
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}

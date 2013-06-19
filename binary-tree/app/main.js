@@ -62,10 +62,11 @@ define(
 
       setTimeout( function() {
         tree.insert( 19 );
+        tree.insert( 35 );
         treeView.render();
         console.log( tree.toArray() );
-      }, 2000 );
-    }, 1000 );
+      }, 1000 );
+    }, 500 );
 
     var treeView = new TreeView({
       el: '#tree-view',
