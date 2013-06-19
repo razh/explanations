@@ -85,3 +85,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke: black;
   stroke-width: 2px;
 }
+
+/* line 29, ../sass/screen.scss */
+#input-view .input-value {
+  padding: 5px;
+  border-radius: 10px;
+  float: left;
+}
+/* line 35, ../sass/screen.scss */
+#input-view .input-button {
+  margin: 0 2px;
+  padding: 5px;
+  width: 20px;
+  float: left;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+/* line 48, ../sass/screen.scss */
+#input-view .input-button:active {
+  background: gray;
+  color: black;
+}

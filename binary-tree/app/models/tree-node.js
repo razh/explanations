@@ -25,7 +25,9 @@ define(
             current = current.get( 'right' );
           }
 
-          currentData = current.get( 'data' );
+          if ( current ) {
+            currentData = current.get( 'data' );
+          }
         }
 
         return current;
