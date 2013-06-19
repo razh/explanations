@@ -3,9 +3,19 @@ define(
   function( Backbone ) {
     'use strict';
 
+    // Global unique id.
+    var uid = 0;
+
+    function nextUid() {
+      var currUid = uid;
+      uid++;
+      return currUid;
+    }
+
     var TreeNode = Backbone.Model.extend({
       defaults: function() {
         return {
+          id: nextUid(),
           data: null,
 
           parent: null,
@@ -48,6 +58,7 @@ define(
             right = this.get( 'right' );
 
         return {
+          id: this.get( 'id' ),
           data: this.get( 'data' ),
           left:  left  ? left.toJSON()  : null,
           right: right ? right.toJSON() : null

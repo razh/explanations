@@ -100,10 +100,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   float: left;
   background: black;
   color: white;
+  border: none;
   border-radius: 5px;
   text-align: center;
 }
-/* line 48, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 #input-view .input-button:active {
   background: gray;
   color: black;

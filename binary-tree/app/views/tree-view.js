@@ -29,6 +29,10 @@ define(
       return d.data;
     }
 
+    function id( d ) {
+      return d.id;
+    }
+
     function translate( d ) {
       return 'translate(' + x(d) + ', ' + y(d) + ')';
     }
@@ -92,7 +96,7 @@ define(
         // Nodes.
         var node = this.vis.select( '#nodes' )
           .selectAll( '.node' )
-          .data( nodes, data );
+          .data( nodes, id );
 
         // Enter.
         var nodeEnter = node.enter()
