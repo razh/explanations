@@ -1,8 +1,9 @@
 define(
-  [ 'underscore',
+  [ 'jquery',
+    'underscore',
     'backbone',
     'text!templates/input-view.html' ],
-  function( _, Backbone, inputTemplate ) {
+  function( $, _, Backbone, inputTemplate ) {
     'use strict';
 
     var InputView = Backbone.View.extend({
@@ -14,7 +15,8 @@ define(
       },
 
       initialize: function() {
-        _.bindAll( this, 'render' );
+        _.bindAll( this, 'render', 'onKeyDown' );
+        $( document ).bind( 'keydown', this.onKeyDown );
         this.listenTo( this.model, 'change', this.render );
       },
 
@@ -24,28 +26,44 @@ define(
       },
 
       insert: function() {
-        var number = this.getInput();
-        if ( !isNaN( number ) ) {
-          this.model.insert( number );
-          // We trigger changes here because we want the model to be free of event references.
-          this.model.trigger( 'change' );
-        }
+        var numbers = this.getInput();
+        numbers.forEach( function( number ) {
+          if ( !isNaN( number ) ) {
+            this.model.insert( number );
+          }
+        }, this ); // Set context to this.
+
+        // We trigger changes here because we want the model to be free of event references.
+        this.model.trigger( 'change' );
       },
 
       delete: function() {
-        var number = this.getInput();
-        if ( !isNaN( number ) ) {
-          var node = this.model.search( number );
-          if ( node ) {
-            this.model.delete( node );
-            // And trigger changes here as well.
-            this.model.trigger( 'change' );
+        var numbers = this.getInput();
+        numbers.forEach( function( number ) {
+          if ( !isNaN( number ) ) {
+            var node = this.model.search( number );
+            if ( node ) {
+              this.model.delete( node );
+            }
           }
-        }
+        }, this );
+
+        // And trigger changes here as well.
+        this.model.trigger( 'change' );
       },
 
       getInput: function() {
-        return parseInt( this.$( '.input-value' ).val(), 10 );
+        var valuesArray = this.$( '.input-value' ).val().split( ',' );
+        return valuesArray.map( function( value ) {
+          return parseInt( value, 10 );
+        });
+      },
+
+      onKeyDown: function( event ) {
+        // Enter.
+        if ( event.which === 13 ) {
+          this.insert();
+        }
       }
     });
 

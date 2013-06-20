@@ -104,18 +104,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 44, ../sass/screen.scss */
 #input-view .input-button {
   margin: 0 2px;
-  padding: 8px;
+  padding: 6px;
   width: 50px;
   float: left;
   font-size: 16pt;
   background: black;
   color: white;
-  border: none;
+  border: 2px solid black;
   border-radius: 5px;
   text-align: center;
 }
 /* line 60, ../sass/screen.scss */
 #input-view .input-button:active {
-  background: gray;
+  background: white;
   color: black;
 }
