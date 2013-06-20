@@ -2,17 +2,18 @@ define(
   [ 'underscore',
     'backbone',
     'd3' ],
-  function( _, Backbone, d3, treeTemplate ) {
+  function( _, Backbone, d3 ) {
     'use strict';
 
     function children( d ) {
-      if ( !d ) {
-        return null;
-      }
-
       var childrenArray = [];
-      if ( d.left  ) { childrenArray.push( d.left ); }
-      if ( d.right ) { childrenArray.push( d.right ); }
+
+      if ( d ) {
+        if ( d.left  ) { childrenArray.push( d.left  ); }
+        if ( d.right ) { childrenArray.push( d.right ); }
+        // if ( d.left  ) { childrenArray.push( d.left  ); } else { childrenArray.push( {} ); }
+        // if ( d.right ) { childrenArray.push( d.right ); } else { childrenArray.push( {} ); }
+      }
 
       return childrenArray;
     }
@@ -22,7 +23,7 @@ define(
     }
 
     function y( d ) {
-      return 0.25 * d.y * window.innerHeight + 50;
+      return 0.6 * d.y * window.innerHeight + 50;
     }
 
     function data( d ) {
@@ -42,6 +43,16 @@ define(
       return translate( d );
     }
 
+    // Cantor pairing function to encode two numbers as one.
+    function pairing( i, j ) {
+      return 0.5 * ( i + j ) * ( i + j + 1 ) + j;
+    }
+
+    // Creates a unique id for each link.
+    function linkID( d ) {
+      return pairing( d.source.id, d.target.id );
+    }
+
     var diagonal = d3.svg.diagonal()
       .projection( function( d ) {
         return [ x(d), y(d) ];
@@ -54,10 +65,7 @@ define(
 
         // Select d3 element.
         this.vis = d3.select( this.el )
-          .append( 'svg:svg' )
-            .attr( 'width', window.innerWidth )
-            .attr( 'height', 0.5 * window.innerHeight )
-            .style( 'background-color', 'gray' );
+          .append( 'svg:svg' );
 
         this.vis.append( 'g' ).attr( 'id', 'links' );
         this.vis.append( 'g' ).attr( 'id', 'nodes' );
@@ -73,7 +81,7 @@ define(
         // Links.
         var link = this.vis.select( '#links' )
           .selectAll( '.link' )
-          .data( this.tree.links( nodes ) );
+          .data( this.tree.links( nodes ), linkID );
 
         link.enter().append( 'path' )
           .attr( 'class', 'link' )

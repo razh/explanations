@@ -86,25 +86,35 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke-width: 2px;
 }
 
-/* line 29, ../sass/screen.scss */
-#input-view .input-value {
-  padding: 5px;
-  border-radius: 10px;
-  float: left;
+/* line 28, ../sass/screen.scss */
+#input-view {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
-/* line 35, ../sass/screen.scss */
+/* line 33, ../sass/screen.scss */
+#input-view .input-value {
+  float: left;
+  padding: 5px;
+  font-size: 16pt;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+}
+/* line 44, ../sass/screen.scss */
 #input-view .input-button {
   margin: 0 2px;
-  padding: 5px;
-  width: 20px;
+  padding: 8px;
+  width: 50px;
   float: left;
+  font-size: 16pt;
   background: black;
   color: white;
   border: none;
   border-radius: 5px;
   text-align: center;
 }
-/* line 49, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 #input-view .input-button:active {
   background: gray;
   color: black;
