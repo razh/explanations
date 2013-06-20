@@ -1,6 +1,6 @@
 define(
   [ 'backbone',
-    'models/tree-node' ],
+    './tree-node' ],
   function( Backbone, TreeNode ) {
     'use strict';
 

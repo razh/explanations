@@ -1,6 +1,5 @@
 define(
-  [],
-  function() {
-
+  [ '../../binary-tree/app/models/tree' ],
+  function( Tree ) {
   }
 );

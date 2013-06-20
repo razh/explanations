@@ -178,11 +178,6 @@ define(
           .style( 'fill-opacity', 0 );
 
         return this;
-      },
-
-      delete: function( node ) {
-
-        this.model.delete( node );
       }
     });
 
