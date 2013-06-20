@@ -8,11 +8,10 @@ define(
     function children( d ) {
       var childrenArray = [];
 
-      if ( d ) {
-        if ( d.left  ) { childrenArray.push( d.left  ); }
-        if ( d.right ) { childrenArray.push( d.right ); }
-        // if ( d.left  ) { childrenArray.push( d.left  ); } else { childrenArray.push( {} ); }
-        // if ( d.right ) { childrenArray.push( d.right ); } else { childrenArray.push( {} ); }
+      if ( d && d.id ) {
+        // If there is only one node, add an empty node for positioning.
+        if ( d.left  ) { childrenArray.push( d.left  ); } else { childrenArray.push( {} ); }
+        if ( d.right ) { childrenArray.push( d.right ); } else { childrenArray.push( {} ); }
       }
 
       return childrenArray;
@@ -58,6 +57,8 @@ define(
         return [ x(d), y(d) ];
       });
 
+    var duration = 500;
+
     var TreeView = Backbone.View.extend({
       initialize: function() {
         _.bindAll( this, 'render' );
@@ -83,21 +84,24 @@ define(
           .selectAll( '.link' )
           .data( this.tree.links( nodes ), linkID );
 
-        link.enter().append( 'path' )
+        link.enter()
+          .append( 'path' )
+          .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
+          .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
           .attr( 'class', 'link' )
           .attr( 'd', diagonal )
-          .style( 'stroke-opacity', 1e-6 );
+          .style( 'stroke-opacity', 0 );
 
         link.transition()
-          .duration( 800 )
+          .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
 
         link.exit()
           .transition()
-          .duration( 800 )
+          .duration( duration )
           .attr( 'd', diagonal )
-          .style( 'stroke-opacity', 1e-6 )
+          .style( 'stroke-opacity', 0 )
           .remove();
 
 
@@ -109,22 +113,23 @@ define(
         // Enter.
         var nodeEnter = node.enter()
           .append( 'g' )
+          .filter( function( d ) { return d.id; } ) // Draw non-empty nodes.
           .attr( 'class', 'node' )
           .attr( 'transform', translateToParent );
 
         nodeEnter.append( 'circle' )
-          .attr( 'r', 1e-6 );
+          .attr( 'r', 0 );
 
         nodeEnter.append( 'text' )
           .text( data )
-          .style( 'fill-opacity', 1e-6 )
+          .style( 'fill-opacity', 0 )
           // Center text.
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
         // Update.
         var nodeUpdate = node.transition()
-          .duration( 500 )
+          .duration( duration )
           .attr( 'transform', translate );
 
         nodeUpdate.select( 'circle' )
@@ -137,15 +142,15 @@ define(
         // Exit.
         var nodeExit = node.exit()
           .transition()
-          .duration( 1000 )
+          .duration( duration )
           .attr( 'transform', translate )
           .remove();
 
         nodeExit.select( 'circle' )
-          .attr( 'r', 1e-6 );
+          .attr( 'r', 0 );
 
         nodeExit.select( 'text' )
-          .style( 'fill-opacity', 1e-6 );
+          .style( 'fill-opacity', 0 );
 
         return this;
       }
