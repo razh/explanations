@@ -10,6 +10,15 @@
     <div id="tree-view"></div>
     <div id="input-view"></div>
 
-    <script data-main="./../binary-tree/app/main" src="../require.js"></script>
+    <script src="../require.js"></script>
+    <script>
+      requirejs.config({
+        baseUrl: 'binary-tree/app'
+      });
+
+      require( [ '../../config' ], function() {
+        require( [ 'main' ] );
+      });
+    </script>
   </body>
 </html>
