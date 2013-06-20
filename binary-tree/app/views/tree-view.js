@@ -114,7 +114,7 @@ define(
         // Enter.
         var nodeEnter = node.enter()
           .append( 'g' )
-            .filter( function( d ) { return d.id; } ) // Draw non-empty nodes.
+            .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
               .attr( 'transform', translateToParent );
 
@@ -146,8 +146,10 @@ define(
         var that = this;
         nodeEnter.on( 'click', function( d ) {
           var node = that.model.searchBy( 'id', d.id );
-          that.model.delete( node );
-          that.render();
+          if ( node ) {
+            that.model.delete( node );
+            that.render();
+          }
         });
 
         // Update.

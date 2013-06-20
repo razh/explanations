@@ -37,6 +37,10 @@ define(
       },
 
       delete: function( node ) {
+        if ( !node ) {
+          return;
+        }
+
         var left  = node.get( 'left' ),
             right = node.get( 'right' );
 
@@ -60,27 +64,36 @@ define(
       },
 
       search: function( data ) {
-        return this.get( 'root' ).search( data );
+        return this.rootFn( 'search', data );
       },
 
       searchBy: function( key, value ) {
-        return this.get( 'root' ).searchBy( key, value );
+        return this.rootFn( 'searchBy', key, value );
       },
 
       toArray: function() {
-        return this.get( 'root' ).toArray();
+        return this.rootFn( 'toArray' ) || [];
       },
 
       toJSON: function() {
-        return this.get( 'root' ).toJSON();
+        return this.rootFn( 'toJSON' ) || {};
       },
 
       min: function() {
-        return this.get( 'root' ).min();
+        return this.rootFn( 'min' );
       },
 
       max: function() {
-        return this.get( 'root' ).max();
+        return this.rootFn( 'max' );
+      },
+
+      // Handles functions called on this tree's root.
+      rootFn: function() {
+        var args = Array.prototype.slice.call( arguments ),
+            fn   = args.shift();
+
+        var root = this.get( 'root' );
+        return root ? root[ fn ].apply( root, args ) : null;
       }
     });
 
