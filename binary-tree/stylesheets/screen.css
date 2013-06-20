@@ -73,26 +73,36 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke: black;
   stroke-width: 2px;
 }
-/* line 15, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: black;
 }
 
-/* line 21, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
+.delete-overlay circle {
+  fill: black;
+  stroke: white;
+}
+/* line 28, ../sass/screen.scss */
+.delete-overlay text {
+  fill: white;
+}
+
+/* line 33, ../sass/screen.scss */
 .link {
   fill: none;
   stroke: black;
   stroke-width: 2px;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 #input-view {
   position: absolute;
   bottom: 10px;
   left: 10px;
 }
-/* line 33, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 #input-view .input-value {
   float: left;
   padding: 5px;
@@ -101,7 +111,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border: none;
   border-bottom: 1px solid black;
 }
-/* line 44, ../sass/screen.scss */
+/* line 56, ../sass/screen.scss */
 #input-view .input-button {
   margin: 0 2px;
   padding: 6px;
@@ -114,7 +124,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-radius: 5px;
   text-align: center;
 }
-/* line 60, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 #input-view .input-button:active {
   background: white;
   color: black;

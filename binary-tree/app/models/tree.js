@@ -63,6 +63,10 @@ define(
         return this.get( 'root' ).search( data );
       },
 
+      searchBy: function( key, value ) {
+        return this.get( 'root' ).searchBy( key, value );
+      },
+
       toArray: function() {
         return this.get( 'root' ).toArray();
       },

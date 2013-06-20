@@ -43,6 +43,29 @@ define(
         return current;
       },
 
+      // Do an in-order traversal to find node with given key/value.
+      searchBy: function( key, value ) {
+        var left  = this.get( 'left' ),
+            right = this.get( 'right' );
+
+        var node;
+        if ( left ) {
+          node = left.searchBy( key, value );
+          if ( node ) { return node; }
+        }
+
+        if ( value === this.get( key ) ) {
+          return this;
+        }
+
+        if ( right ) {
+          node = right.searchBy( key, value );
+          if ( node ) { return node; }
+        }
+
+        return null;
+      },
+
       toArray: function() {
         var left  = this.get( 'left' ),
             right = this.get( 'right' );

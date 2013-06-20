@@ -48,7 +48,7 @@ define(
     }
 
     // Creates a unique id for each link.
-    function linkID( d ) {
+    function linkId( d ) {
       return pairing( d.source.id, d.target.id );
     }
 
@@ -58,6 +58,7 @@ define(
       });
 
     var duration = 500;
+    var radius = 20;
 
     var TreeView = Backbone.View.extend({
       initialize: function() {
@@ -82,15 +83,15 @@ define(
         // Links.
         var link = this.vis.select( '#links' )
           .selectAll( '.link' )
-          .data( this.tree.links( nodes ), linkID );
+          .data( this.tree.links( nodes ), linkId );
 
         link.enter()
           .append( 'path' )
-          .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
-          .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
-          .attr( 'class', 'link' )
-          .attr( 'd', diagonal )
-          .style( 'stroke-opacity', 0 );
+            .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
+            .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
+              .attr( 'class', 'link' )
+              .attr( 'd', diagonal )
+              .style( 'stroke-opacity', 0 );
 
         link.transition()
           .duration( duration )
@@ -113,9 +114,9 @@ define(
         // Enter.
         var nodeEnter = node.enter()
           .append( 'g' )
-          .filter( function( d ) { return d.id; } ) // Draw non-empty nodes.
-          .attr( 'class', 'node' )
-          .attr( 'transform', translateToParent );
+            .filter( function( d ) { return d.id; } ) // Draw non-empty nodes.
+              .attr( 'class', 'node' )
+              .attr( 'transform', translateToParent );
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 );
@@ -127,13 +128,35 @@ define(
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
+        // Mouse over event.
+        nodeEnter.on( 'mouseover', function() {
+          d3.select( this )
+              .classed( 'delete-overlay', true )
+            .select( 'text' )
+              .text( '—' );
+        });
+
+        nodeEnter.on( 'mouseout', function() {
+          d3.select( this )
+              .classed( 'delete-overlay', false )
+            .select( 'text' )
+              .text( data );
+        });
+
+        var that = this;
+        nodeEnter.on( 'click', function( d ) {
+          var node = that.model.searchBy( 'id', d.id );
+          that.model.delete( node );
+          that.render();
+        });
+
         // Update.
         var nodeUpdate = node.transition()
           .duration( duration )
           .attr( 'transform', translate );
 
         nodeUpdate.select( 'circle' )
-          .attr( 'r', 20 );
+          .attr( 'r', radius );
 
         nodeUpdate.select( 'text' )
           .text( data )
@@ -153,6 +176,11 @@ define(
           .style( 'fill-opacity', 0 );
 
         return this;
+      },
+
+      delete: function( node ) {
+
+        this.model.delete( node );
       }
     });
 
