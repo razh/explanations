@@ -13,10 +13,9 @@ define(
         translate         = Utils.translate,
         translateToParent = Utils.translateToParent,
         linkId            = Utils.linkId,
-        diagonal          = Utils.diagonal;
-
-    var duration = 500;
-    var radius = 20;
+        diagonal          = Utils.diagonal,
+        duration          = Utils.duration,
+        radius            = Utils.radius;
 
     var TreeView = Backbone.View.extend({
       initialize: function() {
