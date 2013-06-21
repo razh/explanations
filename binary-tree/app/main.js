@@ -43,7 +43,7 @@ define(
         tree.insert( 35 );
         treeView.render();
         console.log( tree.toArray() );
-      }, 1000 );
+      }, 500 );
     }, 500 );
 
     var treeView = new TreeView({
