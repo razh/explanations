@@ -4,7 +4,7 @@ define(
     'use strict';
 
     // Global unique id.
-    var uid = 0;
+    var uid = 1;
 
     function nextUid() {
       var currUid = uid;

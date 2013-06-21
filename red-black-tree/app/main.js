@@ -8,6 +8,7 @@ define(
     var tree = new RBTree();
     tree.insert( 59 );
     tree.insert( 6 );
+    tree.delete( tree.search( 59 ));
     console.log( tree.toArray() );
 
     var treeView = new RBTreeView({
@@ -17,7 +18,6 @@ define(
 
     console.log( treeView );
     treeView.render();
-
 
     var inputView = new InputView({
       el: '#input-view',

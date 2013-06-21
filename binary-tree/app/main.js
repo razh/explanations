@@ -1,12 +1,9 @@
 define(
-  [ 'jquery',
-    'underscore',
-    'backbone',
-    'models/tree',
+  [ 'models/tree',
     'models/tree-node',
     'views/input-view',
     'views/tree-view' ],
-  function( $, _, Backbone, Tree, TreeNode, InputView, TreeView ) {
+  function( Tree, TreeNode, InputView, TreeView ) {
     'use strict';
 
     var tree = new Tree();
