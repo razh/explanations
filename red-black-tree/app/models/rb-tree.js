@@ -5,6 +5,12 @@ define(
     'use strict';
 
     var RBTree = Tree.extend({
+      defaults: function() {
+        var defaults = Tree.prototype.defaults();
+        defaults.nodeClass = RBTreeNode;
+        return defaults;
+      },
+
       insert: function( data ) {
         Tree.prototype.insert.call( this, data );
       },

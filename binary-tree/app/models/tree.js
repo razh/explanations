@@ -7,7 +7,8 @@ define(
     var Tree = Backbone.Model.extend({
       defaults: function() {
         return {
-          root: null
+          root: null,
+          nodeClass: TreeNode
         };
       },
 
@@ -24,7 +25,8 @@ define(
           }
         }
 
-        var newNode = new TreeNode({ data: data });
+        var Node    = this.get( 'nodeClass' ),
+            newNode = new Node({ data: data });
         newNode.set( 'parent', parent );
 
         if ( parent === null ) {

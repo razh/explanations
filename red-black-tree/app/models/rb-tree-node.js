@@ -11,6 +11,12 @@ define(
         var defaults = TreeNode.prototype.defaults();
         defaults.color = RED;
         return defaults;
+      },
+
+      toJSON: function() {
+        var jsonObject = TreeNode.prototype.toJSON.call( this );
+        jsonObject.color = this.get( 'color' );
+        return jsonObject;
       }
     });
 
