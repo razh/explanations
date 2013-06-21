@@ -12,6 +12,9 @@ define(
         };
       },
 
+      /*
+        Inserts the given data and returns the containing node.
+       */
       insert: function( data ) {
         var current = this.get( 'root' ),
             parent  = null;
@@ -27,6 +30,7 @@ define(
 
         var Node    = this.get( 'nodeClass' ),
             newNode = new Node({ data: data });
+
         newNode.set( 'parent', parent );
 
         if ( parent === null ) {
@@ -36,6 +40,8 @@ define(
         } else {
           parent.set( 'right', newNode );
         }
+
+        return newNode;
       },
 
       delete: function( node ) {

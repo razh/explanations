@@ -12,7 +12,42 @@ define(
       },
 
       insert: function( data ) {
-        Tree.prototype.insert.call( this, data );
+        var newNode = Tree.prototype.insert.call( this, data );
+        this.insertFixup( newNode );
+        return newNode;
+      },
+
+      insertFixup: function( node ) {
+        var current = node,
+            parent, grandParent, parentSibling;
+
+        while ( current.get( 'parent' ).get( 'color' ) === RBTreeNode.RED ) {
+          parent = current.get( 'parent' );
+          if ( parent ) {
+            grandParent = parent.get( 'parent' );
+          }
+
+          if ( grandParent ) {
+            if ( parent === grandParent.get( 'left' ) ) {
+              parentSibling = grandParent.get( 'right' );
+
+              if ( parentSibling.get( 'color' ) === RBTreeNode.RED ) {
+                parent.set( 'color', RBTreeNode.BLACK );
+                parentSibling.set( 'color', RBTreeNode.BLACK );
+                grandParent.set( 'color', RBTreeNode.RED );
+                current = grandParent;
+              } else if ( current === parent.get( 'right' ) ) {
+                current = parent;
+                this.leftRotate( current );
+              }
+
+            } else {
+
+            }
+          }
+        }
+
+        this.get( 'root' ).set( 'color', RBTreeNode.BLACK );
       },
 
       delete: function( data ) {
