@@ -56,16 +56,18 @@ define(
       });
 
     return {
-      children: children,
-      x: x,
-      y: y,
-      data: data,
-      id: id,
-      translate: translate,
+      children:          children,
+      x:                 x,
+      y:                 y,
+      data:              data,
+      id:                id,
+      translate:         translate,
       translateToParent: translateToParent,
-      pairing: pairing,
-      linkId: linkId,
-      diagonal: diagonal
+      pairing:           pairing,
+      linkId:            linkId,
+      diagonal:          diagonal,
+      duration:          500,
+      radius:            20
     };
   }
 );
