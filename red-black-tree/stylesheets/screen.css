@@ -73,16 +73,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   bottom: 10px;
   left: 10px;
 }
-/* line 6, ../../sass/_shared.scss */
+/* line 7, ../../sass/_shared.scss */
 #input-view .input-value {
   float: left;
   padding: 5px;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 16pt;
   outline: none;
   border: none;
   border-bottom: 1px solid black;
 }
-/* line 17, ../../sass/_shared.scss */
+/* line 19, ../../sass/_shared.scss */
 #input-view .input-button {
   margin: 0 2px;
   padding: 6px;
@@ -95,8 +96,34 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-radius: 5px;
   text-align: center;
 }
-/* line 33, ../../sass/_shared.scss */
+/* line 35, ../../sass/_shared.scss */
 #input-view .input-button:active {
   background: white;
   color: black;
+}
+
+/* line 11, ../sass/screen.scss */
+.node circle {
+  stroke: black;
+  stroke-width: 2px;
+}
+/* line 15, ../sass/screen.scss */
+.node circle .red {
+  fill: red;
+}
+/* line 19, ../sass/screen.scss */
+.node circle .black {
+  fill: black;
+}
+/* line 24, ../sass/screen.scss */
+.node text {
+  font-family: Helvetica, Arial, sans-serif;
+  fill: black;
+}
+
+/* line 30, ../sass/screen.scss */
+.link {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
 }

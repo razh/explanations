@@ -6,3 +6,29 @@
 @import "compass/reset";
 
 @import "../../sass/shared";
+
+.node {
+  circle {
+    stroke: black;
+    stroke-width: 2px;
+
+    .red {
+      fill: red;
+    }
+
+    .black {
+      fill: black;
+    }
+  }
+
+  text {
+    font-family: Helvetica, Arial, sans-serif;
+    fill: black;
+  }
+}
+
+.link {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}

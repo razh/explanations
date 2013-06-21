@@ -34,10 +34,7 @@ define(
           .children( children );
       },
 
-      render: function() {
-        var nodes = this.tree.nodes( this.model.toJSON() );
-
-        // Links.
+      renderLinks: function( nodes ) {
         var link = this.vis.select( '#links' )
           .selectAll( '.link' )
           .data( this.tree.links( nodes ), linkId );
@@ -61,9 +58,9 @@ define(
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
+      },
 
-
-        // Nodes.
+      renderNodes: function( nodes ) {
         var node = this.vis.select( '#nodes' )
           .selectAll( '.node' )
           .data( nodes, id );
@@ -133,6 +130,13 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 0 );
+      },
+
+      render: function() {
+        var nodes = this.tree.nodes( this.model.toJSON() );
+
+        this.renderLinks( nodes );
+        this.renderNodes( nodes );
 
         return this;
       }
