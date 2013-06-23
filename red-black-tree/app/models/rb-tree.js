@@ -4,6 +4,10 @@ define(
   function( Tree, RBTreeNode ) {
     'use strict';
 
+    // Direction of rotations.
+    var LEFT  = 0,
+        RIGHT = 1;
+
     var RBTree = Tree.extend({
       defaults: function() {
         var defaults = Tree.prototype.defaults();
@@ -13,6 +17,8 @@ define(
 
       insert: function( data ) {
         var newNode = Tree.prototype.insert.call( this, data );
+        // TODO: Set children to nil?
+        newNode.set( 'color', RBTreeNode.RED );
         this.insertFixup( newNode );
         return newNode;
       },
@@ -39,6 +45,9 @@ define(
                 this.leftRotate( current );
               }
 
+              parent.set( 'color', RBTreeNode.BLACK );
+              grandParent.set( 'color', RBTreeNode.RED );
+              this.rightRotate( grandParent );
             } else {
 
             }
@@ -51,16 +60,16 @@ define(
       },
 
       leftRotate: function( node ) {
-        this.rotate( node, 'left' );
+        this.rotate( node, LEFT );
       },
 
       rightRotate: function( node ) {
-        this.rotate( node, 'right' );
+        this.rotate( node, RIGHT );
       },
 
       rotate: function( node, direction ) {
-        var left  = direction === 'left' ? 'left'  : 'right',
-            right = direction === 'left' ? 'right' : 'left';
+        var left  = direction === LEFT  ? 'left' : 'right',
+            right = direction === RIGHT ? 'left' : 'right';
 
         var child      = node.get( left ),
             parent     = node.get( 'parent' ),
