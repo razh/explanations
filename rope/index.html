@@ -12,10 +12,13 @@
     <script src="../require.js"></script>
     <script>
       requirejs.config({
-        baseUrl: 'rope/app'
+        baseUrl: 'rope/app',
+        paths: {
+          'config': '../../config'
+        }
       });
 
-      require( [ '../../config' ], function() {
+      require( [ 'config' ], function() {
         require( [ 'main' ] );
       });
     </script>

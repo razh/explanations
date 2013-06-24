@@ -13,10 +13,13 @@
     <script src="../require.js"></script>
     <script>
       requirejs.config({
-        baseUrl: 'red-black-tree/app'
+        baseUrl: 'red-black-tree/app',
+        paths: {
+          'config': '../../config'
+        }
       });
 
-      require( [ '../../config' ], function() {
+      require( [ 'config' ], function() {
         require( [ 'main' ] );
       });
     </script>
