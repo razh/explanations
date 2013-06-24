@@ -1,7 +1,7 @@
 define(
-  [ 'models/rb-tree',
-    'views/rb-tree-view',
-    '../../../binary-tree/app/views/input-view' ],
+  [ './models/rb-tree',
+    './views/rb-tree-view',
+    './../binary-tree/app/views/input-view' ],
   function( RBTree, RBTreeView, InputView ) {
     'use strict';
 

@@ -1,8 +1,8 @@
 define(
-  [ 'models/tree',
-    'models/tree-node',
-    'views/input-view',
-    'views/tree-view' ],
+  [ './models/tree',
+    './models/tree-node',
+    './views/input-view',
+    './views/tree-view' ],
   function( Tree, TreeNode, InputView, TreeView ) {
     'use strict';
 
