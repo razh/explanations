@@ -26,30 +26,45 @@ define(
       insertFixup: function( node ) {
         var current = node,
             parent  = current.get( 'parent' ),
-            grandParent, parentSibling;
+            grandParent, parentSibling,
+            direction, left, right;
 
         while ( parent && parent.get( 'color' ) === RBTreeNode.RED ) {
           grandParent = parent.get( 'parent' );
 
           if ( grandParent ) {
-            if ( parent === grandParent.get( 'left' ) ) {
-              parentSibling = grandParent.get( 'right' );
+            direction = parent === grandParent.get( 'left' );
+            left  = direction ? 'left'  : 'right';
+            right = direction ? 'right' : 'left';
 
-              if ( parentSibling.get( 'color' ) === RBTreeNode.RED ) {
-                parent.set( 'color', RBTreeNode.BLACK );
-                parentSibling.set( 'color', RBTreeNode.BLACK );
-                grandParent.set( 'color', RBTreeNode.RED );
-                current = grandParent;
-              } else if ( current === parent.get( 'right' ) ) {
-                current = parent;
-                this.leftRotate( current );
+            if ( parent === grandParent.get( left ) ) {
+              parentSibling = grandParent.get( right );
+
+              if ( parentSibling ) {
+                if ( parentSibling.get( 'color' ) === RBTreeNode.RED ) {
+                  parent.set( 'color', RBTreeNode.BLACK );
+                  parentSibling.set( 'color', RBTreeNode.BLACK );
+                  grandParent.set( 'color', RBTreeNode.RED );
+                  current = grandParent;
+                } else if ( current === parent.get( right ) ) {
+                  current = parent;
+
+                  if ( direction ) {
+                    this.leftRotate( current );
+                  } else {
+                    this.rightRotate( current );
+                  }
+                }
               }
 
               parent.set( 'color', RBTreeNode.BLACK );
               grandParent.set( 'color', RBTreeNode.RED );
-              this.rightRotate( grandParent );
-            } else {
 
+              if ( direction ) {
+                this.rightRotate( current );
+              } else {
+                this.leftRotate( current );
+              }
             }
           }
 
@@ -71,9 +86,9 @@ define(
         var left  = direction === LEFT  ? 'left' : 'right',
             right = direction === RIGHT ? 'left' : 'right';
 
-        var child      = node.get( left ),
+        var child      = node.get( right ),
             parent     = node.get( 'parent' ),
-            grandChild = child.get( right );
+            grandChild = child ? child.get( left ) : null;
 
         node.set( right, grandChild );
 
@@ -81,7 +96,9 @@ define(
           grandChild.set( 'parent', node );
         }
 
-        child.set( 'parent', parent );
+        if ( child ) {
+          child.set( 'parent', parent );
+        }
 
         if ( !parent ) {
           this.set( 'root', child );
@@ -91,7 +108,9 @@ define(
           parent.set( right, child );
         }
 
-        child.set( left, node );
+        if ( child ) {
+          child.set( left, node );
+        }
         node.set( 'parent', child );
       },
 

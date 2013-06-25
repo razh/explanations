@@ -35,17 +35,6 @@ define(
       }
     });
 
-    var initialize = function( options ) {
-      var router = new Router( options );
-
-      router.register( 'binary-tree', 'binary-tree/main' );
-      router.register( 'red-black-tree', 'red-black-tree/main' );
-
-      Backbone.history.start();
-    };
-
-    return {
-      initialize: initialize
-    };
+    return Router;
   }
 );

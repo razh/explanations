@@ -16,8 +16,14 @@ define(
       tree = new RBTree();
       tree.insert( 59 );
       tree.insert( 6 );
-      tree.delete( tree.search( 59 ));
+      // tree.delete( tree.search( 59 ));
       console.log( tree.toArray() );
+
+      // setTimeout(function() {
+      //   tree.insert( 20 );
+      //   tree.insert( 78 );
+      //   treeView.render();
+      // }, 5000 );
 
       treeView = new RBTreeView({
         el: '#rb-tree-view',
@@ -47,6 +53,6 @@ define(
     return {
       initialize: initialize,
       destroy: destroy
-    }
+    };
   }
 );

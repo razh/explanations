@@ -26,6 +26,13 @@ define(
   [ 'backbone',
     'router' ],
   function( Backbone, Router ) {
-    Router.initialize();
+    'use strict';
+
+    var router = new Router();
+
+    router.register( 'binary-tree', 'binary-tree/main' );
+    router.register( 'red-black-tree', 'red-black-tree/main' );
+
+    Backbone.history.start();
   }
 );
