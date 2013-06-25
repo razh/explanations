@@ -1,35 +1,28 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+#rb-tree-view {
+  .node {
+    circle {
+      stroke-width: 2px;
+    }
 
-@import "compass/reset";
+    .red {
+      fill: red;
+      stroke: red;
+    }
 
-@import "../../sass/shared";
+    .black {
+      fill: black;
+      stroke: black;
+    }
 
-.node {
-  circle {
+    text {
+      font-family: Helvetica, Arial, sans-serif;
+      fill: white;
+    }
+  }
+
+  .link {
+    fill: none;
+    stroke: black;
     stroke-width: 2px;
   }
-
-  .red {
-    fill: red;
-    stroke: red;
-  }
-
-  .black {
-    fill: black;
-    stroke: black;
-  }
-
-  text {
-    font-family: Helvetica, Arial, sans-serif;
-    fill: white;
-  }
-}
-
-.link {
-  fill: none;
-  stroke: black;
-  stroke-width: 2px;
 }

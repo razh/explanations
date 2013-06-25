@@ -2,7 +2,7 @@ define(
   [ 'jquery',
     'underscore',
     'backbone',
-    'text!./../templates/input-view.html' ],
+    'text!binary-tree/templates/input-view.html' ],
   function( $, _, Backbone, inputTemplate ) {
     'use strict';
 

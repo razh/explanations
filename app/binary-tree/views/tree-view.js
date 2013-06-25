@@ -2,7 +2,7 @@ define(
   [ 'underscore',
     'backbone',
     'd3',
-    './tree-view-utils' ],
+    'binary-tree/views/tree-view-utils' ],
   function( _, Backbone, d3, Utils ) {
     'use strict';
 

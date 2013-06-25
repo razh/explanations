@@ -1,6 +1,6 @@
 define(
-  [ '../../../binary-tree/app/models/tree',
-    './rb-tree-node' ],
+  [ 'binary-tree/models/tree',
+    'red-black-tree/models/rb-tree-node' ],
   function( Tree, RBTreeNode ) {
     'use strict';
 

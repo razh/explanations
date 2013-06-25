@@ -1,8 +1,8 @@
 define(
   [ 'd3',
-    '../../../binary-tree/app/views/tree-view',
-    '../../../binary-tree/app/views/tree-view-utils',
-    'models/rb-tree-node' ],
+    'binary-tree/views/tree-view',
+    'binary-tree/views/tree-view-utils',
+    'red-black-tree/models/rb-tree-node' ],
    function( d3, TreeView, Utils, RBTreeNode ) {
     'use strict';
 

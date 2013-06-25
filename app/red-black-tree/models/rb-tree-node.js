@@ -1,5 +1,5 @@
 define(
-  [ '../../../binary-tree/app/models/tree-node' ],
+  [ 'binary-tree/models/tree-node' ],
   function( TreeNode ) {
     'use strict';
 
