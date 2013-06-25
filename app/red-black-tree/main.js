@@ -18,6 +18,7 @@ define(
       tree.insert( 6 );
       // tree.delete( tree.search( 59 ));
       console.log( tree.toArray() );
+      console.log( tree.get( 'root' ) );
 
       // setTimeout(function() {
       //   tree.insert( 20 );

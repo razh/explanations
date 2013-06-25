@@ -17,10 +17,37 @@ define(
       },
 
       insert: function( data ) {
-        var newNode = Tree.prototype.insert.call( this, data );
-        // TODO: Set children to nil?
+        var current = this.get( 'root' ),
+            nil     = this.get( 'nil' ),
+            parent  = nil;
+
+        while ( current && current !== nil ) {
+          parent = current;
+          if ( data < current.get( 'data' ) ) {
+            current = current.get( 'left' );
+          } else {
+            current = current.get( 'right' );
+          }
+        }
+
+        var Node    = this.get( 'nodeClass' ),
+            newNode = new Node({ data: data });
+
+        newNode.set( 'parent', parent );
+
+        if ( parent === nil ) {
+          this.set( 'root', newNode );
+        } else if ( data < parent.get( 'data' ) ) {
+          parent.set( 'left', newNode );
+        } else  {
+          parent.set( 'right', newNode );
+        }
+
+        newNode.set( 'left', nil );
+        newNode.set( 'right', nil );
         newNode.set( 'color', RBTreeNode.RED );
-        this.insertFixup( newNode );
+        // this.insertFixup( newNode );
+
         return newNode;
       },
 
@@ -31,6 +58,7 @@ define(
             direction, left, right;
 
         while ( parent && parent.get( 'color' ) === RBTreeNode.RED ) {
+          alert('sd')
           grandParent = parent.get( 'parent' );
 
           if ( grandParent ) {
@@ -38,34 +66,31 @@ define(
             left  = direction ? 'left'  : 'right';
             right = direction ? 'right' : 'left';
 
-            if ( parent === grandParent.get( left ) ) {
-              parentSibling = grandParent.get( right );
+            parentSibling = grandParent.get( right );
 
-              if ( parentSibling ) {
-                if ( parentSibling.get( 'color' ) === RBTreeNode.RED ) {
-                  parent.set( 'color', RBTreeNode.BLACK );
-                  parentSibling.set( 'color', RBTreeNode.BLACK );
-                  grandParent.set( 'color', RBTreeNode.RED );
-                  current = grandParent;
-                } else if ( current === parent.get( right ) ) {
-                  current = parent;
-
-                  if ( direction ) {
-                    this.leftRotate( current );
-                  } else {
-                    this.rightRotate( current );
-                  }
-                }
-              }
-
+            if ( parentSibling.get( 'color' ) === RBTreeNode.RED ) {
               parent.set( 'color', RBTreeNode.BLACK );
+              parentSibling.set( 'color', RBTreeNode.BLACK );
               grandParent.set( 'color', RBTreeNode.RED );
+              current = grandParent;
+            } else if ( current === parent.get( right ) ) {
+              current = parent;
 
               if ( direction ) {
-                this.rightRotate( current );
-              } else {
                 this.leftRotate( current );
+              } else {
+                this.rightRotate( current );
               }
+            }
+
+            parent.set( 'color', RBTreeNode.BLACK );
+            console.log( parent.get( 'color' ) === RBTreeNode.BLACK );
+            grandParent.set( 'color', RBTreeNode.RED );
+
+            if ( direction ) {
+              this.rightRotate( current );
+            } else {
+              this.leftRotate( current );
             }
           }
 
