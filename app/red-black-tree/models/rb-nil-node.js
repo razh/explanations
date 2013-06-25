@@ -1,5 +1,5 @@
 define(
-  [ 'red-black-tree/models/tree-node' ],
+  [ 'red-black-tree/models/rb-tree-node' ],
   function( RBTreeNode ) {
     'use strict';
 
@@ -11,12 +11,24 @@ define(
         return defaults;
       },
 
+      initialize: function() {
+        RBTreeNode.prototype.initialize.call( this );
+        this.set( 'left', this );
+        this.set( 'right', this );
+        this.set( 'parent', this );
+      },
+
+      searchBy: function() {
+        return null;
+      },
+
       toArray: function() {
         return [];
       },
 
       toJSON: function() {
-        return {};
+        // return {};
+        return { id: Math.random(), data: 'nil' };
       },
     });
 

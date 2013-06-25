@@ -1,7 +1,8 @@
 define(
   [ 'binary-tree/models/tree',
-    'red-black-tree/models/rb-tree-node' ],
-  function( Tree, RBTreeNode ) {
+    'red-black-tree/models/rb-tree-node',
+    'red-black-tree/models/rb-nil-node' ],
+  function( Tree, RBTreeNode, Nil ) {
     'use strict';
 
     // Direction of rotations.
@@ -12,7 +13,7 @@ define(
       defaults: function() {
         var defaults = Tree.prototype.defaults();
         defaults.nodeClass = RBTreeNode;
-        defaults.nil = new RBTreeNode();
+        defaults.nil = new Nil();
         return defaults;
       },
 
@@ -46,7 +47,7 @@ define(
         newNode.set( 'left', nil );
         newNode.set( 'right', nil );
         newNode.set( 'color', RBTreeNode.RED );
-        // this.insertFixup( newNode );
+        this.insertFixup( newNode );
 
         return newNode;
       },
@@ -58,7 +59,6 @@ define(
             direction, left, right;
 
         while ( parent && parent.get( 'color' ) === RBTreeNode.RED ) {
-          alert('sd')
           grandParent = parent.get( 'parent' );
 
           if ( grandParent ) {
@@ -84,7 +84,6 @@ define(
             }
 
             parent.set( 'color', RBTreeNode.BLACK );
-            console.log( parent.get( 'color' ) === RBTreeNode.BLACK );
             grandParent.set( 'color', RBTreeNode.RED );
 
             if ( direction ) {
@@ -101,10 +100,12 @@ define(
       },
 
       leftRotate: function( node ) {
+        console.log( 'leftRotate' );
         this.rotate( node, LEFT );
       },
 
       rightRotate: function( node ) {
+        console.log( 'rightRotate' );
         this.rotate( node, RIGHT );
       },
 
@@ -112,13 +113,14 @@ define(
         var left  = direction === LEFT  ? 'left' : 'right',
             right = direction === RIGHT ? 'left' : 'right';
 
-        var child      = node.get( right ),
+        var nil        = this.get( 'nil' ),
+            child      = node.get( right ),
             parent     = node.get( 'parent' ),
-            grandChild = child ? child.get( left ) : null;
+            grandChild = child.get( left );
 
         node.set( right, grandChild );
 
-        if ( grandChild ) {
+        if ( grandChild !== nil ) {
           grandChild.set( 'parent', node );
         }
 
@@ -126,7 +128,7 @@ define(
           child.set( 'parent', parent );
         }
 
-        if ( !parent ) {
+        if ( parent === nil ) {
           this.set( 'root', child );
         } else if ( node === parent.get( right ) ) {
           parent.set( left, child );
@@ -134,10 +136,7 @@ define(
           parent.set( right, child );
         }
 
-        if ( child ) {
-          child.set( left, node );
-        }
-
+        child.set( left, node );
         node.set( 'parent', child );
       },
 

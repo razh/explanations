@@ -25,7 +25,7 @@ define(
       transplant: function( tree, node ) {
         var parent = this.get( 'parent' );
 
-        if ( parent === this.get( 'nil' ) ) {
+        if ( parent === tree.get( 'nil' ) ) {
           tree.set( 'root', node );
         } else if ( this === parent.get( 'left' ) ) {
           parent.set( 'left', node );
