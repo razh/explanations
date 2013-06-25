@@ -17,6 +17,23 @@ define(
         var jsonObject = TreeNode.prototype.toJSON.call( this );
         jsonObject.color = this.get( 'color' );
         return jsonObject;
+      },
+
+      /*
+        Like TreeNode's transplant, but with nil.
+       */
+      transplant: function( tree, node ) {
+        var parent = this.get( 'parent' );
+
+        if ( parent === this.get( 'nil' ) ) {
+          tree.set( 'root', node );
+        } else if ( this === parent.get( 'left' ) ) {
+          parent.set( 'left', node );
+        } else {
+          parent.set( 'right', node );
+        }
+
+        node.set( 'parent', parent );
       }
     });
 

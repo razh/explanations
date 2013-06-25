@@ -126,11 +126,11 @@ define(
           tree.set( 'root', node );
         } else if ( this === parent.get( 'left' ) ) {
           parent.set( 'left', node );
-        } else{
+        } else {
           parent.set( 'right', node );
         }
 
-        if ( node !== null ) {
+        if ( node ) {
           node.set( 'parent', parent );
         }
       }

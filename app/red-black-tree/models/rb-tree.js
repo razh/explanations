@@ -12,6 +12,7 @@ define(
       defaults: function() {
         var defaults = Tree.prototype.defaults();
         defaults.nodeClass = RBTreeNode;
+        defaults.nil = new RBTreeNode();
         return defaults;
       },
 
@@ -111,11 +112,24 @@ define(
         if ( child ) {
           child.set( left, node );
         }
+
         node.set( 'parent', child );
       },
 
       delete: function( data ) {
         Tree.prototype.delete.call( this, data );
+      },
+
+      deleteFixup: function( node ) {
+        var root   = this.get( 'right' ),
+            parent = node.get( 'parent' ),
+            sibling;
+
+        while ( node !== root && node.get( 'color' ) === RBTreeNode.BLACK ) {
+          if ( node === parent.get( 'left' ) ) {
+            sibling = parent.get( 'right' );
+          }
+        }
       }
     });
 
