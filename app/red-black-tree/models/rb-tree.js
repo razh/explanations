@@ -14,6 +14,7 @@ define(
         var defaults = Tree.prototype.defaults();
         defaults.nodeClass = RBTreeNode;
         defaults.nil = new Nil();
+        defaults.root = defaults.nil;
         return defaults;
       },
 
@@ -22,7 +23,7 @@ define(
             nil     = this.get( 'nil' ),
             parent  = nil;
 
-        while ( current && current !== nil ) {
+        while ( current !== nil ) {
           parent = current;
           if ( data < current.get( 'data' ) ) {
             current = current.get( 'left' );
@@ -49,6 +50,7 @@ define(
         newNode.set( 'color', RBTreeNode.RED );
         this.insertFixup( newNode );
 
+        console.log( 'data: ' + this.get( 'root' ).get( 'data' ) + ', color: ' +  ( ( this.get( 'root' ).get( 'color' ) === RBTreeNode.BLACK ) ? 'black' : 'red' ) );
         return newNode;
       },
 
@@ -87,9 +89,9 @@ define(
             grandParent.set( 'color', RBTreeNode.RED );
 
             if ( direction ) {
-              this.rightRotate( current );
+              this.rightRotate( grandParent );
             } else {
-              this.leftRotate( current );
+              this.leftRotate( grandParent );
             }
           }
 
@@ -130,7 +132,7 @@ define(
 
         if ( parent === nil ) {
           this.set( 'root', child );
-        } else if ( node === parent.get( right ) ) {
+        } else if ( node === parent.get( left ) ) {
           parent.set( left, child );
         } else {
           parent.set( right, child );
