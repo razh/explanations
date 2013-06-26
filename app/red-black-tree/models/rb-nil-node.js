@@ -27,8 +27,11 @@ define(
       },
 
       toJSON: function() {
-        // return {};
-        return { id: Math.random(), data: 'nil' };
+        return {
+          id: Math.random(),
+          data: 'nil',
+          color: RBTreeNode.BLACK
+        };
       },
     });
 

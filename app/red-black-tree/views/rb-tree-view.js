@@ -14,6 +14,10 @@ define(
         duration          = Utils.duration,
         radius            = Utils.radius;
 
+    function color( d ) {
+      return d.color ? 'black' : 'red';
+    }
+
     function colorFn( color ) {
       return function( d ) {
         return d.color === color;
@@ -38,8 +42,7 @@ define(
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 )
-          .classed( 'red', red )
-          .classed( 'black', black );
+          .style( 'fill', color );
 
         nodeEnter.append( 'text' )
           .text( data )
@@ -79,11 +82,7 @@ define(
 
         nodeUpdate.select( 'circle' )
           .attr( 'r', radius )
-          .each( 'start', function() {
-            d3.select( this )
-              .classed( 'red', red )
-              .classed( 'black', black );
-          });
+          .style( 'fill', color );
 
         nodeUpdate.select( 'text' )
           .text( data )

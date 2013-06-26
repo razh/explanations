@@ -55,6 +55,7 @@ define(
       },
 
       insertFixup: function( node ) {
+        console.log('fixup')
         var current = node,
             parent  = current.get( 'parent' ),
             grandParent, parentSibling,

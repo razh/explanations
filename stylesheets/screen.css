@@ -133,21 +133,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke-width: 2px;
 }
 /* line 7, ../sass/_red-black-tree.scss */
-#rb-tree-view .node .red {
-  fill: red;
-  stroke: red;
-}
-/* line 12, ../sass/_red-black-tree.scss */
-#rb-tree-view .node .black {
-  fill: black;
-  stroke: black;
-}
-/* line 17, ../sass/_red-black-tree.scss */
 #rb-tree-view .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: white;
 }
-/* line 23, ../sass/_red-black-tree.scss */
+/* line 13, ../sass/_red-black-tree.scss */
 #rb-tree-view .link {
   fill: none;
   stroke: black;
