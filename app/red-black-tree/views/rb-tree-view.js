@@ -78,7 +78,12 @@ define(
           .attr( 'transform', translate );
 
         nodeUpdate.select( 'circle' )
-          .attr( 'r', radius );
+          .attr( 'r', radius )
+          .each( 'start', function() {
+            d3.select( this )
+              .classed( 'red', red )
+              .classed( 'black', black );
+          });
 
         nodeUpdate.select( 'text' )
           .text( data )
