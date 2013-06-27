@@ -1,21 +1,13 @@
 define(
-  [ 'backbone' ],
-  function( Backbone ) {
+  [ 'backbone',
+    'id' ],
+  function( Backbone, Id ) {
     'use strict';
-
-    // Global unique id.
-    var uid = 1;
-
-    function nextUid() {
-      var currUid = uid;
-      uid++;
-      return currUid;
-    }
 
     var TreeNode = Backbone.Model.extend({
       defaults: function() {
         return {
-          id: nextUid(),
+          id: Id.nextUid(),
           data: null,
 
           parent: null,
