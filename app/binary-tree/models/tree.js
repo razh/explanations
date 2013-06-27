@@ -58,16 +58,16 @@ define(
           node.transplant( this, left );
         } else {
           // Get the successor node and move it in.
-          var y = right.min();
-          if ( y.get( 'parent' ) !== node ) {
-            y.transplant( this, y.get( 'right' ) );
-            y.set( 'right', right );
-            right.set( 'parent', y );
+          var next = right.min();
+          if ( next.get( 'parent' ) !== node ) {
+            next.transplant( this, next.get( 'right' ) );
+            next.set( 'right', right );
+            right.set( 'parent', next );
           }
 
-          node.transplant( this, y );
-          y.set( 'left', left );
-          left.set( 'parent', y );
+          node.transplant( this, next );
+          next.set( 'left', left );
+          left.set( 'parent', next );
         }
       },
 
