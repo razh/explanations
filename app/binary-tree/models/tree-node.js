@@ -92,23 +92,31 @@ define(
        * Returns the minimum value in the subtree that is rooted by this node.
        */
       min: function() {
+        return this.minFn( null );
+      },
+
+      max: function() {
+        return this.maxFn( null );
+      },
+
+      minFn: function( end ) {
         var min  = this,
             left = min.get( 'left' );
 
-        while ( left !== null ) {
-          min = left;
+        while ( left !== end ) {
+          min  = left;
           left = left.get( 'left' );
         }
 
         return min;
       },
 
-      max: function() {
+      maxFn: function( end ) {
         var max   = this,
             right = max.get( 'right' );
 
-        while ( right !== null ) {
-          max = right;
+        while ( right !== end ) {
+          max   = right;
           right = right.get( 'right' );
         }
 

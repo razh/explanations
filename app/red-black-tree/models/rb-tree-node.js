@@ -22,7 +22,7 @@ define(
       search: function( data, nil ) {
         var current     = this,
             child       = current,
-            currentData = current.get( 'data' ),
+            currentData = current.get( 'data' );
 
         while ( child !== nil && data !== currentData ) {
           if ( data < currentData ) {
@@ -38,6 +38,14 @@ define(
         }
 
         return current;
+      },
+
+      min: function( nil ) {
+        return this.minFn( nil );
+      },
+
+      max: function( nil ) {
+        return this.maxFn( nil );
       },
 
       /*

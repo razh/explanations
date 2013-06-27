@@ -151,7 +151,7 @@ define(
           sibling = left;
           node.transplant( this, left );
         } else {
-          current = right.min();
+          current = right.min( nil );
           originalColor = current.get( 'color' );
           sibling = current.get( 'right' );
 
@@ -199,7 +199,8 @@ define(
           siblingLeft  = sibling.get( left ),
           siblingRight = sibling.get( right );
 
-          if ( siblingLeft.get( 'color' ) === siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
+          if ( siblingLeft.get( 'color' )  === RBTreeNode.BLACK &&
+               siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
             // Case 2.
             sibling.set( 'color', RBTreeNode.RED );
             current = parent;
