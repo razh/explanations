@@ -73,7 +73,7 @@ define(
             right = this.get( 'right' );
 
         return {
-          id: this.get( 'id' ),
+          id: this.id,
           data: this.get( 'data' ),
           left:  left  ? left.toJSON()  : null,
           right: right ? right.toJSON() : null

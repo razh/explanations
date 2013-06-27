@@ -30,6 +30,7 @@ define(
 
     var router = new Router();
 
+    router.register( 'linked-list', 'linked-list/main' );
     router.register( 'binary-tree', 'binary-tree/main' );
     router.register( 'red-black-tree', 'red-black-tree/main' );
 

@@ -2,7 +2,7 @@ define(
   [ 'jquery',
     'red-black-tree/models/rb-tree',
     'red-black-tree/views/rb-tree-view',
-    'binary-tree/views/input-view' ],
+    'linked-list/views/input-view' ],
   function( $, RBTree, RBTreeView, InputView ) {
     'use strict';
 

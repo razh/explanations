@@ -2,9 +2,9 @@ define(
   [ 'jquery',
     'binary-tree/models/tree',
     'binary-tree/models/tree-node',
-    'binary-tree/views/input-view',
-    'binary-tree/views/tree-view' ],
-  function( $, Tree, TreeNode, InputView, TreeView ) {
+    'binary-tree/views/tree-view',
+    'linked-list/views/input-view' ],
+  function( $, Tree, TreeNode, TreeView, InputView ) {
     'use strict';
 
     var tree, treeView, inputView, el;
