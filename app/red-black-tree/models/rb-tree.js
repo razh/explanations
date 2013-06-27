@@ -84,15 +84,16 @@ define(
               } else {
                 this.rightRotate( current );
               }
-            }
-
-            parent.set( 'color', RBTreeNode.BLACK );
-            grandParent.set( 'color', RBTreeNode.RED );
-
-            if ( direction ) {
-              this.rightRotate( grandParent );
             } else {
-              this.leftRotate( grandParent );
+              // node is a left child.
+              parent.set( 'color', RBTreeNode.BLACK );
+              grandParent.set( 'color', RBTreeNode.RED );
+
+              if ( direction ) {
+                this.rightRotate( grandParent );
+              } else {
+                this.leftRotate( grandParent );
+              }
             }
           }
 
