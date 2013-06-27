@@ -21,16 +21,18 @@ define(
 
       search: function( data, nil ) {
         var current     = this,
-            currentData = current.get( 'data' );
+            child       = current,
+            currentData = current.get( 'data' ),
 
-        while ( current !== nil && data !== currentData ) {
+        while ( child !== nil && data !== currentData ) {
           if ( data < currentData ) {
-            current = current.get( 'left' );
+            child = current.get( 'left' );
           } else {
-            current = current.get( 'right' );
+            child = current.get( 'right' );
           }
 
-          if ( current !== nil ) {
+          if ( child !== nil ) {
+            current = child;
             currentData = current.get( 'data' );
           }
         }
