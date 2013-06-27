@@ -19,6 +19,25 @@ define(
         return jsonObject;
       },
 
+      search: function( data, nil ) {
+        var current     = this,
+            currentData = current.get( 'data' );
+
+        while ( current !== nil && data !== currentData ) {
+          if ( data < currentData ) {
+            current = current.get( 'left' );
+          } else {
+            current = current.get( 'right' );
+          }
+
+          if ( current !== nil ) {
+            currentData = current.get( 'data' );
+          }
+        }
+
+        return current;
+      },
+
       /*
         Like TreeNode's transplant, but with nil.
        */

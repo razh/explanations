@@ -3,6 +3,10 @@ define(
   function( RBTreeNode ) {
     'use strict';
 
+    function nullFn() {
+      return null;
+    }
+
     var Nil = RBTreeNode.extend({
       defaults: function() {
         // Set default color to black.
@@ -18,9 +22,9 @@ define(
         this.set( 'parent', this );
       },
 
-      searchBy: function() {
-        return null;
-      },
+      searchBy: nullFn,
+      min:      nullFn,
+      max:      nullFn,
 
       toArray: function() {
         return [];

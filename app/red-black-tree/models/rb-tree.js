@@ -59,7 +59,7 @@ define(
             grandParent, parentSibling,
             direction, left, right;
 
-        while ( parent && parent.get( 'color' ) === RBTreeNode.RED ) {
+        while ( parent.get( 'color' ) === RBTreeNode.RED ) {
           grandParent = parent.get( 'parent' );
 
           if ( grandParent ) {
@@ -158,12 +158,12 @@ define(
           if ( current.get( 'parent' ) === node ) {
             sibling.set( 'parent', current );
           } else {
-            current.transplant( current.get( 'right' ) );
+            current.transplant( this, current.get( 'right' ) );
             current.set( 'right', right );
             right.set( 'parent', current );
           }
 
-          node.transplant( current );
+          node.transplant( this, current );
           current.set( 'left', left );
           left.set( 'parent', current );
           current.set( 'color', node.get( 'color' ) );
@@ -186,43 +186,46 @@ define(
           left  = direction ? 'left'  : 'right';
           right = direction ? 'right' : 'left';
 
-          if ( current === parent.get( left ) ) {
-            // Case 1.
+          sibling = parent.get( right );
+
+          if ( sibling.get( 'color' ) === RBTreeNode.RED ) {
+          // Case 1.
+            sibling.set( 'color', RBTreeNode.BLACK );
+            parent.set( 'color', RBTreeNode.RED );
+            this.rotate( parent, direction ? LEFT : RIGHT );
             sibling = parent.get( right );
+          }
 
-            if ( sibling.get( 'color' ) === RBTreeNode.RED ) {
-              sibling.set( 'color', RBTreeNode.BLACK );
-              parent.set( 'color', RBTreeNode.RED );
-              this.rotate( parent, direction ? LEFT : RIGHT );
-            }
+          siblingLeft  = sibling.get( left ),
+          siblingRight = sibling.get( right );
 
-            siblingLeft  = sibling.get( left ),
-            siblingRight = sibling.get( right );
-
-            if ( siblingLeft.get( 'color' ) === siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
-              // Case 2.
-              sibling.set( 'color', RBTreeNode.RED );
-              current = parent;
-            } else if ( siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
-              // Case 3.
-              siblingLeft.set( 'color', RBTreeNode.BLACK );
-              sibling.set( 'color', RBTreeNode.RED );
-              this.rotate( sibling, direction ? RIGHT : LEFT );
-              sibling = parent.get( 'right ');
-            } else {
-              // Case 4.
-              sibling.set( 'color', parent.get( 'color' ) );
-              parent.set( 'color', RBTreeNode.BLACK );
-              siblingRight.set( 'color', RBTreeNode.BLACK );
-              this.rotate( parent, direction ? LEFT : RIGHT );
-              current = root;
-            }
+          if ( siblingLeft.get( 'color' ) === siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
+            // Case 2.
+            sibling.set( 'color', RBTreeNode.RED );
+            current = parent;
+          } else if ( siblingRight.get( 'color' ) === RBTreeNode.BLACK ) {
+            // Case 3.
+            siblingLeft.set( 'color', RBTreeNode.BLACK );
+            sibling.set( 'color', RBTreeNode.RED );
+            this.rotate( sibling, direction ? RIGHT : LEFT );
+            sibling = parent.get( right );
+          } else {
+            // Case 4.
+            sibling.set( 'color', parent.get( 'color' ) );
+            parent.set( 'color', RBTreeNode.BLACK );
+            siblingRight.set( 'color', RBTreeNode.BLACK );
+            this.rotate( parent, direction ? LEFT : RIGHT );
+            current = root;
           }
 
           parent = current.get( 'parent' );
         }
 
         current.set( 'color', RBTreeNode.BLACK );
+      },
+
+      search: function( data ) {
+        return this.rootFn( 'search', data, this.get( 'nil' ) );
       }
     });
 
