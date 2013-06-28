@@ -4,38 +4,12 @@ define(
     'use strict';
 
     function x( d ) {
-      return 50 * d.depth + 50;
+      return 50 * d.y + 50;
     }
 
     function y( d ) {
       return d.x * window.innerHeight;
     }
-
-    /*
-      Returns a function which gets an attribute and applies a function.
-     */
-    function coordFn( attr, fn ) {
-      return function( d ) {
-        return fn( d[ attr ] );
-      };
-    }
-
-    var sourceX = coordFn( 'source', x ),
-        sourceY = coordFn( 'source', y ),
-        targetX = coordFn( 'target', x ),
-        targetY = coordFn( 'target', y );
-
-    /*
-      Returns a function that gets the midpoint between a source and target position.
-     */
-    function midpointFn( sourceFn, targetFn ) {
-      return function( d ) {
-        return 0.5 * ( sourceFn( d ) + targetFn( d ) );
-      };
-    }
-
-    var midpointX = midpointFn( sourceX, targetX ),
-        midpointY = midpointFn( sourceY, targetY );
 
     function id( d ) {
       return d.id;
@@ -86,6 +60,15 @@ define(
       return pairing( d.source.id, d.target.id );
     }
 
+    function diagonalFn( xFn, yFn ) {
+      return d3.svg.diagonal()
+        .projection( function( d ) {
+          return [ xFn(d), yFn(d) ];
+        });
+    }
+
+    var diagonal = diagonalFn( x, y );
+
     return {
       x:               x,
       y:               y,
@@ -93,19 +76,13 @@ define(
       data:            data,
       children:        children,
 
-      sourceX:         sourceX,
-      sourceY:         sourceY,
-      targetX:         targetX,
-      targetY:         targetY,
-      midpointX:       midpointX,
-      midpointY:       midpointY,
-
       translateFn:     translateFn,
       translateTo:     translateTo,
       translate:       translate,
 
       pairing:         pairing,
       linkId:          linkId,
+      diagonal:        diagonal,
 
       duration:        500,
       borderRadius:    4,

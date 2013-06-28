@@ -5,20 +5,14 @@ define(
   function( d3, StructView, Utils ) {
     'use strict';
 
-    var x            = Utils.x,
-        y            = Utils.y,
-        id           = Utils.id,
+    var id           = Utils.id,
         data         = Utils.data,
         children     = Utils.children,
         translate    = Utils.translate,
         linkId       = Utils.linkId,
+        diagonal     = Utils.diagonal,
         duration     = Utils.duration * 4,
-        sourceX      = Utils.sourceX,
-        sourceY      = Utils.sourceY,
-        targetX      = Utils.targetX,
-        targetY      = Utils.targetY,
-        midpointX    = Utils.midpointX,
-        midpointY    = Utils.midpointY,
+
         // Constants.
         borderRadius = Utils.borderRadius,
         width        = Utils.width,
@@ -34,37 +28,30 @@ define(
       },
 
       renderLinks: function( nodes ) {
+        // Set y-height equal to depth of node in list (position).
+        nodes.forEach(function( d ) {
+          d.y = d.depth;
+        });
+
         var link = this.vis.select( '#links' )
           .selectAll( '.link' )
           .data( this.tree.links( nodes ), linkId );
-          console.log(this.tree.links( nodes ));
 
         link.enter()
-          .append( 'g' )
-          .append( 'line' )
-          .attr( 'x1', sourceX )
-          .attr( 'y1', sourceY )
-          .attr( 'x2', sourceX )
-          .attr( 'y2', sourceY )
-          .style( 'stroke-opacity', 0 );
+          .append( 'path' )
+            .attr( 'class', 'link' )
+            .attr( 'd', diagonal )
+            .style( 'stroke-opacity', 0 );
 
         link.transition()
           .duration( duration )
-          .select( 'line' )
-          .attr( 'x1', sourceX )
-          .attr( 'y1', sourceY )
-          .attr( 'x2', targetX )
-          .attr( 'y2', targetY )
+          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
 
         link.exit()
           .transition()
           .duration( duration )
-          .select( 'line' )
-          .attr( 'x1', 0 )
-          .attr( 'y1', 0 )
-          .attr( 'x2', 0 )
-          .attr( 'y2', 0 )
+          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
       },

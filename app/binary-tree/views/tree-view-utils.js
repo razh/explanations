@@ -24,14 +24,7 @@ define(
       return childrenArray;
     }
 
-    function diagonalFn( xFn, yFn ) {
-      return d3.svg.diagonal()
-        .projection( function( d ) {
-          return [ xFn(d), yFn(d) ];
-        });
-    }
-
-    var diagonal          = diagonalFn( x, y ),
+    var diagonal          = Utils.diagonalFn( x, y ),
         translate         = Utils.translateFn( x, y ),
         translateToParent = Utils.translateTo( 'parent', translate );
 
