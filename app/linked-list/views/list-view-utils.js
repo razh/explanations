@@ -4,7 +4,7 @@ define(
     'use strict';
 
     function x( d ) {
-      return 0.5 * d.y * window.innerWidth + 0.25 * window.innerWidth
+      return 50 * d.depth + 50;
     }
 
     function y( d ) {
@@ -60,15 +60,6 @@ define(
       return pairing( d.source.id, d.target.id );
     }
 
-    function diagonalFn( xFn, yFn ) {
-      return d3.svg.diagonal()
-        .projection( function( d ) {
-          return [ xFn(d), yFn(d) ];
-        });
-    }
-
-    var diagonal = diagonalFn( x, y );
-
     return {
       x:               x,
       y:               y,
@@ -83,13 +74,10 @@ define(
       pairing:         pairing,
       linkId:          linkId,
 
-      diagonalFn:      diagonalFn,
-      diagonal:        diagonal,
-
       duration:        500,
       borderRadius:    4,
-      width:           24,
-      height:          32
+      width:           32,
+      height:          28
     };
   }
 );

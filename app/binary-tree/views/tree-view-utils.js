@@ -1,6 +1,7 @@
 define(
-  [ 'linked-list/views/list-view-utils' ],
-  function( Utils ) {
+  [ 'd3',
+    'linked-list/views/list-view-utils' ],
+  function( d3, Utils ) {
     'use strict';
 
     function x( d ) {
@@ -23,7 +24,14 @@ define(
       return childrenArray;
     }
 
-    var diagonal          = Utils.diagonalFn( x, y ),
+    function diagonalFn( xFn, yFn ) {
+      return d3.svg.diagonal()
+        .projection( function( d ) {
+          return [ xFn(d), yFn(d) ];
+        });
+    }
+
+    var diagonal          = diagonalFn( x, y ),
         translate         = Utils.translateFn( x, y ),
         translateToParent = Utils.translateTo( 'parent', translate );
 

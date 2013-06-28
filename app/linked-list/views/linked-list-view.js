@@ -5,17 +5,18 @@ define(
   function( d3, StructView, Utils ) {
     'use strict';
 
-    var id              = Utils.id,
-        data            = Utils.data,
-        children        = Utils.children,
-        translate       = Utils.translate,
-        linkId          = Utils.linkId,
-        diagonal        = Utils.diagonal,
-        duration        = Utils.duration,
+    var x            = Utils.x,
+        y            = Utils.y,
+        id           = Utils.id,
+        data         = Utils.data,
+        children     = Utils.children,
+        translate    = Utils.translate,
+        linkId       = Utils.linkId,
+        duration     = Utils.duration,
         // Constants.
-        borderRadius    = Utils.borderRadius,
-        width           = Utils.width,
-        height          = Utils.height;
+        borderRadius = Utils.borderRadius,
+        width        = Utils.width,
+        height       = Utils.height;
 
     var LinkedListView = StructView.extend({
       initialize: function() {
@@ -32,22 +33,22 @@ define(
           .data( this.tree.links( nodes ), linkId );
 
         link.enter()
-          .append( 'path' )
-          .style( 'fill-opacity', 0 )
-          .filter( function( d ) { return d.target.id; } )
-            .attr( 'class', 'link' )
-            .attr( 'd', diagonal )
-            .style( 'stroke-opacity', 0 );
+          .append( 'line' )
+          .attr( 'x1', function( d ) { return x( d.source ); } )
+          .attr( 'y1', function( d ) { return y( d.source ); } )
+          .attr( 'x2', function( d ) { return x( d.source ); } )
+          .attr( 'y2', function( d ) { return y( d.source ); } )
+          .style( 'stroke-opacity', 0 );
 
         link.transition()
           .duration( duration )
-          .attr( 'd', diagonal )
+          .attr( 'x2', function( d ) { return x( d.target ); } )
+          .attr( 'y2', function( d ) { return y( d.target ); } )
           .style( 'stroke-opacity', 1 );
 
         link.exit()
           .transition()
           .duration( duration )
-          .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
       },
