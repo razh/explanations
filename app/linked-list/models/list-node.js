@@ -13,6 +13,18 @@ define(
           prev: null,
           next: null
         };
+      },
+
+      toJSON: function() {
+        var prev = this.get( 'prev' ),
+            next = this.get( 'next' );
+
+        return {
+          id: this.id,
+          data: this.get( 'data' ),
+          prev: prev ? prev.id : null,
+          next: next ? next.toJSON() : null
+        };
       }
     });
 

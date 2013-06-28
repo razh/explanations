@@ -47,6 +47,26 @@ define(
         if ( next ) {
           next.set( 'prev', prev );
         }
+      },
+
+      toArray: function() {
+        var array   = [],
+            current = this.get( 'head' ),
+            data;
+
+        while ( current ) {
+          data = current.get( 'data' );
+          if ( data ) {
+            array.push( data );
+          }
+        }
+
+        return array;
+      },
+
+      toJSON: function() {
+        var head = this.get( 'head' );
+        return head ? head.toJSON() : {};
       }
     });
 

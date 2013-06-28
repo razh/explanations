@@ -2,7 +2,7 @@ define(
   [ 'jquery',
     'underscore',
     'backbone',
-    'text!linked-list/templates/input-view.html' ],
+    'text!shared/templates/input-view.html' ],
   function( $, _, Backbone, inputTemplate ) {
     'use strict';
 

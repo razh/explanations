@@ -102,6 +102,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   color: black;
 }
 
+/* line 3, ../sass/_linked-list.scss */
+#list-view .node rect {
+  fill: white;
+  stroke: black;
+  stroke-width: 2px;
+}
+/* line 10, ../sass/_linked-list.scss */
+#list-view .node text {
+  font-family: Helvetica, Arial, sans-serif;
+  fill: black;
+}
+/* line 16, ../sass/_linked-list.scss */
+#list-view .link {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
+
 /* line 3, ../sass/_binary-tree.scss */
 #tree-view .node circle {
   fill: white;

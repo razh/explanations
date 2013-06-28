@@ -1,15 +1,15 @@
 define(
   [ 'underscore',
-    'backbone',
     'd3',
+    'shared/views/struct-view',
     'binary-tree/views/tree-view-utils' ],
-  function( _, Backbone, d3, Utils ) {
+  function( _, d3, StructView, Utils ) {
     'use strict';
 
     // Load utility functions/variables.
-    var children          = Utils.children,
+    var id                = Utils.id,
         data              = Utils.data,
-        id                = Utils.id,
+        children          = Utils.children,
         translate         = Utils.translate,
         translateToParent = Utils.translateToParent,
         linkId            = Utils.linkId,
@@ -17,17 +17,9 @@ define(
         duration          = Utils.duration,
         radius            = Utils.radius;
 
-    var TreeView = Backbone.View.extend({
+    var TreeView = StructView.extend({
       initialize: function() {
-        _.bindAll( this, 'render' );
-        this.listenTo( this.model, 'change', this.render );
-
-        // Select d3 element.
-        this.vis = d3.select( this.el )
-          .append( 'svg:svg' );
-
-        this.vis.append( 'g' ).attr( 'id', 'links' );
-        this.vis.append( 'g' ).attr( 'id', 'nodes' );
+        StructView.prototype.initialize.call( this );
 
         // d3 configuration.
         this.tree = d3.layout.tree()
@@ -130,15 +122,6 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 0 );
-      },
-
-      render: function() {
-        var nodes = this.tree.nodes( this.model.toJSON() );
-
-        this.renderLinks( nodes );
-        this.renderNodes( nodes );
-
-        return this;
       }
     });
 

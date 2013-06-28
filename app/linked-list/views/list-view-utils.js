@@ -4,11 +4,11 @@ define(
     'use strict';
 
     function x( d ) {
-      return d.y * window.innerHeight;
+      return 0.5 * d.y * window.innerWidth + 0.25 * window.innerWidth
     }
 
     function y( d ) {
-      return d.x * window.innerWidth;
+      return d.x * window.innerHeight;
     }
 
     function id( d ) {
@@ -17,6 +17,16 @@ define(
 
     function data( d ) {
       return d.data;
+    }
+
+    function children( d ) {
+      var childrenArray = [];
+
+      if ( d && d.id && d.next ) {
+        childrenArray.push( d.next );
+      }
+
+      return childrenArray;
     }
 
     function translateFn( xFn, yFn ) {
@@ -39,8 +49,6 @@ define(
         return fn( d );
       };
     }
-
-    var translateToPrev = translateTo( 'prev', translate );
 
     // Cantor pairing function to encode two numbers as one.
     function pairing( i, j ) {
@@ -66,19 +74,22 @@ define(
       y:               y,
       id:              id,
       data:            data,
+      children:        children,
 
       translateFn:     translateFn,
-      translate:       translate,
-
       translateTo:     translateTo,
-      translateToPrev: translateToPrev,
+      translate:       translate,
 
       pairing:         pairing,
       linkId:          linkId,
 
       diagonalFn:      diagonalFn,
       diagonal:        diagonal,
-      duration:        500
+
+      duration:        500,
+      borderRadius:    4,
+      width:           24,
+      height:          32
     };
   }
 );

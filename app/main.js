@@ -30,9 +30,11 @@ define(
 
     var router = new Router();
 
-    router.register( 'linked-list', 'linked-list/main' );
-    router.register( 'binary-tree', 'binary-tree/main' );
-    router.register( 'red-black-tree', 'red-black-tree/main' );
+    router.paths = {
+      'linked-list': 'linked-list/main',
+      'binary-tree': 'binary-tree/main',
+      'red-black-tree': 'red-black-tree/main'
+    };
 
     Backbone.history.start();
   }

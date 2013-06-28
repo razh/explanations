@@ -5,7 +5,7 @@ define(
 
     var Router = Backbone.Router.extend({
       routes: {
-        ':name': 'navigate'
+        ':name': 'load'
       },
 
       initialize: function() {
@@ -13,7 +13,7 @@ define(
         this.module = null;
       },
 
-      navigate: function( name ) {
+      load: function( name ) {
         if ( this.module ) {
           this.module.destroy();
         }
@@ -27,11 +27,6 @@ define(
             that.module.initialize();
           });
         }
-      },
-
-      // When we navigate to the name, open up the corresponding module.
-      register: function( name, path ) {
-        this.paths[ name ] = path;
       }
     });
 

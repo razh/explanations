@@ -1,0 +1,21 @@
+#list-view {
+  .node {
+    rect {
+      fill: white;
+      stroke: black;
+      stroke-width: 2px;
+
+    }
+
+    text {
+      font-family: Helvetica, Arial, sans-serif;
+      fill: black;
+    }
+  }
+
+  .link {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+  }
+}

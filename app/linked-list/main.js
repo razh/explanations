@@ -2,7 +2,7 @@ define(
   [ 'jquery',
     'linked-list/models/linked-list',
     'linked-list/views/linked-list-view',
-    'linked-list/views/input-view' ],
+    'shared/views/input-view' ],
   function( $, LinkedList, LinkedListView, InputView ) {
     'use strict';
 
@@ -14,6 +14,8 @@ define(
         .append( '<div id="input-view"></div>' );
 
       list = new LinkedList();
+      list.insert( 1 );
+      list.insert( 2 );
 
       listView = new LinkedListView({
         el: '#list-view',

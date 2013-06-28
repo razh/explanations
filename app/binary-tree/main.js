@@ -3,7 +3,7 @@ define(
     'binary-tree/models/tree',
     'binary-tree/models/tree-node',
     'binary-tree/views/tree-view',
-    'linked-list/views/input-view' ],
+    'shared/views/input-view' ],
   function( $, Tree, TreeNode, TreeView, InputView ) {
     'use strict';
 
