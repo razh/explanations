@@ -12,7 +12,13 @@ define(
         children     = Utils.children,
         translate    = Utils.translate,
         linkId       = Utils.linkId,
-        duration     = Utils.duration,
+        duration     = Utils.duration * 4,
+        sourceX      = Utils.sourceX,
+        sourceY      = Utils.sourceY,
+        targetX      = Utils.targetX,
+        targetY      = Utils.targetY,
+        midpointX    = Utils.midpointX,
+        midpointY    = Utils.midpointY,
         // Constants.
         borderRadius = Utils.borderRadius,
         width        = Utils.width,
@@ -31,24 +37,34 @@ define(
         var link = this.vis.select( '#links' )
           .selectAll( '.link' )
           .data( this.tree.links( nodes ), linkId );
+          console.log(this.tree.links( nodes ));
 
         link.enter()
+          .append( 'g' )
           .append( 'line' )
-          .attr( 'x1', function( d ) { return x( d.source ); } )
-          .attr( 'y1', function( d ) { return y( d.source ); } )
-          .attr( 'x2', function( d ) { return x( d.source ); } )
-          .attr( 'y2', function( d ) { return y( d.source ); } )
+          .attr( 'x1', sourceX )
+          .attr( 'y1', sourceY )
+          .attr( 'x2', sourceX )
+          .attr( 'y2', sourceY )
           .style( 'stroke-opacity', 0 );
 
         link.transition()
           .duration( duration )
-          .attr( 'x2', function( d ) { return x( d.target ); } )
-          .attr( 'y2', function( d ) { return y( d.target ); } )
+          .select( 'line' )
+          .attr( 'x1', sourceX )
+          .attr( 'y1', sourceY )
+          .attr( 'x2', targetX )
+          .attr( 'y2', targetY )
           .style( 'stroke-opacity', 1 );
 
         link.exit()
           .transition()
           .duration( duration )
+          .select( 'line' )
+          .attr( 'x1', 0 )
+          .attr( 'y1', 0 )
+          .attr( 'x2', 0 )
+          .attr( 'y2', 0 )
           .style( 'stroke-opacity', 0 )
           .remove();
       },
@@ -97,7 +113,7 @@ define(
 
         var that = this;
         nodeEnter.on( 'click', function( d ) {
-          var node = that.model.search( d.data );
+          var node = that.model.searchBy( 'id', d.id );
           if ( node ) {
             that.model.delete( node );
             that.render();

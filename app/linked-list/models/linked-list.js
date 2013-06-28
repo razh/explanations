@@ -11,9 +11,13 @@ define(
       },
 
       search: function( data ) {
+        return this.searchBy( 'data', data );
+      },
+
+      searchBy: function( key, value ) {
         var current = this.get( 'head' );
 
-        while ( current && current.get( 'data' ) !== data ) {
+        while ( current && current.get( key ) !== value ) {
           current = current.get( 'next' );
         }
 
