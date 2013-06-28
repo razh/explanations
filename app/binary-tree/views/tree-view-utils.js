@@ -1,7 +1,15 @@
 define(
-  [ 'd3' ],
-  function( d3 ) {
+  [ 'linked-list/views/list-view-utils' ],
+  function( Utils ) {
     'use strict';
+
+    function x( d ) {
+      return d.x * window.innerWidth;
+    }
+
+    function y( d ) {
+      return 0.6 * d.y * window.innerHeight + 50;
+    }
 
     function children( d ) {
       var childrenArray = [];
@@ -15,59 +23,26 @@ define(
       return childrenArray;
     }
 
-    function x( d ) {
-      return d.x * window.innerWidth;
-    }
-
-    function y( d ) {
-      return 0.6 * d.y * window.innerHeight + 50;
-    }
-
-    function data( d ) {
-      return d.data;
-    }
-
-    function id( d ) {
-      return d.id;
-    }
-
-    function translate( d ) {
-      return 'translate(' + x(d) + ', ' + y(d) + ')';
-    }
-
-    function translateToParent( d ) {
-      d = d.parent ? d.parent : d;
-      return translate( d );
-    }
-
-    // Cantor pairing function to encode two numbers as one.
-    function pairing( i, j ) {
-      return 0.5 * ( i + j ) * ( i + j + 1 ) + j;
-    }
-
-    // Creates a unique id for each link.
-    function linkId( d ) {
-      return pairing( d.source.id, d.target.id );
-    }
-
-    var diagonal = d3.svg.diagonal()
-      .projection( function( d ) {
-        return [ x(d), y(d) ];
-      });
+    var diagonal          = Utils.diagonalFn( x, y ),
+        translate         = Utils.translateFn( x, y ),
+        translateToParent = Utils.translateTo( 'parent', translate );
 
     return {
-      children:          children,
       x:                 x,
       y:                 y,
-      data:              data,
-      id:                id,
+      children:          children,
+
       translate:         translate,
       translateToParent: translateToParent,
-      pairing:           pairing,
-      linkId:            linkId,
+
       diagonal:          diagonal,
-      duration:          500,
-      radius:            20
+      radius:            20,
+
+      data:              Utils.data,
+      id:                Utils.id,
+      pairing:           Utils.pairing,
+      linkId:            Utils.linkId,
+      duration:          Utils.duration
     };
   }
 );

@@ -1,6 +1,7 @@
 define(
   [ 'linked-list/models/list-node' ],
   function( ListNode ) {
+    'use strict';
 
     var LinkedList = Backbone.Model.extend({
       defaults: function() {
