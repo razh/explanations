@@ -11,8 +11,7 @@ define(
         translate    = Utils.translate,
         linkId       = Utils.linkId,
         diagonal     = Utils.diagonal,
-        duration     = Utils.duration * 4,
-
+        duration     = Utils.duration,
         // Constants.
         borderRadius = Utils.borderRadius,
         width        = Utils.width,

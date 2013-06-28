@@ -8,7 +8,7 @@ define(
     }
 
     function y( d ) {
-      return d.x * window.innerHeight;
+      return 0.8 * d.x * window.innerHeight;
     }
 
     function id( d ) {
@@ -82,12 +82,14 @@ define(
 
       pairing:         pairing,
       linkId:          linkId,
+
+      diagonalFn:      diagonalFn,
       diagonal:        diagonal,
 
       duration:        500,
       borderRadius:    4,
-      width:           32,
-      height:          28
+      width:           36,
+      height:          30
     };
   }
 );

@@ -92,11 +92,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 16pt;
   background: black;
   color: white;
+  outline: none;
   border: 2px solid black;
   border-radius: 5px;
   text-align: center;
 }
-/* line 35, ../sass/_input-view.scss */
+/* line 36, ../sass/_input-view.scss */
 #input-view .input-button:active {
   background: white;
   color: black;
