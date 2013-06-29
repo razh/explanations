@@ -13,11 +13,11 @@ requirejs.config({
   },
 
   paths: {
-    'backbone': 'lib/backbone/backbone',
-    'd3': 'lib/d3/d3.v3',
-    'jquery': 'lib/jquery/jquery-2.0.2',
-    'text': 'lib/text',
-    'underscore': 'lib/underscore/underscore'
+    'backbone': 'components/backbone/backbone',
+    'd3': 'components/d3/d3',
+    'jquery': 'components/jquery/jquery',
+    'text': 'components/requirejs-text/text',
+    'underscore': 'components/underscore/underscore'
   }
 });
 
