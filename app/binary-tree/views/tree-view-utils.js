@@ -1,7 +1,6 @@
 define(
-  [ 'd3',
-    'linked-list/views/list-view-utils' ],
-  function( d3, Utils ) {
+  [ 'linked-list/views/list-view-utils' ],
+  function( Utils ) {
     'use strict';
 
     function x( d ) {

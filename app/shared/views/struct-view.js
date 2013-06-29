@@ -6,6 +6,7 @@ define(
 
     /*
       Generic view for data structures (nodes and links).
+      Note that this uses d3's tree layout (change if necessary).
      */
     var StructView = Backbone.View.extend({
       initialize: function() {
