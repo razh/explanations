@@ -22,7 +22,7 @@ define(
           node5 = new GraphNode( { data: 'F' } );
 
       node0.to( node1, node3 );
-      node1.to( node2, node3 );
+      node1.to( node2, node3, node0 );
       node2.to( node4, node5 );
       node3.to( node4 );
 

@@ -24,8 +24,12 @@ define(
         var children = this.get( 'children' ),
             args     = Array.prototype.slice.call( arguments );
 
+        var that = this;
         args.forEach(function( arg ) {
-          children.push( arg );
+          // Check that we don't already have an edge coming in from that node.
+          if ( arg.get( 'children' ).indexOf( that ) < 0 ) {
+            children.push( arg );
+          }
         });
 
         children.sort( function( a, b ) { return a.id - b.id; } );

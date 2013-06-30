@@ -32,11 +32,6 @@ define(
       },
 
       render: function() {
-        var collectionJSON = this.collection.toJSON();
-        console.log( collectionJSON );
-
-        // var nodes = this.force ? this.force.nodes( this.collection.nodes() ) : [],
-        //     links = this.tree  ? this.tree.links(  this.collection.links() ) : [];
         var nodes = this.collection.nodes(),
             links = this.collection.links();
 
@@ -44,11 +39,6 @@ define(
           .nodes( nodes )
           .links( links )
           .start();
-
-        console.log( 'nodes' );
-        console.log( nodes );
-        console.log( 'links' );
-        console.log( links );
 
         this.renderLinks( links );
         this.renderNodes( nodes );
