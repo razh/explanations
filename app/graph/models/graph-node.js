@@ -12,7 +12,10 @@ define(
       defaults: function() {
         return {
           id: Id.nextUid(),
-          children: []
+          data: null,
+
+          children: [],
+          weight: 1
         };
       },
 
@@ -27,6 +30,14 @@ define(
 
         children.sort( function( a, b ) { return a.id - b.id; } );
         this.set( 'children', _.uniq( children, true ) );
+      },
+
+      toJSON: function() {
+        return {
+          id: this.id,
+          data: this.get( 'data' ),
+          weight: this.get( 'weight' )
+        };
       }
     });
 

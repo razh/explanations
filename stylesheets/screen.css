@@ -162,3 +162,40 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke: black;
   stroke-width: 2px;
 }
+
+/* line 3, ../sass/_graph.scss */
+#graph-view .node circle {
+  fill: white;
+  stroke: black;
+  stroke-width: 2px;
+}
+/* line 9, ../sass/_graph.scss */
+#graph-view .node text {
+  font-family: Helvetica, Arial, sans-serif;
+  fill: black;
+}
+/* line 15, ../sass/_graph.scss */
+#graph-view line {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+/* line 14, ../sass/screen.scss */
+a {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: middle;
+  padding: 0 7px;
+}
+
+/* line 22, ../sass/screen.scss */
+a + a {
+  border-left: 1px solid #ccc;
+}
+
+/* line 26, ../sass/screen.scss */
+.nav {
+  padding-top: 10px;
+}

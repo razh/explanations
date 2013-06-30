@@ -107,7 +107,6 @@ define(
           .attr( 'r', radius );
 
         nodeUpdate.select( 'text' )
-          .text( data )
           .style( 'fill-opacity', 1 );
 
         // Exit.

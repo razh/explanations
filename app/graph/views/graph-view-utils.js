@@ -4,26 +4,41 @@ define(
     'use strict';
 
     function x( d ) {
-      return d.x * window.innerWidth;
+      return d.x;
     }
 
     function y( d ) {
-      return d.y * window.innerHeight;
+      return d.y;
     }
 
-    var translate = Utils.translateFn( x, y );
+    function coordFn( attr, fn ) {
+      return function( d ) {
+        return fn( d[ attr ] );
+      };
+    }
+
+    var sourceX = coordFn( 'source', x ),
+        sourceY = coordFn( 'source', y ),
+        targetX = coordFn( 'target', x ),
+        targetY = coordFn( 'target', y );
 
     return {
+      x:         x,
+      y:         y,
+
       id:        Utils.id,
       data:      Utils.data,
 
       pairing:   Utils.pairing,
       linkId:    Utils.linkId,
 
-      translate: translate,
+      sourceX:   sourceX,
+      sourceY:   sourceY,
+      targetX:   targetX,
+      targetY:   targetY,
 
       duration:  500,
-      radius:    6
+      radius:    14
     };
   }
 );

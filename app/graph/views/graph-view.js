@@ -5,11 +5,15 @@ define(
   function( d3, StructView, Utils ) {
     'use strict';
 
-    var id        = Utils.id,
+    var x         = Utils.x,
+        y         = Utils.y,
+        id        = Utils.id,
         data      = Utils.data,
         linkId    = Utils.linkId,
-        translate = Utils.translate,
-        diagonal  = Utils.diagonal,
+        sourceX   = Utils.sourceX,
+        sourceY   = Utils.sourceY,
+        targetX   = Utils.targetX,
+        targetY   = Utils.targetY,
         duration  = Utils.duration,
         radius    = Utils.radius;
 
@@ -17,65 +21,88 @@ define(
       initialize: function() {
         StructView.prototype.initialize.call( this );
 
-        this.force = d3.layout.force();
+        this.force = d3.layout.force()
+          .charge( -150 )
+          .linkDistance( 50 )
+          .size( [ window.innerWidth, window.innerHeight ] );
         this.tree = d3.layout.tree();
+
+        this.node = null;
+        this.link = null;
       },
 
       render: function() {
         var collectionJSON = this.collection.toJSON();
         console.log( collectionJSON );
 
-        var nodes = this.force ? this.force.nodes( collectionJSON ) : [],
-            links = this.tree  ? this.tree.links( collectionJSON ) : [];
+        // var nodes = this.force ? this.force.nodes( this.collection.nodes() ) : [],
+        //     links = this.tree  ? this.tree.links(  this.collection.links() ) : [];
+        var nodes = this.collection.nodes(),
+            links = this.collection.links();
 
-        console.log('nodes');
-        console.log(nodes);
-        console.log('links');
-        console.log(links);
+        this.force
+          .nodes( nodes )
+          .links( links )
+          .start();
+
+        console.log( 'nodes' );
+        console.log( nodes );
+        console.log( 'links' );
+        console.log( links );
 
         this.renderLinks( links );
         this.renderNodes( nodes );
+
+        var that = this;
+        this.force.on( 'tick', function() {
+          that.link
+            .attr( 'x1', sourceX )
+            .attr( 'y1', sourceY )
+            .attr( 'x2', targetX )
+            .attr( 'y2', targetY );
+
+          that.node.select( 'circle' )
+            .attr( 'cx', x )
+            .attr( 'cy', y );
+
+          that.node.select( 'text' )
+            .attr( 'x', x )
+            .attr( 'y', y );
+        });
 
         return this;
       },
 
       renderLinks: function( links ) {
-        var link = this.vis.select( '#links' )
+        this.link = this.vis.select( '#links' )
           .selectAll( '.link' )
           .data( links, linkId );
 
-        link.enter()
-          .append( 'path' )
-            .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
-            // .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
-              .attr( 'class', 'link' )
-              // .attr( 'd', diagonal )
-              .style( 'stroke-opacity', 0 );
+        this.link.enter()
+          .append( 'line' )
+            .style( 'stroke-opacity', 0 );
 
-        link.transition()
+        this.link.transition()
           .duration( duration )
-          // .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
 
-        link.exit()
+        this.link.exit()
           .transition()
           .duration( duration )
-          // .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
       },
 
       renderNodes: function( nodes ) {
-        var node = this.vis.select( '#nodes' )
+        this.node = this.vis.select( '#nodes' )
           .selectAll( '.node' )
           .data( nodes, id );
 
         // Enter.
-        var nodeEnter = node.enter()
+        var nodeEnter = this.node.enter()
           .append( 'g' )
-            .filter( id ) // Draw non-empty nodes.
-              .attr( 'class', 'node' )
-              .attr( 'transform', translate );
+          .attr( 'class', 'node' )
+          .call( this.force.drag );
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 );
@@ -88,9 +115,8 @@ define(
           .style( 'dominant-baseline', 'middle' );
 
         // Update.
-        var nodeUpdate = node.transition()
-          .duration( duration )
-          .attr( 'transform', translate );
+        var nodeUpdate = this.node.transition()
+          .duration( duration );
 
         nodeUpdate.select( 'circle' )
           .attr( 'r', radius );
@@ -99,6 +125,8 @@ define(
           .text( data )
           .style( 'fill-opacity', 1 );
 
+        // Exit any old nodes.
+        this.node.exit().remove();
       }
     });
 

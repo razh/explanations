@@ -1,0 +1,20 @@
+#graph-view {
+  .node {
+    circle {
+      fill: white;
+      stroke: black;
+      stroke-width: 2px;
+    }
+
+    text {
+      font-family: Helvetica, Arial, sans-serif;
+      fill: black;
+    }
+  }
+
+  line {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+  }
+}

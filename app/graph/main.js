@@ -14,19 +14,17 @@ define(
 
       graph = new Graph();
 
-      var node0 = new GraphNode(),
-          node1 = new GraphNode(),
-          node2 = new GraphNode(),
-          node3 = new GraphNode(),
-          node4 = new GraphNode(),
-          node5 = new GraphNode();
+      var node0 = new GraphNode( { data: 'A' } ),
+          node1 = new GraphNode( { data: 'B' } ),
+          node2 = new GraphNode( { data: 'C' } ),
+          node3 = new GraphNode( { data: 'D' } ),
+          node4 = new GraphNode( { data: 'E' } ),
+          node5 = new GraphNode( { data: 'F' } );
 
       node0.to( node1, node3 );
-      node1.to( node0, node2, node3 );
-      node2.to( node1, node4, node5 );
-      node3.to( node0, node1, node4 );
-      node4.to( node2, node3 );
-      node5.to( node2 );
+      node1.to( node2, node3 );
+      node2.to( node4, node5 );
+      node3.to( node4 );
 
       // Duplicate.
       node0.to( node1, node3 );
@@ -40,6 +38,9 @@ define(
         node5
       ]);
 
+      console.log(graph.nodes());
+      console.log(graph.links());
+
       graphView = new GraphView({
         el: '#graph-view',
         collection: graph
@@ -49,15 +50,8 @@ define(
     }
 
     function destroy() {
-      var graphNode = graph.first();
-
-      while ( graphNode ) {
-        graphNode.destroy();
-        graphNode = graph.first();
-      }
-
+      graph.reset();
       graphView.remove();
-
       el.empty();
     }
 
