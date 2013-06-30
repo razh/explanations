@@ -33,7 +33,8 @@ define(
     router.paths = {
       'linked-list': 'linked-list/main',
       'binary-tree': 'binary-tree/main',
-      'red-black-tree': 'red-black-tree/main'
+      'red-black-tree': 'red-black-tree/main',
+      'graph': 'graph/main'
     };
 
     Backbone.history.start();

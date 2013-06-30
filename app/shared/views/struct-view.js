@@ -11,7 +11,9 @@ define(
     var StructView = Backbone.View.extend({
       initialize: function() {
         _.bindAll( this, 'render' );
-        this.listenTo( this.model, 'change', this.render );
+        if ( this.model ) {
+          this.listenTo( this.model, 'change', this.render );
+        }
 
         // Select d3 element.
         this.vis = d3.select( this.el )
