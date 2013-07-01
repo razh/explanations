@@ -38,8 +38,8 @@ define(
         node5
       ]);
 
-      console.log(graph.nodes());
-      console.log(graph.links());
+      console.log( graph.nodes() );
+      console.log( graph.links() );
 
       graphView = new GraphView({
         el: '#graph-view',

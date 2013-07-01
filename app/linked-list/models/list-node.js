@@ -1,18 +1,14 @@
 define(
-  [ 'backbone',
-    'id' ],
-  function( Backbone, Id ) {
+  [ 'shared/models/node' ],
+  function( Node ) {
     'use strict';
 
-    var ListNode = Backbone.Model.extend({
+    var ListNode = Node.extend({
       defaults: function() {
-        return {
-          id: Id.nextUid(),
-          data: null,
-
-          prev: null,
-          next: null
-        };
+        var defaults = Node.prototype.defaults();
+        defaults.prev = null;
+        defaults.next = null;
+        return defaults;
       },
 
       toJSON: function() {

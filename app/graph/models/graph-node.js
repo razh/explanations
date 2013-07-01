@@ -1,22 +1,18 @@
 define(
   [ 'underscore',
-    'backbone',
-    'id' ],
-  function( _, Backbone, Id ) {
+    'shared/models/node' ],
+  function( _, Node ) {
     'use strict';
 
     /*
       Node in directed acyclic graph.
      */
-    var GraphNode = Backbone.Model.extend({
+    var GraphNode = Node.extend({
       defaults: function() {
-        return {
-          id: Id.nextUid(),
-          data: null,
-
-          children: [],
-          weight: 1
-        };
+        var defaults = Node.prototype.defaults();
+        defaults.children = [];
+        defaults.weight   = 1;
+        return defaults;
       },
 
       to: function() {

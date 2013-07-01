@@ -1,19 +1,15 @@
 define(
-  [ 'backbone',
-    'id' ],
-  function( Backbone, Id ) {
+  [ 'shared/models/node' ],
+  function( Node ) {
     'use strict';
 
-    var TreeNode = Backbone.Model.extend({
+    var TreeNode = Node.extend({
       defaults: function() {
-        return {
-          id: Id.nextUid(),
-          data: null,
-
-          parent: null,
-          left: null,
-          right: null
-        };
+        var defaults = Node.prototype.defaults();
+        defaults.parent = null;
+        defaults.left   = null;
+        defaults.right  = null;
+        return defaults;
       },
 
       search: function( data ) {
