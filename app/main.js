@@ -34,6 +34,7 @@ define(
       'linked-list': 'linked-list/main',
       'binary-tree': 'binary-tree/main',
       'red-black-tree': 'red-black-tree/main',
+      'binary-heap': 'binary-heap/main',
       'graph': 'graph/main'
     };
 
