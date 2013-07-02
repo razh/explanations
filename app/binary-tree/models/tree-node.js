@@ -58,8 +58,8 @@ define(
         var left  = this.get( 'left' ),
             right = this.get( 'right' );
 
-        var leftArray  = left  !== null ? left.toArray()  : [],
-            rightArray = right !== null ? right.toArray() : [];
+        var leftArray  = left  ? left.toArray()  : [],
+            rightArray = right ? right.toArray() : [];
 
         return leftArray.concat( [ this.get( 'data' ) ], rightArray );
       },

@@ -122,26 +122,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 3, ../sass/_binary-tree.scss */
-#tree-view .node circle {
+#tree-view .node circle, #binary-heap-view .node circle {
   fill: white;
   stroke: black;
   stroke-width: 2px;
 }
 /* line 10, ../sass/_binary-tree.scss */
-#tree-view .node text {
+#tree-view .node text, #binary-heap-view .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: black;
 }
 /* line 17, ../sass/_binary-tree.scss */
-#tree-view .delete-overlay circle {
+#tree-view .delete-overlay circle, #binary-heap-view .delete-overlay circle {
   fill: black;
 }
 /* line 21, ../sass/_binary-tree.scss */
-#tree-view .delete-overlay text {
+#tree-view .delete-overlay text, #binary-heap-view .delete-overlay text {
   fill: white;
 }
 /* line 26, ../sass/_binary-tree.scss */
-#tree-view .link {
+#tree-view .link, #binary-heap-view .link {
   fill: none;
   stroke: black;
   stroke-width: 2px;
@@ -181,7 +181,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   stroke-width: 2px;
 }
 
-/* line 14, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -190,12 +190,12 @@ a {
   padding: 0 7px;
 }
 
-/* line 22, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 a + a {
   border-left: 1px solid #ccc;
 }
 
-/* line 26, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 .nav {
   padding-top: 10px;
 }
