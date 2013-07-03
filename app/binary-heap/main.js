@@ -26,6 +26,11 @@ define(
       });
 
       binaryHeapView.render();
+
+      setTimeout(function() {
+        binaryHeap.insert( 100 );
+        binaryHeapView.render();
+      }, 500 );
     }
 
     function destroy() {
