@@ -7,9 +7,7 @@ define(
 
     var x         = Utils.x,
         y         = Utils.y,
-        id        = Utils.id,
         data      = Utils.data,
-        linkId    = Utils.linkId,
         sourceX   = Utils.sourceX,
         sourceY   = Utils.sourceY,
         targetX   = Utils.targetX,
@@ -25,10 +23,8 @@ define(
           .charge( -150 )
           .linkDistance( 50 )
           .size( [ window.innerWidth, window.innerHeight ] );
-        this.tree = d3.layout.tree();
 
-        this.node = null;
-        this.link = null;
+        this.tree = d3.layout.tree();
       },
 
       render: function() {
@@ -63,19 +59,19 @@ define(
         return this;
       },
 
-      renderLinks: function( links ) {
-        this.link = this.vis.select( '#links' )
-          .selectAll( '.link' )
-          .data( links, linkId );
-
+      linkEnter: function() {
         this.link.enter()
           .append( 'line' )
             .style( 'stroke-opacity', 0 );
+      },
 
+      linkUpdate: function() {
         this.link.transition()
           .duration( duration )
           .style( 'stroke-opacity', 1 );
+      },
 
+      linkExit: function() {
         this.link.exit()
           .transition()
           .duration( duration )
@@ -83,12 +79,7 @@ define(
           .remove();
       },
 
-      renderNodes: function( nodes ) {
-        this.node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( nodes, id );
-
-        // Enter.
+      nodeEnter: function() {
         var nodeEnter = this.node.enter()
           .append( 'g' )
           .attr( 'class', 'node' )
@@ -103,8 +94,9 @@ define(
           // Center text.
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
+      },
 
-        // Update.
+      nodeUpdate: function() {
         var nodeUpdate = this.node.transition()
           .duration( duration );
 
@@ -114,8 +106,9 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
+      },
 
-        // Exit any old nodes.
+      nodeExit: function() {
         this.node.exit().remove();
       }
     });

@@ -1,8 +1,13 @@
 define(
   [ 'underscore',
     'backbone',
-    'd3' ],
-  function( _, Backbone, d3 ) {
+    'd3',
+    'linked-list/views/list-view-utils' ],
+  function( _, Backbone, d3, Utils ) {
+    'use strict';
+
+    var id     = Utils.id,
+        linkId = Utils.linkId;
 
     /*
       View interface for data structures (nodes and links).
@@ -21,19 +26,49 @@ define(
 
         this.vis.append( 'g' ).attr( 'id', 'links' );
         this.vis.append( 'g' ).attr( 'id', 'nodes' );
+
+        this.link = null;
+        this.node = null;
       },
 
+      // This render function assumes a tree.
       render: function() {
-        var nodes = this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
+        var nodes = this.tree ? this.tree.nodes( this.model.toJSON() ) : [],
+            links = this.tree.links( nodes );
 
-        this.renderLinks( nodes );
+        this.renderLinks( links );
         this.renderNodes( nodes );
 
         return this;
       },
 
-      renderLinks: function() {},
-      renderNodes: function() {}
+      renderLinks: function( links ) {
+        this.link = this.vis.select( '#links' )
+          .selectAll( '.link' )
+          .data( links, linkId );
+
+        this.linkEnter();
+        this.linkUpdate();
+        this.linkExit();
+      },
+
+      renderNodes: function( nodes ) {
+        this.node = this.vis.select( '#nodes' )
+          .selectAll( '.node' )
+          .data( nodes, id );
+
+        this.nodeEnter();
+        this.nodeUpdate();
+        this.nodeExit();
+      },
+
+      linkEnter: function() {},
+      linkUpdate: function() {},
+      linkExit: function() {},
+
+      nodeEnter: function() {},
+      nodeUpdate: function() {},
+      nodeExit: function() {}
     });
 
 

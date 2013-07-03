@@ -28,13 +28,8 @@ define(
         black = colorFn( RBTreeNode.BLACK );
 
     var RBTreeView = TreeView.extend({
-      renderNodes: function( nodes ) {
-        var node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( nodes, id );
-
-        // Enter.
-        var nodeEnter = node.enter()
+      nodeEnter: function() {
+        var nodeEnter = this.node.enter()
           .append( 'g' )
             .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
@@ -51,7 +46,7 @@ define(
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
-        // Mouse over event.
+        // Interactions.
         nodeEnter.on( 'mouseover', function() {
           d3.select( this )
               .classed( 'delete-overlay', true )
@@ -74,9 +69,10 @@ define(
             that.render();
           }
         });
+      },
 
-        // Update.
-        var nodeUpdate = node.transition()
+      nodeUpdate: function() {
+        var nodeUpdate = this.node.transition()
           .duration( duration )
           .attr( 'transform', translate );
 
@@ -87,9 +83,10 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
+      },
 
-        // Exit.
-        var nodeExit = node.exit()
+      nodeExit: function() {
+        var nodeExit = this.node.exit()
           .transition()
           .duration( duration )
           .attr( 'transform', translate )

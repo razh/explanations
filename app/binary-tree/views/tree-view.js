@@ -12,7 +12,6 @@ define(
         children          = Utils.children,
         translate         = Utils.translate,
         translateToParent = Utils.translateToParent,
-        linkId            = Utils.linkId,
         diagonal          = Utils.diagonal,
         duration          = Utils.duration,
         radius            = Utils.radius;
@@ -26,25 +25,26 @@ define(
           .children( children );
       },
 
-      renderLinks: function( nodes ) {
-        var link = this.vis.select( '#links' )
-          .selectAll( '.link' )
-          .data( this.tree.links( nodes ), linkId );
-
-        link.enter()
+      // Link states.
+      linkEnter: function() {
+        this.link.enter()
           .append( 'path' )
             .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
             .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
               .attr( 'class', 'link' )
               .attr( 'd', diagonal )
               .style( 'stroke-opacity', 0 );
+      },
 
-        link.transition()
+      linkUpdate: function() {
+        this.link.transition()
           .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
+      },
 
-        link.exit()
+      linkExit: function() {
+        this.link.exit()
           .transition()
           .duration( duration )
           .attr( 'd', diagonal )
@@ -52,13 +52,9 @@ define(
           .remove();
       },
 
-      renderNodes: function( nodes ) {
-        var node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( nodes, id );
-
-        // Enter.
-        var nodeEnter = node.enter()
+      // Node states.
+      nodeEnter: function() {
+        var nodeEnter = this.node.enter()
           .append( 'g' )
             .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
@@ -97,9 +93,10 @@ define(
             that.render();
           }
         });
+      },
 
-        // Update.
-        var nodeUpdate = node.transition()
+      nodeUpdate: function() {
+        var nodeUpdate = this.node.transition()
           .duration( duration )
           .attr( 'transform', translate );
 
@@ -108,9 +105,10 @@ define(
 
         nodeUpdate.select( 'text' )
           .style( 'fill-opacity', 1 );
+      },
 
-        // Exit.
-        var nodeExit = node.exit()
+      nodeExit: function() {
+        var nodeExit = this.node.exit()
           .transition()
           .duration( duration )
           .attr( 'transform', translate )
@@ -121,7 +119,7 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 0 );
-      }
+      },
     });
 
     return TreeView;

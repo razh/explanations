@@ -9,7 +9,6 @@ define(
         data         = Utils.data,
         children     = Utils.children,
         translate    = Utils.translate,
-        linkId       = Utils.linkId,
         diagonal     = Utils.diagonal,
         duration     = Utils.duration,
         // Constants.
@@ -26,28 +25,39 @@ define(
           .children( children );
       },
 
-      renderLinks: function( nodes ) {
+      render: function() {
+        var nodes = this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
         // Set y-height equal to depth of node in list (position).
         nodes.forEach(function( d ) {
           d.y = d.depth;
         });
 
-        var link = this.vis.select( '#links' )
-          .selectAll( '.link' )
-          .data( this.tree.links( nodes ), linkId );
+        var links = this.tree.links( nodes );
 
-        link.enter()
+        this.renderLinks( links );
+        this.renderNodes( nodes );
+
+        return this;
+      },
+
+      // Link states.
+      linkEnter: function() {
+        this.link.enter()
           .append( 'path' )
             .attr( 'class', 'link' )
             .attr( 'd', diagonal )
             .style( 'stroke-opacity', 0 );
+      },
 
-        link.transition()
+      linkUpdate: function() {
+        this.link.transition()
           .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
+      },
 
-        link.exit()
+      linkExit: function() {
+        this.link.exit()
           .transition()
           .duration( duration )
           .attr( 'd', diagonal )
@@ -55,13 +65,9 @@ define(
           .remove();
       },
 
-      renderNodes: function( nodes ) {
-        var node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( nodes, id );
-
-        // Enter.
-        var nodeEnter = node.enter()
+      // Node states.
+      nodeEnter: function() {
+        var nodeEnter = this.node.enter()
           .append( 'g' )
             .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
@@ -105,9 +111,10 @@ define(
             that.render();
           }
         });
+      },
 
-        // Update.
-        var nodeUpdate = node.transition()
+      nodeUpdate: function() {
+        var nodeUpdate = this.node.transition()
           .duration( duration )
           .attr( 'transform', translate );
 
@@ -120,9 +127,10 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
+      },
 
-        // Exit.
-        var nodeExit = node.exit()
+      nodeExit: function() {
+        var nodeExit = this.node.exit()
           .transition()
           .duration( duration )
           .attr( 'transform', translate )
