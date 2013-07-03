@@ -1,3 +1,15 @@
 #binary-heap-view {
   @extend #tree-view;
 }
+
+#heap-input-view {
+  @extend #input-view;
+
+  .pop {
+    width: 70px;
+  }
+
+  .popped-value {
+    font-family: Helvetica, Arial, sans-serif;
+  }
+}

@@ -21,7 +21,7 @@ define(
       },
 
       render: function() {
-        this.$el.html( this.template({ tree: this.model }) );
+        this.$el.html( this.template() );
         return this;
       },
 

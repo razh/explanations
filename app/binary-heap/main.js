@@ -1,15 +1,17 @@
 define(
   [ 'jquery',
     'binary-heap/models/binary-heap',
-    'binary-heap/views/binary-heap-view' ],
-  function( $, BinaryHeap, BinaryHeapView ) {
+    'binary-heap/views/binary-heap-view',
+    'binary-heap/views/heap-input-view' ],
+  function( $, BinaryHeap, BinaryHeapView, HeapInputView ) {
     'use strict';
 
-    var binaryHeap, binaryHeapView, el;
+    var binaryHeap, binaryHeapView, inputView, el;
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div id="binary-heap-view"></div>' );
+        .append( '<div id="binary-heap-view"></div>' )
+        .append( '<div id="heap-input-view"></div>' );
 
       binaryHeap = new BinaryHeap();
       binaryHeap.insert( 25 );
@@ -27,6 +29,13 @@ define(
 
       binaryHeapView.render();
 
+      inputView = new HeapInputView({
+        el: $( '#heap-input-view' ),
+        model: binaryHeap
+      });
+
+      inputView.render();
+
       setTimeout(function() {
         binaryHeap.insert( 100 );
         binaryHeapView.render();
@@ -35,7 +44,10 @@ define(
 
     function destroy() {
       binaryHeap.destroy();
+
       binaryHeapView.remove();
+      inputView.remove();
+
       el.empty();
     }
 

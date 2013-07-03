@@ -68,13 +68,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 1, ../sass/_input-view.scss */
-#input-view {
+#input-view, #heap-input-view {
   position: absolute;
   bottom: 10px;
   left: 10px;
 }
 /* line 7, ../sass/_input-view.scss */
-#input-view .input-value {
+#input-view .input-value, #heap-input-view .input-value {
   float: left;
   padding: 5px;
   font-family: Helvetica, Arial, sans-serif;
@@ -84,7 +84,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-bottom: 1px solid black;
 }
 /* line 19, ../sass/_input-view.scss */
-#input-view .input-button {
+#input-view .input-button, #heap-input-view .input-button {
   margin: 0 2px;
   padding: 6px;
   width: 50px;
@@ -98,7 +98,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-align: center;
 }
 /* line 36, ../sass/_input-view.scss */
-#input-view .input-button:active {
+#input-view .input-button:active, #heap-input-view .input-button:active {
   background: white;
   color: black;
 }
@@ -161,6 +161,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   fill: none;
   stroke: black;
   stroke-width: 2px;
+}
+
+/* line 8, ../sass/_binary-heap.scss */
+#heap-input-view .pop {
+  width: 70px;
+}
+/* line 12, ../sass/_binary-heap.scss */
+#heap-input-view .popped-value {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /* line 3, ../sass/_graph.scss */

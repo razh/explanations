@@ -16,8 +16,10 @@ define(
        * @return {Object} JSONified root node.
        */
       toJSON: function() {
-        var nodes = this.get( 'nodes' );
-        return nodes[1].toTree( nodes, 1 );
+        var nodes = this.get( 'nodes' ),
+            node  = nodes[1];
+
+        return node ? node.toTree( nodes, 1 ) : {};
       },
 
       insert: function( data ) {
@@ -32,32 +34,35 @@ define(
         return node;
       },
 
-      top: function() {
+      pop: function() {
         var nodes = this.get( 'nodes' );
         if ( nodes.length < 1 ) {
           return;
         }
 
         var max = nodes[1];
-        nodes[1] = nodes[ nodes.length ];
-        nodes.length--;
-        this.maxHeapify( 1 );
+        nodes[1] = nodes[ nodes.length - 1 ];
+        nodes.pop();
+        this.maxHeapify(1);
 
         return max;
       },
 
+      top: function() {
+        return this.get( 'nodes' )[1].get( 'data' );
+      },
+
       maxHeapify: function( index ) {
         var nodes  = this.get( 'nodes' ),
-            node   = nodes[ index ],
-            length = nodes.length;
+            length = nodes.length - 1;
 
         var leftIndex  = this.left( index ),
             rightIndex = this.right( index );
 
         var largest;
         if ( leftIndex <= length &&
-             nodes[ leftIndex ].get( 'data' ) > node.get( 'data' ) ) {
-          largest = length;
+             nodes[ leftIndex ].get( 'data' ) > nodes[ index ].get( 'data' ) ) {
+          largest = leftIndex;
         } else {
           largest = index;
         }
@@ -69,8 +74,8 @@ define(
 
         if ( largest !== index ) {
           // Swap largest and this.
-          var temp = node[ largest ];
-          nodes[ largest ] = node;
+          var temp = nodes[ largest ];
+          nodes[ largest ] = nodes[ index ];
           nodes[ index ] = temp;
           this.maxHeapify( largest );
         }
