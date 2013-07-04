@@ -44,19 +44,20 @@ define(
         node1.to( node6 );
         node2.to( node6 );
         graph.add( node6 );
-        graphView.render();
-      }, 1000 );
+      }, 500 );
 
       setTimeout(function() {
         node6.to( node7 );
         graph.add( node7 );
-        graphView.render();
-      }, 2000 );
+      }, 1000 );
 
       setTimeout(function() {
         graph.remove( graph.at(2) );
-        graphView.render();
-      }, 3000 )
+      }, 1500 );
+
+      setTimeout(function() {
+        graph.remove( graph.at(4) );
+      }, 2000 );
 
       console.log( graph.nodes() );
       console.log( graph.links() );
@@ -65,8 +66,6 @@ define(
         el: '#graph-view',
         collection: graph
       });
-
-      graphView.render();
     }
 
     function destroy() {

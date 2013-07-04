@@ -18,6 +18,7 @@ define(
     var GraphView = StructView.extend({
       initialize: function() {
         StructView.prototype.initialize.call( this );
+        this.listenTo( this.collection, 'change add remove', this.render );
 
         this.force = d3.layout.force()
           .charge( -150 )
