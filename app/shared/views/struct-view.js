@@ -29,33 +29,57 @@ define(
 
         this.link = null;
         this.node = null;
+
+        this.links = [];
+        this.nodes = [];
       },
 
-      // This render function assumes a tree.
-      render: function() {
-        var nodes = this.tree ? this.tree.nodes( this.model.toJSON() ) : [],
-            links = this.tree.links( nodes );
+      /**
+       * Returns nodes array to be used by d3.
+       */
+      getNodes: function() {
+        return this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
+      },
 
-        this.renderLinks( links );
-        this.renderNodes( nodes );
+      /**
+       * Returns links array to be used by d3.
+       * Call this after this.nodes(); it needs the newest version of this.nodes.
+       */
+      getLinks: function() {
+        return this.tree ? this.tree.links( this.nodes ) : [];
+      },
+
+      /**
+       * Prepares view for rendering.
+       */
+      setup: function() {
+        this.nodes = this.getNodes();
+        this.links = this.getLinks();
+      },
+
+      render: function() {
+        this.setup();
+
+        this.renderLinks();
+        this.renderNodes();
 
         return this;
       },
 
-      renderLinks: function( links ) {
+      renderLinks: function() {
         this.link = this.vis.select( '#links' )
           .selectAll( '.link' )
-          .data( links, linkId );
+          .data( this.links, linkId );
 
         this.linkEnter();
         this.linkUpdate();
         this.linkExit();
       },
 
-      renderNodes: function( nodes ) {
+      renderNodes: function() {
         this.node = this.vis.select( '#nodes' )
           .selectAll( '.node' )
-          .data( nodes, id );
+          .data( this.nodes, id );
 
         this.nodeEnter();
         this.nodeUpdate();

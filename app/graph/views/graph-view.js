@@ -15,6 +15,8 @@ define(
         duration  = Utils.duration,
         radius    = Utils.radius;
 
+        var test = 0;
+
     var GraphView = StructView.extend({
       initialize: function() {
         StructView.prototype.initialize.call( this );
@@ -27,17 +29,25 @@ define(
         this.tree = d3.layout.tree();
       },
 
-      render: function() {
-        var nodes = this.collection.nodes(),
-            links = this.collection.links();
+      getNodes: function() {
+        return this.collection.nodes();
+      },
+
+      getLinks: function() {
+        return this.collection.links();
+      },
+
+      setup: function() {
+        StructView.prototype.setup.call( this );
 
         this.force
-          .nodes( nodes )
-          .links( links )
+          .nodes( this.nodes )
+          .links( this.links )
           .start();
+      },
 
-        this.renderLinks( links );
-        this.renderNodes( nodes );
+      render: function() {
+        StructView.prototype.render.call( this );
 
         var that = this;
         this.force.on( 'tick', function() {
@@ -62,7 +72,10 @@ define(
       linkEnter: function() {
         this.link.enter()
           .append( 'line' )
+          .attr( 'data-id', function(d) { return d.source.id + '-' + d.target.id; } )
+          .attr( 'data-test', test )
             .style( 'stroke-opacity', 0 );
+            test++;
       },
 
       linkUpdate: function() {

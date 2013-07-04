@@ -14,12 +14,12 @@ define(
 
       graph = new Graph();
 
-      var node0 = new GraphNode( { data: 'A' } ),
-          node1 = new GraphNode( { data: 'B' } ),
-          node2 = new GraphNode( { data: 'C' } ),
-          node3 = new GraphNode( { data: 'D' } ),
-          node4 = new GraphNode( { data: 'E' } ),
-          node5 = new GraphNode( { data: 'F' } );
+      var node0 = new GraphNode({ data: 'A' }),
+          node1 = new GraphNode({ data: 'B' }),
+          node2 = new GraphNode({ data: 'C' }),
+          node3 = new GraphNode({ data: 'D' }),
+          node4 = new GraphNode({ data: 'E' }),
+          node5 = new GraphNode({ data: 'F' });
 
       node0.to( node1, node3 );
       node1.to( node2, node3, node0 );
@@ -37,6 +37,14 @@ define(
         node4,
         node5
       ]);
+
+      setTimeout(function() {
+        var node6 = new GraphNode({ data: 'G' });
+        node1.to( node6 );
+        node2.to( node6 );
+        graph.add( node6 );
+        graphView.render();
+      }, 1000 );
 
       console.log( graph.nodes() );
       console.log( graph.links() );

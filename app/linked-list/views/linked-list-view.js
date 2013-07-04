@@ -25,19 +25,14 @@ define(
           .children( children );
       },
 
-      render: function() {
-        var nodes = this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
+      getNodes: function() {
+        var nodes = StructView.prototype.getNodes.call( this );
         // Set y-height equal to depth of node in list (position).
         nodes.forEach(function( d ) {
           d.y = d.depth;
         });
 
-        var links = this.tree.links( nodes );
-
-        this.renderLinks( links );
-        this.renderNodes( nodes );
-
-        return this;
+        return nodes;
       },
 
       // Link states.

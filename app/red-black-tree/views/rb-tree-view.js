@@ -83,20 +83,6 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
-      },
-
-      nodeExit: function() {
-        var nodeExit = this.node.exit()
-          .transition()
-          .duration( duration )
-          .attr( 'transform', translate )
-          .remove();
-
-        nodeExit.select( 'circle' )
-          .attr( 'r', 0 );
-
-        nodeExit.select( 'text' )
-          .style( 'fill-opacity', 0 );
       }
     });
 
