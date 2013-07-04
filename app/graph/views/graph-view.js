@@ -15,8 +15,6 @@ define(
         duration  = Utils.duration,
         radius    = Utils.radius;
 
-        var test = 0;
-
     var GraphView = StructView.extend({
       initialize: function() {
         StructView.prototype.initialize.call( this );
@@ -38,7 +36,21 @@ define(
       },
 
       setup: function() {
+        // Store last state of nodes.
+        var prevNodes = this.nodes;
+
         StructView.prototype.setup.call( this );
+        // Hacky way to ensure old coordinates are copied over.
+        this.nodes.forEach(function( node ) {
+          prevNodes.forEach(function( prev ) {
+            if ( node.id === prev.id ) {
+              node.x  = prev.x;
+              node.y  = prev.y;
+              node.px = prev.px;
+              node.py = prev.py;
+            }
+          });
+        });
 
         this.force
           .nodes( this.nodes )
@@ -72,10 +84,7 @@ define(
       linkEnter: function() {
         this.link.enter()
           .append( 'line' )
-          .attr( 'data-id', function(d) { return d.source.id + '-' + d.target.id; } )
-          .attr( 'data-test', test )
             .style( 'stroke-opacity', 0 );
-            test++;
       },
 
       linkUpdate: function() {
