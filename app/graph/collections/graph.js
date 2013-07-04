@@ -1,7 +1,8 @@
 define(
-  [ 'backbone',
+  [ 'underscore',
+    'backbone',
     'graph/models/graph-node' ],
-  function( Backbone, GraphNode ) {
+  function( _, Backbone, GraphNode ) {
     'use strict';
 
     var Graph = Backbone.Collection.extend({
@@ -28,6 +29,16 @@ define(
         });
 
         return links;
+      },
+
+      remove: function( node ) {
+        // Remove all references to the node first.
+        this.forEach(function( currNode ) {
+          currNode.set( 'children',  _.without( currNode.get( 'children' ), node ) );
+        });
+
+        // Normal remove.
+        Backbone.Collection.prototype.remove.call( this, node );
       }
     });
 

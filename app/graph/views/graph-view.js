@@ -39,6 +39,14 @@ define(
         // Store last state of nodes.
         var prevNodes = this.nodes;
 
+        // Empty link and remove SVG elements.
+        if ( this.link ) {
+          this.link
+            .data( [] )
+            .exit()
+            .remove();
+        }
+
         StructView.prototype.setup.call( this );
         // Hacky way to ensure old coordinates are copied over.
         this.nodes.forEach(function( node ) {
@@ -83,21 +91,18 @@ define(
 
       linkEnter: function() {
         this.link.enter()
-          .append( 'line' )
-            .style( 'stroke-opacity', 0 );
+          .append( 'line' );
       },
 
       linkUpdate: function() {
         this.link.transition()
-          .duration( duration )
-          .style( 'stroke-opacity', 1 );
+          .duration( duration );
       },
 
       linkExit: function() {
         this.link.exit()
           .transition()
           .duration( duration )
-          .style( 'stroke-opacity', 0 )
           .remove();
       },
 
