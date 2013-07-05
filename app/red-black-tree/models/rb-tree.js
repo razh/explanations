@@ -50,6 +50,7 @@ define(
         newNode.set( 'color', RBTreeNode.RED );
         this.insertFixup( newNode );
 
+        this.trigger( 'change' );
         return newNode;
       },
 
@@ -172,6 +173,8 @@ define(
         if ( originalColor === RBTreeNode.BLACK ) {
           this.deleteFixup( sibling );
         }
+
+        this.trigger( 'change' );
       },
 
       deleteFixup: function( node ) {

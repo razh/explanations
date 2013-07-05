@@ -41,6 +41,7 @@ define(
           parent.set( 'right', newNode );
         }
 
+        this.trigger( 'change' );
         return newNode;
       },
 
@@ -69,6 +70,8 @@ define(
           next.set( 'left', left );
           left.set( 'parent', next );
         }
+
+        this.trigger( 'change' );
       },
 
       search: function( data ) {

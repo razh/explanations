@@ -31,6 +31,7 @@ define(
         nodes.push( node );
         this.increaseKey( nodes.length - 1, data );
 
+        this.trigger( 'change' );
         return node;
       },
 
@@ -45,6 +46,7 @@ define(
         nodes.pop();
         this.maxHeapify(1);
 
+        this.trigger( 'change' );
         return max;
       },
 

@@ -27,8 +27,6 @@ define(
         model: binaryHeap
       });
 
-      binaryHeapView.render();
-
       inputView = new HeapInputView({
         el: $( '#heap-input-view' ),
         model: binaryHeap
@@ -38,7 +36,6 @@ define(
 
       setTimeout(function() {
         binaryHeap.insert( 100 );
-        binaryHeapView.render();
       }, 500 );
     }
 

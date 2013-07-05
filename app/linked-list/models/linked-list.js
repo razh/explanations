@@ -1,6 +1,7 @@
 define(
-  [ 'linked-list/models/list-node' ],
-  function( ListNode ) {
+  [ 'backbone',
+    'linked-list/models/list-node' ],
+  function( Backbone, ListNode ) {
     'use strict';
 
     var LinkedList = Backbone.Model.extend({
@@ -36,6 +37,8 @@ define(
         this.set( 'head', newNode );
         // As prev defaults to null, this is unnecessary.
         newNode.set( 'prev', null );
+
+        this.trigger( 'change' );
       },
 
       delete: function( node ) {
@@ -51,6 +54,8 @@ define(
         if ( next ) {
           next.set( 'prev', prev );
         }
+
+        this.trigger( 'change' );
       },
 
       toArray: function() {
