@@ -23,6 +23,33 @@ define(
         // d3 configuration.
         this.tree = d3.layout.tree()
           .children( children );
+
+        /*
+          States of nodes (indexed by key).
+          This idea of preserving state is taken from the NYTimes' Path to the
+          White House infographic.
+       */
+        this.nodesById = {};
+        this.oldNodesById = {};
+      },
+
+      render: function() {
+        var that = this;
+        this.nodes.forEach(function( d ) {
+          if ( d.id ) {
+            that.oldNodesById[ d.id ] = d;
+          }
+        });
+
+        StructView.prototype.render.call( this );
+
+        this.nodes.forEach(function( d ) {
+          if ( d.id ) {
+            that.nodesById[ d.id ] = d;
+          }
+        });
+
+        return this;
       },
 
       // Link states.

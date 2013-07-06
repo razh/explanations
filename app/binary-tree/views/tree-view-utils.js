@@ -23,6 +23,21 @@ define(
       return childrenArray;
     }
 
+    // Taken from NYTimes' Paths to the White House infographic.
+    function parentFn( nodesById ) {
+      return function( d ) {
+        var parent = d.parent;
+        while ( parent ) {
+          d = nodesById[ parent.id ];
+          if ( d ) {
+            return d;
+          }
+
+          parent = parent.parent;
+        }
+      };
+    }
+
     var diagonal          = Utils.diagonalFn( x, y ),
         translate         = Utils.translateFn( x, y ),
         translateToParent = Utils.translateTo( 'parent', translate );
@@ -32,6 +47,7 @@ define(
       y:                 y,
       children:          children,
 
+      parentFn:          parentFn,
       translate:         translate,
       translateToParent: translateToParent,
 
