@@ -38,11 +38,11 @@ define(
     var translate = translateFn( x, y );
 
     /**
-     * Returns a translation function which takes a node attribute.
+     * Returns a function which executes fn on a node attribute.
      * e.g., if we wanted to translate to d's parent with the translateXY function,
      * we would use: translateTo( 'parent', translateXY );
      */
-    function translateTo( attr, fn ) {
+    function attrFn( attr, fn ) {
       return function( d ) {
         var value = d[ attr ];
         d = value ? value : d;
@@ -70,26 +70,26 @@ define(
     var diagonal = diagonalFn( x, y );
 
     return {
-      x:               x,
-      y:               y,
-      id:              id,
-      data:            data,
-      children:        children,
+      x:            x,
+      y:            y,
+      id:           id,
+      data:         data,
+      children:     children,
 
-      translateFn:     translateFn,
-      translateTo:     translateTo,
-      translate:       translate,
+      attrFn:       attrFn,
+      translateFn:  translateFn,
+      translate:    translate,
 
-      pairing:         pairing,
-      linkId:          linkId,
+      pairing:      pairing,
+      linkId:       linkId,
 
-      diagonalFn:      diagonalFn,
-      diagonal:        diagonal,
+      diagonalFn:   diagonalFn,
+      diagonal:     diagonal,
 
-      duration:        500,
-      borderRadius:    4,
-      width:           36,
-      height:          30
+      duration:     500,
+      borderRadius: 4,
+      width:        36,
+      height:       30
     };
   }
 );

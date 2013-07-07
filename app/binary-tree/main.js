@@ -41,13 +41,16 @@ define(
         console.log( 'added 87' );
         tree.insert( 87 );
         console.log( tree.toArray() );
-      }, 500 );
+      }, 1000 );
 
       setTimeout( function() {
         tree.insert( 19 );
-        tree.insert( 35 );
         console.log( tree.toArray() );
-      }, 1000 );
+      }, 2000 );
+
+      setTimeout(function() {
+        tree.insert( 35 );
+      }, 3000 );
 
       treeView = new TreeView({
         el: '#tree-view',

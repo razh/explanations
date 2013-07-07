@@ -7,14 +7,15 @@ define(
     'use strict';
 
     // Load utility functions/variables.
-    var id                = Utils.id,
-        data              = Utils.data,
-        children          = Utils.children,
-        translate         = Utils.translate,
-        translateToParent = Utils.translateToParent,
-        diagonal          = Utils.diagonal,
-        duration          = Utils.duration,
-        radius            = Utils.radius;
+    var x             = Utils.x,
+        y             = Utils.y,
+        id            = Utils.id,
+        data          = Utils.data,
+        children      = Utils.children,
+        translate     = Utils.translate,
+        diagonal      = Utils.diagonal,
+        duration      = Utils.duration,
+        radius        = Utils.radius;
 
     var TreeView = StructView.extend({
       initialize: function() {
@@ -24,17 +25,17 @@ define(
         this.tree = d3.layout.tree()
           .children( children );
 
-        /*
-          States of nodes (indexed by key).
-          This idea of preserving state is taken from the NYTimes' Path to the
-          White House infographic.
-       */
-        this.nodesById = {};
+        // Last state of nodes (indexed by id).
+        // This idea of preserving state to have more coherent link transitions
+        // is taken from the NYTimes' Path to the White House infographic.
         this.oldNodesById = {};
       },
 
       render: function() {
         var that = this;
+
+        // Stash old state of nodes.
+        this.oldNodesById = {};
         this.nodes.forEach(function( d ) {
           if ( d.id ) {
             that.oldNodesById[ d.id ] = d;
@@ -43,23 +44,27 @@ define(
 
         StructView.prototype.render.call( this );
 
-        this.nodes.forEach(function( d ) {
-          if ( d.id ) {
-            that.nodesById[ d.id ] = d;
-          }
-        });
-
         return this;
       },
 
       // Link states.
       linkEnter: function() {
+        var that = this;
         this.link.enter()
           .append( 'path' )
             .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
             .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
               .attr( 'class', 'link' )
-              .attr( 'd', diagonal )
+              .attr( 'd', function( d ) {
+                var source = that.oldNodesById[ d.source ];
+                source = source ? source : d.source;
+
+                // Draw from the old source.
+                return diagonal({
+                  source: source,
+                  target: source
+                });
+              })
               .style( 'stroke-opacity', 0 );
       },
 
@@ -73,7 +78,8 @@ define(
       linkExit: function() {
         this.link.exit()
           .transition()
-          .duration( duration )
+          // Links need to disappear faster for visual coherency.
+          .duration( 0.5 * duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
@@ -81,11 +87,17 @@ define(
 
       // Node states.
       nodeEnter: function() {
+        var that = this;
         var nodeEnter = this.node.enter()
           .append( 'g' )
             .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
-              .attr( 'transform', translateToParent );
+              .attr( 'transform', function( d ) {
+                // Enter at the last position of the parent.
+                var parent = that.oldNodesById[ d.parent ];
+                parent = parent ? parent : d;
+                return 'translate(' + x( parent ) + ', ' + y( parent ) + ')';
+              });
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 );
@@ -112,7 +124,6 @@ define(
               .text( data );
         });
 
-        var that = this;
         nodeEnter.on( 'click', function( d ) {
           var node = that.model.searchBy( 'id', d.id );
           if ( node ) {

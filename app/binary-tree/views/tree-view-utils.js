@@ -23,31 +23,24 @@ define(
       return childrenArray;
     }
 
-    // Taken from NYTimes' Paths to the White House infographic.
-    function parentFn( nodesById ) {
+    function getNodeByIdFn( nodesById ) {
       return function( d ) {
-        var parent = d.parent;
-        while ( parent ) {
-          d = nodesById[ parent.id ];
-          if ( d ) {
-            return d;
-          }
-
-          parent = parent.parent;
+        if ( d ) {
+          return nodesById[ d.id ];
         }
       };
     }
 
     var diagonal          = Utils.diagonalFn( x, y ),
         translate         = Utils.translateFn( x, y ),
-        translateToParent = Utils.translateTo( 'parent', translate );
+        translateToParent = Utils.attrFn( 'parent', translate );
 
     return {
       x:                 x,
       y:                 y,
       children:          children,
+      getNodeByIdFn:     getNodeByIdFn,
 
-      parentFn:          parentFn,
       translate:         translate,
       translateToParent: translateToParent,
 
