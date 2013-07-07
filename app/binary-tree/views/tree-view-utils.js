@@ -23,14 +23,6 @@ define(
       return childrenArray;
     }
 
-    function getNodeByIdFn( nodesById ) {
-      return function( d ) {
-        if ( d ) {
-          return nodesById[ d.id ];
-        }
-      };
-    }
-
     var diagonal          = Utils.diagonalFn( x, y ),
         translate         = Utils.translateFn( x, y ),
         translateToParent = Utils.attrFn( 'parent', translate );
@@ -39,7 +31,6 @@ define(
       x:                 x,
       y:                 y,
       children:          children,
-      getNodeByIdFn:     getNodeByIdFn,
 
       translate:         translate,
       translateToParent: translateToParent,
