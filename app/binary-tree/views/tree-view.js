@@ -56,7 +56,7 @@ define(
             .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
               .attr( 'class', 'link' )
               .attr( 'd', function( d ) {
-                var source = that.oldNodesById[ d.source ];
+                var source = that.oldNodesById[ d.source.id ];
                 source = source ? source : d.source;
 
                 // Draw from the old source.
@@ -94,7 +94,7 @@ define(
               .attr( 'class', 'node' )
               .attr( 'transform', function( d ) {
                 // Enter at the last position of the parent.
-                var parent = that.oldNodesById[ d.parent ];
+                var parent = that.oldNodesById[ d.parent ? d.parent.id : d.id ];
                 parent = parent ? parent : d;
                 return 'translate(' + x( parent ) + ', ' + y( parent ) + ')';
               });
