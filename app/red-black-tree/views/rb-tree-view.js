@@ -14,8 +14,11 @@ define(
         duration          = Utils.duration,
         radius            = Utils.radius;
 
+    var lightBlack = '#222',
+        darkRed    = '#bb0000';
+
     function color( d ) {
-      return d.color ? 'black' : 'red';
+      return d.color ? lightBlack : darkRed;
     }
 
     function colorFn( color ) {

@@ -3,14 +3,14 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
+@import "partials/base";
 
-@import "input-view";
-@import "linked-list";
-@import "binary-tree";
-@import "red-black-tree";
-@import "binary-heap";
-@import "graph";
+@import "partials/input-view";
+@import "partials/linked-list";
+@import "partials/binary-tree";
+@import "partials/red-black-tree";
+@import "partials/binary-heap";
+@import "partials/graph";
 
 a {
   font-family: Helvetica, Arial, sans-serif;

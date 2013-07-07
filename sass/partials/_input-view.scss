@@ -1,19 +1,18 @@
 #input-view {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-
+  bottom: $padding;
+  left: $padding;
 
   .input-value {
     float: left;
-    padding: 5px;
+    padding: 0.5 * $padding;
 
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16pt;
 
     outline: none;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $dark-gray;
   }
 
   .input-button {
@@ -24,18 +23,18 @@
 
     font-size: 16pt;
 
-    background: black;
+    background: $dark-gray;
     color: white;
 
     outline: none;
-    border: 2px solid black;
+    border: $line-width solid $dark-gray;
     border-radius: 5px;
 
     text-align: center;
 
     &:active {
       background: white;
-      color: black;
+      color: $dark-gray;
     }
   }
 }
