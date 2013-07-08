@@ -54,6 +54,7 @@ define(
 
       linkExit: function() {
         return this.link.exit()
+          .transition()
           .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
@@ -111,6 +112,7 @@ define(
 
       nodeExit: function() {
         var nodeExit = this.node.exit()
+          .transition()
           .duration( duration )
           .attr( 'transform', translate )
           .remove();
