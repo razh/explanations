@@ -39,3 +39,10 @@ footer {
     color: #777;
   }
 }
+
+// Hack to ensure Raleway displays correctly on Firefox.
+@-moz-document url-prefix() {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+}

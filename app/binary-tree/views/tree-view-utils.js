@@ -23,24 +23,24 @@ define(
       return childrenArray;
     }
 
-    var diagonal          = Utils.diagonalFn( x, y ),
-        translate         = Utils.translateFn( x, y );
+    var diagonal  = Utils.diagonalFn( x, y ),
+        translate = Utils.translateFn( x, y );
 
     return {
-      x:                 x,
-      y:                 y,
-      children:          children,
-      translate:         translate,
+      x:           x,
+      y:           y,
+      children:    children,
+      translate:   translate,
 
-      diagonal:          diagonal,
-      radius:            20,
+      diagonal:    diagonal,
+      radius:      20,
 
-      data:              Utils.data,
-      id:                Utils.id,
-      pairing:           Utils.pairing,
-      linkId:            Utils.linkId,
-      duration:          Utils.duration,
-      translateFn:       Utils.translateFn,
+      data:        Utils.data,
+      id:          Utils.id,
+      pairing:     Utils.pairing,
+      linkId:      Utils.linkId,
+      duration:    Utils.duration,
+      translateFn: Utils.translateFn,
     };
   }
 );

@@ -32,6 +32,10 @@ define(
 
         this.links = [];
         this.nodes = [];
+
+        // View dimensions.
+        this.width  = this.el ? this.el.clientWidth  : 0;
+        this.height = this.el ? this.el.clientHeight : 0;
       },
 
       /**

@@ -167,6 +167,13 @@ footer p {
   color: #777;
 }
 
+@-moz-document url-prefix() {
+  /* line 45, ../sass/partials/_text.scss */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+}
+
 /* line 16, ../sass/screen.scss */
 a {
   font-family: Helvetica, Arial, sans-serif;
