@@ -15,9 +15,19 @@ define(
 
       binaryHeap = new BinaryHeap();
       binaryHeap.insert( 25 );
-      binaryHeap.insert( 10 );
-      binaryHeap.insert( 2 );
-      binaryHeap.insert( 55 );
+
+      var duration = 1000;
+      function insertAt( value, time ) {
+        return setTimeout(function() {
+          binaryHeap.insert( value );
+        }, time );
+      }
+
+      insertAt(  10,     duration );
+      insertAt(   2, 2 * duration );
+      insertAt(  55, 3 * duration );
+      insertAt( 100, 4 * duration );
+      insertAt(   1, 5 * duration );
 
       console.log( binaryHeap );
       console.log( binaryHeap.toJSON() );
@@ -27,16 +37,14 @@ define(
         model: binaryHeap
       });
 
+      binaryHeapView.render();
+
       inputView = new HeapInputView({
         el: $( '#heap-input-view' ),
         model: binaryHeap
       });
 
       inputView.render();
-
-      setTimeout(function() {
-        binaryHeap.insert( 100 );
-      }, 500 );
     }
 
     function destroy() {
