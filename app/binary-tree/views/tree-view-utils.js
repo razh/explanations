@@ -24,13 +24,16 @@ define(
     }
 
     var diagonal          = Utils.diagonalFn( x, y ),
-        translate         = Utils.translateFn( x, y );
+        translate         = Utils.translateFn( x, y ),
+        translateToParent = Utils.attrFn( 'parent', translate );
 
     return {
       x:                 x,
       y:                 y,
       children:          children,
+
       translate:         translate,
+      translateToParent: translateToParent,
 
       diagonal:          diagonal,
       radius:            20,
@@ -39,8 +42,7 @@ define(
       id:                Utils.id,
       pairing:           Utils.pairing,
       linkId:            Utils.linkId,
-      duration:          Utils.duration,
-      translateFn:       Utils.translateFn,
+      duration:          Utils.duration
     };
   }
 );

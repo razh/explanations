@@ -86,29 +86,13 @@ define(
         this.nodeExit();
       },
 
-      linkEnter: function() {
-        return this.link.enter();
-      },
+      linkEnter: function() {},
+      linkUpdate: function() {},
+      linkExit: function() {},
 
-      linkUpdate: function() {
-        return this.link.transition();
-      },
-
-      linkExit: function() {
-        return this.link.exit();
-      },
-
-      nodeEnter: function() {
-        return this.node.enter();
-      },
-
-      nodeUpdate: function() {
-        return this.node.transition();
-      },
-
-      nodeExit: function() {
-        return this.node.exit();
-      }
+      nodeEnter: function() {},
+      nodeUpdate: function() {},
+      nodeExit: function() {}
     });
 
 
