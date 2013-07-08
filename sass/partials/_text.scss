@@ -1,0 +1,41 @@
+// sass partial for text based files.
+p {
+  font-family: "chaparral-pro", Georgia, Cambria, serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "raleway", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.note h4 {
+  margin-top: 0;
+}
+
+.jumbotron {
+  text-align: center;
+  margin-top: 50px;
+
+  h1 {
+    font-size: 64px;
+    line-height: 1.1;
+  }
+}
+
+/* Taken from Twitter Bootstrap's website. */
+footer {
+  margin-top: 70px;
+  padding: 40px;
+  border-top: 1px solid #eee;
+  background: #f5f5f5;
+
+  p {
+    color: #777;
+  }
+}
