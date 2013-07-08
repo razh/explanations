@@ -25,8 +25,8 @@ define(
 
       insertAt( 2,     duration );
       insertAt( 3, 2 * duration );
-      // insertAt( 4, 3 * duration );
-      // insertAt( 5, 4 * duration );
+      insertAt( 4, 3 * duration );
+      insertAt( 5, 4 * duration );
 
       console.log( tree.toArray() );
       console.log( tree.get( 'root' ) );

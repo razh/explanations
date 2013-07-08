@@ -91,17 +91,17 @@ define(
       },
 
       linkEnter: function() {
-        this.link.enter()
+        return this.link.enter()
           .append( 'line' );
       },
 
       linkUpdate: function() {
-        this.link.transition()
+        return this.link.transition()
           .duration( duration );
       },
 
       linkExit: function() {
-        this.link.exit()
+        return this.link.exit()
           .transition()
           .duration( duration )
           .remove();
@@ -122,6 +122,8 @@ define(
           // Center text.
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
+
+        return nodeEnter;
       },
 
       nodeUpdate: function() {
@@ -134,10 +136,13 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
+
+        return nodeUpdate;
       },
 
       nodeExit: function() {
-        this.node.exit().remove();
+        return this.node.exit()
+          .remove();
       }
     });
 
