@@ -49,55 +49,65 @@ define(
 
       // Link states.
       linkEnter: function() {
-        var that = this;
-        this.link.enter()
-          .append( 'path' )
-            .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
-            .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
-              .attr( 'class', 'link' )
-              .attr( 'd', function( d ) {
-                var source = that.oldNodesById[ d.source.id ];
-                source = source ? source : d.source;
+        var linkEnter = StructView.prototype.linkEnter.call( this );
 
-                // Draw from the old source.
-                return diagonal({
-                  source: source,
-                  target: source
-                });
-              })
-              .style( 'stroke-opacity', 0 );
+        var that = this;
+        linkEnter = linkEnter.append( 'path' )
+          .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
+          .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
+            .attr( 'class', 'link' )
+            .attr( 'd', function( d ) {
+              var source = that.oldNodesById[ d.source.id ];
+              source = source ? source : d.source;
+
+              // Draw from the old source.
+              return diagonal({
+                source: source,
+                target: source
+              });
+            })
+            .style( 'stroke-opacity', 0 );
+
+        return linkEnter;
       },
 
       linkUpdate: function() {
-        this.link.transition()
-          .duration( duration )
+        var linkUpdate = StructView.prototype.linkUpdate.call( this );
+
+        linkUpdate.duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
+
+        return linkUpdate;
       },
 
       linkExit: function() {
-        this.link.exit()
-          .transition()
+        var linkExit = StructView.prototype.linkExit.call( this );
+
+        linkExit.transition()
           // Links need to disappear faster for visual coherency.
           .duration( 0.5 * duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
+
+        return linkExit;
       },
 
       // Node states.
       nodeEnter: function() {
+        var nodeEnter = StructView.prototype.nodeEnter.call( this );
+
         var that = this;
-        var nodeEnter = this.node.enter()
-          .append( 'g' )
-            .filter( id ) // Draw non-empty nodes.
-              .attr( 'class', 'node' )
-              .attr( 'transform', function( d ) {
-                // Enter at the last position of the parent.
-                var parent = that.oldNodesById[ d.parent ? d.parent.id : d.id ];
-                parent = parent ? parent : d;
-                return 'translate(' + x( parent ) + ', ' + y( parent ) + ')';
-              });
+        nodeEnter = nodeEnter.append( 'g' )
+          .filter( id ) // Draw non-empty nodes.
+            .attr( 'class', 'node' )
+            .attr( 'transform', function( d ) {
+              // Enter at the last position of the parent.
+              var parent = that.oldNodesById[ d.parent ? d.parent.id : d.id ];
+              parent = parent ? parent : d;
+              return 'translate(' + x( parent ) + ', ' + y( parent ) + ')';
+            });
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 );
@@ -109,6 +119,13 @@ define(
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
+        this.nodeInput( nodeEnter );
+        return nodeEnter;
+      },
+
+      // Attach input handlers on to nodes.
+      nodeInput: function( nodeEnter ) {
+        var that = this;
         // Mouse over event.
         nodeEnter.on( 'mouseover', function() {
           d3.select( this )
@@ -134,8 +151,9 @@ define(
       },
 
       nodeUpdate: function() {
-        var nodeUpdate = this.node.transition()
-          .duration( duration )
+        var nodeUpdate = StructView.prototype.nodeUpdate.call( this );
+
+        nodeUpdate.duration( duration )
           .attr( 'transform', translate );
 
         nodeUpdate.select( 'circle' )
@@ -143,11 +161,14 @@ define(
 
         nodeUpdate.select( 'text' )
           .style( 'fill-opacity', 1 );
+
+        return nodeUpdate;
       },
 
       nodeExit: function() {
-        var nodeExit = this.node.exit()
-          .transition()
+        var nodeExit = StructView.prototype.nodeExit.call( this );
+
+        nodeExit.transition()
           .duration( duration )
           .attr( 'transform', translate )
           .remove();
@@ -157,6 +178,8 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 0 );
+
+        return nodeExit;
       },
     });
 

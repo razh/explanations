@@ -16,7 +16,7 @@ define(
       tree = new RBTree();
       tree.insert( 1 );
 
-      var duration = 5000;
+      var duration = 1000;
       function insertAt( value, time ) {
         return setTimeout(function() {
           tree.insert( value );

@@ -1,8 +1,9 @@
 define(
   [ 'd3',
     'shared/views/struct-view',
+    'binary-tree/views/tree-view',
     'linked-list/views/list-view-utils' ],
-  function( d3, StructView, Utils ) {
+  function( d3, StructView, TreeView, Utils ) {
     'use strict';
 
     var id           = Utils.id,
@@ -37,36 +38,47 @@ define(
 
       // Link states.
       linkEnter: function() {
-        this.link.enter()
-          .append( 'path' )
-            .attr( 'class', 'link' )
-            .attr( 'd', diagonal )
-            .style( 'stroke-opacity', 0 );
+        var linkEnter = StructView.prototype.linkEnter.call( this );
+
+        linkEnter.append( 'path' )
+          .attr( 'class', 'link' )
+          .attr( 'd', diagonal )
+          .style( 'stroke-opacity', 0 );
+
+        return linkEnter;
       },
 
       linkUpdate: function() {
-        this.link.transition()
+        var linkUpdate = StructView.prototype.linkUpdate.call( this );
+
+        linkUpdate.transition()
           .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 1 );
+
+        return linkUpdate;
       },
 
       linkExit: function() {
-        this.link.exit()
-          .transition()
+        var linkExit = StructView.prototype.linkExit.call( this );
+
+        linkExit.transition()
           .duration( duration )
           .attr( 'd', diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
+
+        return linkExit;
       },
 
       // Node states.
       nodeEnter: function() {
-        var nodeEnter = this.node.enter()
-          .append( 'g' )
-            .filter( id ) // Draw non-empty nodes.
-              .attr( 'class', 'node' )
-              .attr( 'transform', translate );
+        var nodeEnter = StructView.prototype.nodeEnter.call( this );
+
+        nodeEnter = nodeEnter.append( 'g' )
+          .filter( id ) // Draw non-empty nodes.
+            .attr( 'class', 'node' )
+            .attr( 'transform', translate );
 
         nodeEnter.append( 'rect' )
           .attr( 'rx', borderRadius )
@@ -83,34 +95,18 @@ define(
           .style( 'text-anchor', 'middle' )
           .style( 'dominant-baseline', 'middle' );
 
-        // Mouse over event.
-        nodeEnter.on( 'mouseover', function() {
-          d3.select( this )
-              .classed( 'delete-overlay', true )
-            .select( 'text' )
-              .text( '—' );
-        });
+        this.nodeInput( nodeEnter );
+        return nodeEnter;
+      },
 
-        nodeEnter.on( 'mouseout', function() {
-          d3.select( this )
-              .classed( 'delete-overlay', false )
-            .select( 'text' )
-              .text( data );
-        });
-
-        var that = this;
-        nodeEnter.on( 'click', function( d ) {
-          var node = that.model.searchBy( 'id', d.id );
-          if ( node ) {
-            that.model.delete( node );
-            that.render();
-          }
-        });
+      nodeInput: function( nodeEnter ) {
+        TreeView.prototype.nodeInput.call( this, nodeEnter );
       },
 
       nodeUpdate: function() {
-        var nodeUpdate = this.node.transition()
-          .duration( duration )
+        var nodeUpdate = StructView.prototype.nodeUpdate.call( this );
+
+        nodeUpdate.duration( duration )
           .attr( 'transform', translate );
 
         nodeUpdate.select( 'rect' )
@@ -122,11 +118,14 @@ define(
         nodeUpdate.select( 'text' )
           .text( data )
           .style( 'fill-opacity', 1 );
+
+        return nodeUpdate;
       },
 
       nodeExit: function() {
-        var nodeExit = this.node.exit()
-          .transition()
+        var nodeExit = StructView.prototype.nodeExit.call( this );
+
+        nodeExit.transition()
           .duration( duration )
           .attr( 'transform', translate )
           .remove();
@@ -139,6 +138,8 @@ define(
 
         nodeExit.select( 'text' )
           .style( 'fill-opacity', 0 );
+
+        return nodeExit;
       }
     });
 
