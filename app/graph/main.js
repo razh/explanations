@@ -31,6 +31,11 @@ define(
       // Duplicate.
       node0.to( node1, node3 );
 
+      graphView = new GraphView({
+        el: '#graph-view',
+        collection: graph
+      });
+
       graph.add([
         node0,
         node1,
@@ -61,11 +66,6 @@ define(
 
       console.log( graph.nodes() );
       console.log( graph.links() );
-
-      graphView = new GraphView({
-        el: '#graph-view',
-        collection: graph
-      });
     }
 
     function destroy() {
