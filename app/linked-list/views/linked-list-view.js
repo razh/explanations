@@ -9,9 +9,11 @@ define(
     var id           = Utils.id,
         data         = Utils.data,
         children     = Utils.children,
-        translate    = Utils.translate,
-        diagonal     = Utils.diagonal,
         duration     = Utils.duration,
+
+        scaleFn      = Utils.scaleFn,
+        diagonalFn   = Utils.diagonalFn,
+        translateFn  = Utils.translateFn,
         // Constants.
         borderRadius = Utils.borderRadius,
         width        = Utils.width,
@@ -24,6 +26,30 @@ define(
         // d3 configuration.
         this.tree = d3.layout.tree()
           .children( children );
+
+        this.diagonal  = null;
+        this.translate = null;
+
+        this.resize();
+      },
+
+      resize: function() {
+        StructView.prototype.resize.call( this );
+
+        this.x = scaleFn({
+          attr: 'y',
+          min: 0,
+          max: 50
+        });
+
+        this.y = scaleFn({
+          attr: 'x',
+          min: 0,
+          max: this.height
+        });
+
+        this.diagonal  = diagonalFn(  this.x, this.y );
+        this.translate = translateFn( this.x, this.y );
       },
 
       getNodes: function() {
@@ -41,14 +67,14 @@ define(
         return this.link.enter()
           .append( 'path' )
             .attr( 'class', 'link' )
-            .attr( 'd', diagonal )
+            .attr( 'd', this.diagonal )
             .style( 'stroke-opacity', 0 );
       },
 
       linkUpdate: function() {
         return this.link.transition()
           .duration( duration )
-          .attr( 'd', diagonal )
+          .attr( 'd', this.diagonal )
           .style( 'stroke-opacity', 1 );
       },
 
@@ -56,7 +82,7 @@ define(
         return this.link.exit()
           .transition()
           .duration( duration )
-          .attr( 'd', diagonal )
+          .attr( 'd', this.diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
       },
@@ -67,7 +93,7 @@ define(
           .append( 'g' )
             .filter( id ) // Draw non-empty nodes.
               .attr( 'class', 'node' )
-              .attr( 'transform', translate );
+              .attr( 'transform', this.translate );
 
         nodeEnter.append( 'rect' )
           .attr( 'rx', borderRadius )
@@ -95,7 +121,7 @@ define(
       nodeUpdate: function() {
         var nodeUpdate = this.node.transition()
           .duration( duration )
-          .attr( 'transform', translate );
+          .attr( 'transform', this.translate );
 
         nodeUpdate.select( 'rect' )
           .attr( 'x', -0.5 * width )
@@ -114,7 +140,7 @@ define(
         var nodeExit = this.node.exit()
           .transition()
           .duration( duration )
-          .attr( 'transform', translate )
+          .attr( 'transform', this.translate )
           .remove();
 
         nodeExit.select( 'rect' )

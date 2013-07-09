@@ -38,10 +38,10 @@ define(
         this.height = this.outerHeight = 0;
 
         this.margin = {
-          top:    100,
-          right:  0,
-          bottom: 0,
-          left:   0
+          top:    50,
+          right:  50,
+          bottom: 50,
+          left:   50
         };
 
         // Scaling functions.
@@ -62,8 +62,7 @@ define(
 
         this.vis
           .attr( 'width', this.outerWidth )
-          .attr( 'height', this.outerHeight )
-          .style('border', '1px solid red' );
+          .attr( 'height', this.outerHeight );
 
         // Add margins.
         this.vis.selectAll( 'g' )

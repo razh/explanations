@@ -7,7 +7,7 @@ define(
       var attr = options.attr || '',
           min  = options.min  || 0,
           max  = options.max  || 0,
-          type = options.type || 'identity';
+          type = options.type || 'linear';
 
       var scale = d3.scale[ type ]()
         .domain( [ 0, 1 ] )

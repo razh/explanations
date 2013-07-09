@@ -46,8 +46,8 @@ define(
 
         this.y = scaleFn({
           attr: 'y',
-          min: this.height,
-          max: 0
+          min: 0,
+          max: this.height
         });
 
         this.diagonal  = diagonalFn(  this.x, this.y );
