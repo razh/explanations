@@ -36,7 +36,9 @@ define(
       'red-black-tree': 'red-black-tree/main',
       'binary-heap': 'binary-heap/main',
       'graph': 'graph/main',
-      'binary-tree-notes': 'notes/binary-tree'
+      'notes': {
+        'binary-tree': 'binary-tree/main'
+      }
     };
 
     Backbone.history.start();
