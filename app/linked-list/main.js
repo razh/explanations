@@ -10,8 +10,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div id="list-view"></div>' )
-        .append( '<div id="input-view"></div>' );
+        .append( '<div class="list-view" id="list-view"></div>' )
+        .append( '<div class="input-view" id="input-view"></div>' );
 
       list = new LinkedList();
       list.insert( 1 );

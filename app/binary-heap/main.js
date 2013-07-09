@@ -10,8 +10,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div id="binary-heap-view"></div>' )
-        .append( '<div id="heap-input-view"></div>' );
+        .append( '<div class="binary-heap-view" id="binary-heap-view"></div>' )
+        .append( '<div class="heap-input-view" id="heap-input-view"></div>' );
 
       binaryHeap = new BinaryHeap();
       binaryHeap.insert( 25 );

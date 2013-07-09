@@ -11,8 +11,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div id="tree-view"></div>' )
-        .append( '<div id="input-view"></div>' );
+        .append( '<div class="tree-view" id="tree-view"></div>' )
+        .append( '<div class="input-view" id="input-view"></div>' );
 
       tree = new Tree();
       tree.insert( 180 );
