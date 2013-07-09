@@ -3,14 +3,6 @@ define(
   function( Utils ) {
     'use strict';
 
-    function x( d ) {
-      return d.x * window.innerWidth;
-    }
-
-    function y( d ) {
-      return 0.6 * d.y * window.innerHeight + 50;
-    }
-
     function children( d ) {
       var childrenArray = [];
 
@@ -23,16 +15,8 @@ define(
       return childrenArray;
     }
 
-    var diagonal  = Utils.diagonalFn( x, y ),
-        translate = Utils.translateFn( x, y );
-
     return {
-      x:           x,
-      y:           y,
       children:    children,
-      translate:   translate,
-
-      diagonal:    diagonal,
       radius:      20,
 
       data:        Utils.data,
@@ -40,6 +24,9 @@ define(
       pairing:     Utils.pairing,
       linkId:      Utils.linkId,
       duration:    Utils.duration,
+
+      scaleFn:     Utils.scaleFn,
+      diagonalFn:  Utils.diagonalFn,
       translateFn: Utils.translateFn,
     };
   }

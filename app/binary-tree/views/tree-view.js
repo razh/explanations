@@ -7,15 +7,16 @@ define(
     'use strict';
 
     // Load utility functions/variables.
-    var x             = Utils.x,
-        y             = Utils.y,
-        id            = Utils.id,
-        data          = Utils.data,
-        children      = Utils.children,
-        translate     = Utils.translate,
-        diagonal      = Utils.diagonal,
-        duration      = Utils.duration,
-        radius        = Utils.radius;
+    var id          = Utils.id,
+        data        = Utils.data,
+        children    = Utils.children,
+
+        scaleFn     = Utils.scaleFn,
+        diagonalFn  = Utils.diagonalFn,
+        translateFn = Utils.translateFn,
+
+        duration    = Utils.duration,
+        radius      = Utils.radius;
 
     var TreeView = StructView.extend({
       initialize: function() {
@@ -29,6 +30,28 @@ define(
         // This idea of preserving state to have more coherent link transitions
         // is taken from the NYTimes' Path to the White House infographic.
         this.oldNodesById = {};
+
+        this.resize();
+      },
+
+      resize: function() {
+        StructView.prototype.resize.call( this );
+
+        // Set scaling functions.
+        this.x = scaleFn({
+          attr: 'x',
+          min: 0,
+          max: this.width
+        });
+
+        this.y = scaleFn({
+          attr: 'y',
+          min: this.height,
+          max: 0
+        });
+
+        this.diagonal  = diagonalFn(  this.x, this.y );
+        this.translate = translateFn( this.x, this.y );
       },
 
       render: function() {
@@ -49,7 +72,9 @@ define(
 
       // Link states.
       linkEnter: function() {
-        var that = this;
+        var that     = this,
+            diagonal = this.diagonal;
+
         return this.link.enter()
           .append( 'path' )
             .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
@@ -71,7 +96,7 @@ define(
       linkUpdate: function() {
         return this.link.transition()
           .duration( duration )
-          .attr( 'd', diagonal )
+          .attr( 'd', this.diagonal )
           .style( 'stroke-opacity', 1 );
       },
 
@@ -80,14 +105,16 @@ define(
           .transition()
           // Links need to disappear faster for visual coherency.
           .duration( 0.5 * duration )
-          .attr( 'd', diagonal )
+          .attr( 'd', this.diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();
       },
 
       // Node states.
       nodeEnter: function() {
-        var that = this;
+        var that = this,
+            x = this.x,
+            y = this.y;
 
         var nodeEnter = this.node.enter()
           .append( 'g' )
@@ -144,7 +171,7 @@ define(
       nodeUpdate: function() {
         var nodeUpdate = this.node.transition()
           .duration( duration )
-          .attr( 'transform', translate );
+          .attr( 'transform', this.translate );
 
         nodeUpdate.select( 'circle' )
           .attr( 'r', radius );
@@ -159,7 +186,7 @@ define(
         var nodeExit = this.node.exit()
           .transition()
           .duration( duration )
-          .attr( 'transform', translate )
+          .attr( 'transform', this.translate )
           .remove();
 
         nodeExit.select( 'circle' )

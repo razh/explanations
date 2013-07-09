@@ -33,9 +33,41 @@ define(
         this.links = [];
         this.nodes = [];
 
-        // View dimensions.
-        this.width  = this.el ? this.el.clientWidth  : 0;
-        this.height = this.el ? this.el.clientHeight : 0;
+        // Default view dimensions.
+        this.width  = this.outerWidth  = 0;
+        this.height = this.outerHeight = 0;
+
+        this.margin = {
+          top:    100,
+          right:  0,
+          bottom: 0,
+          left:   0
+        };
+
+        // Scaling functions.
+        this.x = this.y = null;
+      },
+
+      /**
+       * Resizes the view to fit the viewport.
+       */
+      resize: function() {
+        var margin  = this.margin;
+
+        this.outerWidth  = this.el ? this.el.clientWidth  : 0;
+        this.outerHeight = this.el ? this.el.clientHeight : 0;
+
+        this.width  = this.outerWidth  - margin.left - margin.right;
+        this.height = this.outerHeight - margin.top  - margin.bottom;
+
+        this.vis
+          .attr( 'width', this.outerWidth )
+          .attr( 'height', this.outerHeight )
+          .style('border', '1px solid red' );
+
+        // Add margins.
+        this.vis.selectAll( 'g' )
+          .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
       },
 
       /**

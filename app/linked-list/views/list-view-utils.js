@@ -3,12 +3,19 @@ define(
   function( d3 ) {
     'use strict';
 
-    function x( d ) {
-      return 50 * d.y + 50;
-    }
+    function scaleFn( options ) {
+      var attr = options.attr || '',
+          min  = options.min  || 0,
+          max  = options.max  || 0,
+          type = options.type || 'identity';
 
-    function y( d ) {
-      return 0.8 * d.x * window.innerHeight;
+      var scale = d3.scale[ type ]()
+        .domain( [ 0, 1 ] )
+        .range( [ min, max ] );
+
+      return function( d ) {
+        return scale( d[ attr ] );
+      };
     }
 
     function id( d ) {
@@ -34,8 +41,6 @@ define(
         return 'translate(' + xFn(d) + ', ' + yFn(d) + ')';
       };
     }
-
-    var translate = translateFn( x, y );
 
     /**
      * Returns a function which executes fn on a node attribute.
@@ -67,24 +72,18 @@ define(
         });
     }
 
-    var diagonal = diagonalFn( x, y );
-
     return {
-      x:            x,
-      y:            y,
       id:           id,
       data:         data,
       children:     children,
 
       attrFn:       attrFn,
+      scaleFn:      scaleFn,
+      diagonalFn:   diagonalFn,
       translateFn:  translateFn,
-      translate:    translate,
 
       pairing:      pairing,
       linkId:       linkId,
-
-      diagonalFn:   diagonalFn,
-      diagonal:     diagonal,
 
       duration:     500,
       borderRadius: 4,

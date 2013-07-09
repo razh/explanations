@@ -5,15 +5,9 @@ define(
   function( d3, StructView, Utils ) {
     'use strict';
 
-    var x         = Utils.x,
-        y         = Utils.y,
-        data      = Utils.data,
-        sourceX   = Utils.sourceX,
-        sourceY   = Utils.sourceY,
-        targetX   = Utils.targetX,
-        targetY   = Utils.targetY,
-        duration  = Utils.duration,
-        radius    = Utils.radius;
+    var data     = Utils.data,
+        duration = Utils.duration,
+        radius   = Utils.radius;
 
     var GraphView = StructView.extend({
       initialize: function() {
@@ -26,6 +20,10 @@ define(
           .size( [ window.innerWidth, window.innerHeight ] );
 
         this.tree = d3.layout.tree();
+
+        this.x       = this.y       = null;
+        this.sourceX = this.sourceY = null;
+        this.targetX = this.targetY = null;
       },
 
       getNodes: function() {
@@ -73,18 +71,18 @@ define(
         var that = this;
         this.force.on( 'tick', function() {
           that.link
-            .attr( 'x1', sourceX )
-            .attr( 'y1', sourceY )
-            .attr( 'x2', targetX )
-            .attr( 'y2', targetY );
+            .attr( 'x1', this.sourceX )
+            .attr( 'y1', this.sourceY )
+            .attr( 'x2', this.targetX )
+            .attr( 'y2', this.targetY );
 
           that.node.select( 'circle' )
-            .attr( 'cx', x )
-            .attr( 'cy', y );
+            .attr( 'cx', this.x )
+            .attr( 'cy', this.y );
 
           that.node.select( 'text' )
-            .attr( 'x', x )
-            .attr( 'y', y );
+            .attr( 'x', this.x )
+            .attr( 'y', this.y );
         });
 
         return this;

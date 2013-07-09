@@ -17,6 +17,16 @@ define(
           model: tree
         });
 
+        var duration = 1000;
+        function insertAt( value, time ) {
+          return setTimeout(function() {
+            tree.insert( value );
+          }, time );
+        }
+
+        insertAt( 1,      duration );
+        insertAt( 10, 2 * duration );
+
         treeView.render();
       });
 
