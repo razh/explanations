@@ -10,8 +10,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="binary-heap-view" id="binary-heap-view"></div>' )
-        .append( '<div class="heap-input-view" id="heap-input-view"></div>' );
+        .append( '<div class="binary-heap" id="binary-heap"></div>' )
+        .append( '<div class="input heap" id="heap-input"></div>' );
 
       binaryHeap = new BinaryHeap();
       binaryHeap.insert( 25 );
@@ -33,14 +33,14 @@ define(
       console.log( binaryHeap.toJSON() );
 
       binaryHeapView = new BinaryHeapView({
-        el: $( '#binary-heap-view' ),
+        el: $( '#binary-heap' ),
         model: binaryHeap
       });
 
       binaryHeapView.render();
 
       inputView = new HeapInputView({
-        el: $( '#heap-input-view' ),
+        el: $( '#heap-input' ),
         model: binaryHeap
       });
 

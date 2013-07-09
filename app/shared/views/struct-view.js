@@ -18,10 +18,10 @@ define(
         return {
           // Default margins.
           margin: {
-            top:    75,
-            right:  75,
-            bottom: 75,
-            left:   75
+            top:    40,
+            right:  40,
+            bottom: 40,
+            left:   40
           }
         };
       },
@@ -65,11 +65,11 @@ define(
         this.width  = this.outerWidth  - margin.left - margin.right;
         this.height = this.outerHeight - margin.top  - margin.bottom;
 
-        console.log(this.outerWidth + ', ' + this.outerHeight + ', ' + this.width + ', ' + this.height )
-
         this.vis
           .attr( 'width', this.outerWidth )
           .attr( 'height', this.outerHeight );
+
+          // console.log(this.outerWidth + ', ' + this.outerHeight + ', ' + this.width + ', ' + this.height);
 
         // Add margins.
         this.vis.selectAll( 'g' )

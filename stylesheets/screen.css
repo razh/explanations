@@ -3,13 +3,13 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 1, ../sass/partials/_input-view.scss */
-.input-view, .heap-input-view {
+.input {
   position: absolute;
   bottom: 10px;
   left: 10px;
 }
 /* line 6, ../sass/partials/_input-view.scss */
-.input-view .input-value, .heap-input-view .input-value {
+.input .input-value {
   float: left;
   padding: 5px;
   font-family: Helvetica, Arial, sans-serif;
@@ -19,7 +19,7 @@
   border-bottom: 1px solid #222222;
 }
 /* line 18, ../sass/partials/_input-view.scss */
-.input-view .input-button, .heap-input-view .input-button {
+.input .input-button {
   margin: 0 2px;
   padding: 6px;
   width: 50px;
@@ -33,78 +33,78 @@
   text-align: center;
 }
 /* line 35, ../sass/partials/_input-view.scss */
-.input-view .input-button:active, .heap-input-view .input-button:active {
+.input .input-button:active {
   background: white;
   color: #222222;
 }
 
 /* line 3, ../sass/partials/_linked-list.scss */
-.list-view .node rect {
+.list .node rect {
   fill: white;
   stroke: #555555;
   stroke-width: 2px;
 }
 /* line 10, ../sass/partials/_linked-list.scss */
-.list-view .node text {
+.list .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: #555555;
 }
 /* line 16, ../sass/partials/_linked-list.scss */
-.list-view .link {
+.list .link {
   fill: none;
   stroke: #555555;
   stroke-width: 2px;
 }
 
 /* line 3, ../sass/partials/_binary-tree.scss */
-.tree-view .node circle, .binary-heap-view .node circle {
+.tree .node circle, .binary-heap .node circle {
   fill: white;
   stroke: #555555;
   stroke-width: 2px;
 }
 /* line 9, ../sass/partials/_binary-tree.scss */
-.tree-view .node text, .binary-heap-view .node text {
+.tree .node text, .binary-heap .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: #555555;
 }
 /* line 16, ../sass/partials/_binary-tree.scss */
-.tree-view .delete-overlay circle, .binary-heap-view .delete-overlay circle {
+.tree .delete-overlay circle, .binary-heap .delete-overlay circle {
   fill: #555555;
 }
 /* line 20, ../sass/partials/_binary-tree.scss */
-.tree-view .delete-overlay text, .binary-heap-view .delete-overlay text {
+.tree .delete-overlay text, .binary-heap .delete-overlay text {
   fill: white;
 }
 /* line 25, ../sass/partials/_binary-tree.scss */
-.tree-view .link, .binary-heap-view .link {
+.tree .link, .binary-heap .link {
   fill: none;
   stroke: #555555;
   stroke-width: 2px;
 }
 
 /* line 3, ../sass/partials/_red-black-tree.scss */
-.rb-tree-view .node text {
+.rb-tree .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: white;
 }
 /* line 9, ../sass/partials/_red-black-tree.scss */
-.rb-tree-view .link {
+.rb-tree .link {
   fill: none;
   stroke: #222222;
   stroke-width: 2px;
 }
 
-/* line 8, ../sass/partials/_binary-heap.scss */
-.heap-input-view .pop {
+/* line 6, ../sass/partials/_binary-heap.scss */
+.input.heap .pop {
   width: 70px;
 }
-/* line 12, ../sass/partials/_binary-heap.scss */
-.heap-input-view .popped-value {
+/* line 10, ../sass/partials/_binary-heap.scss */
+.input.heap .popped-value {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 20px;
 }
-/* line 16, ../sass/partials/_binary-heap.scss */
-.heap-input-view .popped-value span {
+/* line 14, ../sass/partials/_binary-heap.scss */
+.input.heap .popped-value span {
   position: absolute;
   margin-left: 2px;
   bottom: 0;
@@ -113,18 +113,18 @@
 }
 
 /* line 3, ../sass/partials/_graph.scss */
-.graph-view .node circle {
+.graph .node circle {
   fill: white;
   stroke: #555555;
   stroke-width: 2px;
 }
 /* line 9, ../sass/partials/_graph.scss */
-.graph-view .node text {
+.graph .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: #555555;
 }
 /* line 15, ../sass/partials/_graph.scss */
-.graph-view line {
+.graph line {
   fill: none;
   stroke: #555555;
   stroke-width: 2px;
@@ -181,6 +181,22 @@ footer p {
   h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
   }
+}
+
+/* line 50, ../sass/partials/_text.scss */
+.view, .large-view {
+  height: 15em;
+  border: 1px solid #ddd;
+}
+
+/* line 55, ../sass/partials/_text.scss */
+.large-view {
+  height: 20em;
+}
+
+/* line 61, ../sass/partials/_text.scss */
+.small-view {
+  height: 10em;
 }
 
 /* line 16, ../sass/screen.scss */

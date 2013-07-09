@@ -10,8 +10,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="rb-tree-view" id="rb-tree-view"></div>' )
-        .append( '<div class="input-view" id="input-view"></div>' );
+        .append( '<div class="rb-tree" id="rb-tree"></div>' )
+        .append( '<div class="input" id="input"></div>' );
 
       tree = new RBTree();
       tree.insert( 1 );
@@ -32,7 +32,7 @@ define(
       console.log( tree.get( 'root' ) );
 
       treeView = new RBTreeView({
-        el: '#rb-tree-view',
+        el: '#rb-tree',
         model: tree
       });
 
@@ -40,7 +40,7 @@ define(
       treeView.render();
 
       inputView = new InputView({
-        el: '#input-view',
+        el: '#input',
         model: tree
       });
 

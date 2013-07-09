@@ -10,7 +10,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="graph-view" id="graph-view"></div>');
+        .append( '<div class="graph" id="graph"></div>');
 
       graph = new Graph();
 
@@ -32,7 +32,7 @@ define(
       node0.to( node1, node3 );
 
       graphView = new GraphView({
-        el: '#graph-view',
+        el: '#graph',
         collection: graph
       });
 

@@ -1,10 +1,8 @@
-.binary-heap-view {
-  @extend .tree-view;
+.binary-heap {
+  @extend .tree;
 }
 
-.heap-input-view {
-  @extend .input-view;
-
+.input.heap {
   .pop {
     width: 70px;
   }

@@ -20,14 +20,8 @@ define(function( require ) {
       tree.insert( 5 );
 
       treeView = new TreeView({
-        el: '#tree-view-00',
-        model: tree,
-        margin: {
-          top: 60,
-          right: 0,
-          bottom: 30,
-          left: 0
-        }
+        el: '#tree-00',
+        model: tree
       });
 
       var duration = 1000;
@@ -53,7 +47,7 @@ define(function( require ) {
       node1.to( node2 );
 
       graphView = new GraphView({
-        el: '#graph-view-00',
+        el: '#graph-00',
         collection: graph
       });
 
@@ -70,7 +64,7 @@ define(function( require ) {
       list.insert( 15 );
 
       listView = new ListView({
-        el: '#list-view-00',
+        el: '#list-00',
         model: list
       });
 

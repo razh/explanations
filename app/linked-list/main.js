@@ -10,22 +10,22 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="list-view" id="list-view"></div>' )
-        .append( '<div class="input-view" id="input-view"></div>' );
+        .append( '<div class="list" id="list"></div>' )
+        .append( '<div class="input" id="input"></div>' );
 
       list = new LinkedList();
       list.insert( 1 );
       list.insert( 2 );
 
       listView = new LinkedListView({
-        el: '#list-view',
+        el: '#list',
         model: list
       });
 
       listView.render();
 
       inputView = new InputView({
-        el: '#input-view',
+        el: '#input',
         model: list
       });
 

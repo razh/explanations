@@ -46,3 +46,18 @@ footer {
     font-weight: normal;
   }
 }
+
+.view {
+  height: 15em;
+  border: 1px solid #ddd;
+}
+
+.large-view {
+  @extend .view;
+  height: 20em;
+}
+
+// No border for small views.
+.small-view {
+  height: 10em;
+}

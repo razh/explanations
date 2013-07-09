@@ -11,8 +11,8 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="tree-view" id="tree-view"></div>' )
-        .append( '<div class="input-view" id="input-view"></div>' );
+        .append( '<div class="tree" id="tree"></div>' )
+        .append( '<div class="input" id="input"></div>' );
 
       tree = new Tree();
       tree.insert( 180 );
@@ -53,14 +53,14 @@ define(
       }, 3000 );
 
       treeView = new TreeView({
-        el: '#tree-view',
+        el: '#tree',
         model: tree
       });
 
       treeView.render();
 
       inputView = new InputView({
-        el: '#input-view',
+        el: '#input',
         model: tree
       });
 
