@@ -11,5 +11,16 @@
 
   .popped-value {
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+
+    span {
+      position: absolute;
+      margin-left: 2px;
+      bottom: 0;
+
+      width: 150px;
+
+      text-align: left;
+    }
   }
 }

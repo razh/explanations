@@ -101,6 +101,15 @@
 /* line 12, ../sass/partials/_binary-heap.scss */
 .heap-input-view .popped-value {
   font-family: Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}
+/* line 16, ../sass/partials/_binary-heap.scss */
+.heap-input-view .popped-value span {
+  position: absolute;
+  margin-left: 2px;
+  bottom: 0;
+  width: 150px;
+  text-align: left;
 }
 
 /* line 3, ../sass/partials/_graph.scss */
@@ -146,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 21, ../sass/partials/_text.scss */
 .jumbotron {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 75px;
 }
 /* line 25, ../sass/partials/_text.scss */
 .jumbotron h1 {
@@ -190,5 +199,6 @@ a + a {
 
 /* line 28, ../sass/screen.scss */
 .nav {
+  position: absolute;
   padding-top: 10px;
 }

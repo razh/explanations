@@ -21,7 +21,13 @@ define(function( require ) {
 
       treeView = new TreeView({
         el: '#tree-view-00',
-        model: tree
+        model: tree,
+        margin: {
+          top: 60,
+          right: 0,
+          bottom: 30,
+          left: 0
+        }
       });
 
       var duration = 1000;
@@ -60,6 +66,8 @@ define(function( require ) {
       // List test.
       list = new List();
       list.insert( 2 );
+      list.insert( 10 );
+      list.insert( 15 );
 
       listView = new ListView({
         el: '#list-view-00',
