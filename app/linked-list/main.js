@@ -10,7 +10,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="list" id="list"></div>' )
+        .append( '<div class="list padded" id="list"></div>' )
         .append( '<div class="input" id="input"></div>' );
 
       list = new LinkedList();

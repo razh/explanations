@@ -11,7 +11,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="tree" id="tree"></div>' )
+        .append( '<div class="tree padded" id="tree"></div>' )
         .append( '<div class="input" id="input"></div>' );
 
       tree = new Tree();

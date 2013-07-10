@@ -29,3 +29,20 @@ a + a {
   position: absolute;
   padding-top: 10px;
 }
+
+.full {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.padded {
+  @extend .full;
+  top: 50px;
+  right: 50px;
+  bottom: 50px;
+  left: 50px;
+}

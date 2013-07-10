@@ -10,7 +10,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="rb-tree" id="rb-tree"></div>' )
+        .append( '<div class="rb-tree padded" id="rb-tree"></div>' )
         .append( '<div class="input" id="input"></div>' );
 
       tree = new RBTree();

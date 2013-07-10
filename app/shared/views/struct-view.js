@@ -18,10 +18,10 @@ define(
         return {
           // Default margins.
           margin: {
-            top:    40,
-            right:  40,
-            bottom: 40,
-            left:   40
+            top:    25,
+            right:  25,
+            bottom: 25,
+            left:   25
           }
         };
       },

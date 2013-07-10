@@ -36,6 +36,10 @@ define(function( require ) {
       insertAt( 11, 3 * duration );
       insertAt( 12, 4 * duration );
 
+      insertAt( 14, 5 * duration );
+      insertAt( 18, 6 * duration );
+      insertAt( 20, 7 * duration );
+
       treeView.render();
 
       // Graph test.

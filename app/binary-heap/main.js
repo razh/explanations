@@ -10,7 +10,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="binary-heap" id="binary-heap"></div>' )
+        .append( '<div class="binary-heap padded" id="binary-heap"></div>' )
         .append( '<div class="input heap" id="heap-input"></div>' );
 
       binaryHeap = new BinaryHeap();

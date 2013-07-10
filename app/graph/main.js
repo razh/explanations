@@ -10,7 +10,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="graph" id="graph"></div>');
+        .append( '<div class="graph full" id="graph"></div>');
 
       graph = new Graph();
 

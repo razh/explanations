@@ -29,6 +29,14 @@ define(
 
         this.tree = d3.layout.tree();
 
+        // The graph view takes up the whole space.
+        this.options.margin = {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
+        };
+
         this.resize();
       },
 
