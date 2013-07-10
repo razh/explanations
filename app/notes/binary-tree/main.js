@@ -33,6 +33,8 @@ define(function( require ) {
 
       insertAt( 1,      duration );
       insertAt( 10, 2 * duration );
+      insertAt( 11, 3 * duration );
+      insertAt( 12, 4 * duration );
 
       treeView.render();
 

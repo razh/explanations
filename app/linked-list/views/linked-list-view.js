@@ -45,7 +45,7 @@ define(
         this.y = scaleFn({
           attr: 'x',
           min: 0,
-          max: this.height
+          max: this.height - height
         });
 
         this.diagonal  = diagonalFn(  this.x, this.y );
@@ -81,7 +81,8 @@ define(
       linkExit: function() {
         return this.link.exit()
           .transition()
-          .duration( duration )
+          // Link disappears twice as fast.
+          .duration( 0.5 * duration )
           .attr( 'd', this.diagonal )
           .style( 'stroke-opacity', 0 )
           .remove();

@@ -40,13 +40,13 @@ define(
         // Set scaling functions.
         this.x = scaleFn({
           attr: 'x',
-          min: 0,
+          min: radius,
           max: this.width
         });
 
         this.y = scaleFn({
           attr: 'y',
-          min: 0,
+          min: radius,
           max: this.height
         });
 

@@ -69,8 +69,6 @@ define(
           .attr( 'width', this.outerWidth )
           .attr( 'height', this.outerHeight );
 
-          // console.log(this.outerWidth + ', ' + this.outerHeight + ', ' + this.width + ', ' + this.height);
-
         // Add margins.
         this.vis.selectAll( 'g' )
           .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
