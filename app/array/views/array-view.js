@@ -11,6 +11,9 @@ define(
     var data     = Utils.data,
         duration = 0.5 * Utils.duration;
 
+    var light = 'white',
+        dark  = '#555';
+
     var ArrayView = D3View.extend({
       initialize: function() {
         D3View.prototype.initialize.call( this );
@@ -43,19 +46,24 @@ define(
         var nodeEnter = this.node.enter()
           .append( 'td' )
             .attr( 'class', 'node' )
-            .style( 'opacity', 0 );
+              .style( 'background-color', dark );
 
         nodeEnter.append( 'text' )
-          .text( data );
+          .text( data )
+            .style( 'color', light );
       },
 
       nodeUpdate: function() {
         // Reorder DOM elements.
         this.node.order();
 
-        this.node.transition()
-          .duration( duration )
-          .style( 'opacity', 1 );
+        var nodeUpdate = this.node.transition()
+          .duration( duration );
+
+        nodeUpdate.style( 'background-color', light );
+
+        nodeUpdate.select( 'text' )
+          .style( 'color', dark );
       },
 
       nodeExit: function() {

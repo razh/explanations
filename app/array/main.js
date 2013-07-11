@@ -28,13 +28,16 @@ define(
         model: binaryHeap
       });
 
-      var insertHeap = Utils.insertAtFn( binaryHeap ),
-          duration = 500;
+      // Render now since binary heaps already have an empty node.
+      arrayView.render();
 
-      insertHeap(  5, 0 );
-      insertHeap( 10, duration );
-      insertHeap( 13, 2 * duration );
-      insertHeap( 16, 3 * duration );
+      var insertHeap = Utils.insertAtFn( binaryHeap ),
+          duration = 750;
+
+      insertHeap(  5, duration );
+      insertHeap( 10, 2 * duration );
+      insertHeap( 13, 3 * duration );
+      insertHeap( 16, 4 * duration );
 
       setTimeout(function() {
         binaryHeap.pop();

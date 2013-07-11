@@ -16,11 +16,14 @@
 
     &:before {
       content: counter(index);
+
       position: absolute;
-      top: 2 * $cell-size;
-      color: $lighter-gray;
       display: block;
+
+      top: 2 * $cell-size;
       width: $cell-size;
+
+      color: $lighter-gray;
     }
   }
 
