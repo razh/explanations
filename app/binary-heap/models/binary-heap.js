@@ -7,8 +7,14 @@ define(
     var BinaryHeap = Backbone.Model.extend({
       defaults: function() {
         return {
-          nodes: [{}] // Initialize with empty object.
+          nodes: [ new BinaryHeapNode() ] // Initialize with empty object.
         };
+      },
+
+      toArray: function() {
+        return this.get( 'nodes' ).map(function( node ) {
+          return node.toJSON();
+        });
       },
 
       /**

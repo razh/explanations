@@ -72,6 +72,14 @@ define(
         });
     }
 
+    function insertAtFn( object ) {
+      return function( value, time ) {
+        return setTimeout(function() {
+          object.insert( value );
+        }, time );
+      };
+    }
+
     return {
       id:           id,
       data:         data,
@@ -79,6 +87,7 @@ define(
 
       attrFn:       attrFn,
       scaleFn:      scaleFn,
+      insertAtFn:   insertAtFn,
       diagonalFn:   diagonalFn,
       translateFn:  translateFn,
 

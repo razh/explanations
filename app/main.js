@@ -31,6 +31,7 @@ define(
     var router = new Router();
 
     router.paths = {
+      'array': 'array/main',
       'linked-list': 'linked-list/main',
       'binary-tree': 'binary-tree/main',
       'red-black-tree': 'red-black-tree/main',

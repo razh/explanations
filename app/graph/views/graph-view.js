@@ -1,8 +1,8 @@
 define(
   [ 'd3',
-    'shared/views/struct-view',
+    'shared/views/svg-view',
     'graph/views/graph-view-utils' ],
-  function( d3, StructView, Utils ) {
+  function( d3, SVGView, Utils ) {
     'use strict';
 
     var x        = Utils.x,
@@ -17,9 +17,9 @@ define(
         duration = Utils.duration,
         radius   = Utils.radius;
 
-    var GraphView = StructView.extend({
+    var GraphView = SVGView.extend({
       initialize: function() {
-        StructView.prototype.initialize.call( this );
+        SVGView.prototype.initialize.call( this );
         this.listenTo( this.collection, 'change add remove', this.render );
 
         this.force = d3.layout.force()
@@ -31,17 +31,17 @@ define(
 
         // The graph view takes up the whole space.
         this.options.margin = {
-          top: 0,
-          right: 0,
+          top:    0,
+          right:  0,
           bottom: 0,
-          left: 0
+          left:   0
         };
 
         this.resize();
       },
 
       resize: function() {
-        StructView.prototype.resize.call( this );
+        SVGView.prototype.resize.call( this );
 
         this.force.size( [ this.width, this.height ] );
       },
@@ -66,7 +66,7 @@ define(
             .remove();
         }
 
-        StructView.prototype.setup.call( this );
+        SVGView.prototype.setup.call( this );
         // Hacky way to ensure old coordinates are copied over.
         this.nodes.forEach(function( node ) {
           prevNodes.forEach(function( prev ) {
@@ -86,7 +86,7 @@ define(
       },
 
       render: function() {
-        StructView.prototype.render.call( this );
+        SVGView.prototype.render.call( this );
 
         var that = this;
         this.force.on( 'tick', function() {

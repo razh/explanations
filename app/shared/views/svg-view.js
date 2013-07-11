@@ -1,41 +1,28 @@
 define(
   [ 'underscore',
-    'backbone',
     'd3',
+    'shared/views/d3-view',
     'linked-list/views/list-view-utils' ],
-  function( _, Backbone, d3, Utils ) {
+  function( _, d3, D3View, Utils ) {
     'use strict';
 
     var id     = Utils.id,
         linkId = Utils.linkId;
 
     /*
-      View interface for data structures (nodes and links).
+      View interface for data structures comprised of nodes and links,
+      which is technically a graph.
       Note that this uses d3's tree layout (change if necessary).
      */
-    var StructView = Backbone.View.extend({
-      options: function() {
-        return {
-          // Default margins.
-          margin: {
-            top:    25,
-            right:  25,
-            bottom: 25,
-            left:   25
-          }
-        };
-      },
-
+    var SVGView = D3View.extend({
       initialize: function() {
-        _.bindAll( this, 'render' );
+        D3View.prototype.initialize.call( this );
+
         if ( this.model ) {
           this.listenTo( this.model, 'change', this.render );
         }
 
-        // Select d3 element.
-        this.vis = d3.select( this.el )
-          .append( 'svg:svg' );
-
+        this.vis = this.vis.append( 'svg' );
         this.vis.append( 'g' ).attr( 'id', 'links' );
         this.vis.append( 'g' ).attr( 'id', 'nodes' );
 
@@ -44,32 +31,13 @@ define(
 
         this.links = [];
         this.nodes = [];
-
-        // Default view dimensions.
-        this.width  = this.outerWidth  = 0;
-        this.height = this.outerHeight = 0;
-
-        // Scaling functions.
-        this.x = this.y = null;
       },
 
-      /**
-       * Resizes the view to fit the viewport.
-       */
       resize: function() {
-        var margin  = this.options.margin;
-
-        this.outerWidth  = this.el ? this.el.clientWidth  : 0;
-        this.outerHeight = this.el ? this.el.clientHeight : 0;
-
-        this.width  = this.outerWidth  - margin.left - margin.right;
-        this.height = this.outerHeight - margin.top  - margin.bottom;
-
-        this.vis
-          .attr( 'width', this.outerWidth )
-          .attr( 'height', this.outerHeight );
+        D3View.prototype.resize.call( this );
 
         // Add margins.
+        var margin = this.options.margin;
         this.vis.selectAll( 'g' )
           .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
       },
@@ -136,6 +104,6 @@ define(
     });
 
 
-    return StructView;
+    return SVGView;
   }
 );

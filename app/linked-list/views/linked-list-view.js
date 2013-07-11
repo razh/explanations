@@ -1,9 +1,9 @@
 define(
   [ 'd3',
-    'shared/views/struct-view',
+    'shared/views/svg-view',
     'binary-tree/views/tree-view',
     'linked-list/views/list-view-utils' ],
-  function( d3, StructView, TreeView, Utils ) {
+  function( d3, SVGView, TreeView, Utils ) {
     'use strict';
 
     var id           = Utils.id,
@@ -19,9 +19,9 @@ define(
         width        = Utils.width,
         height       = Utils.height;
 
-    var LinkedListView = StructView.extend({
+    var LinkedListView = SVGView.extend({
       initialize: function() {
-        StructView.prototype.initialize.call( this );
+        SVGView.prototype.initialize.call( this );
 
         // d3 configuration.
         this.tree = d3.layout.tree()
@@ -34,7 +34,7 @@ define(
       },
 
       resize: function() {
-        StructView.prototype.resize.call( this );
+        SVGView.prototype.resize.call( this );
 
         this.x = scaleFn({
           attr: 'y',
@@ -53,7 +53,7 @@ define(
       },
 
       getNodes: function() {
-        var nodes = StructView.prototype.getNodes.call( this );
+        var nodes = SVGView.prototype.getNodes.call( this );
         // Set y-height equal to depth of node in list (position).
         nodes.forEach(function( d ) {
           d.y = d.depth;

@@ -1,9 +1,9 @@
 define(
   [ 'underscore',
     'd3',
-    'shared/views/struct-view',
+    'shared/views/svg-view',
     'binary-tree/views/tree-view-utils' ],
-  function( _, d3, StructView, Utils ) {
+  function( _, d3, SVGView, Utils ) {
     'use strict';
 
     // Load utility functions/variables.
@@ -18,9 +18,9 @@ define(
         duration    = Utils.duration,
         radius      = Utils.radius;
 
-    var TreeView = StructView.extend({
+    var TreeView = SVGView.extend({
       initialize: function() {
-        StructView.prototype.initialize.call( this );
+        SVGView.prototype.initialize.call( this );
 
         // d3 configuration.
         this.tree = d3.layout.tree()
@@ -35,7 +35,7 @@ define(
       },
 
       resize: function() {
-        StructView.prototype.resize.call( this );
+        SVGView.prototype.resize.call( this );
 
         // Set scaling functions.
         this.x = scaleFn({
@@ -65,7 +65,7 @@ define(
           }
         });
 
-        StructView.prototype.render.call( this );
+        SVGView.prototype.render.call( this );
 
         return this;
       },
