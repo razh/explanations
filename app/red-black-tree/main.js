@@ -2,8 +2,9 @@ define(
   [ 'jquery',
     'red-black-tree/models/rb-tree',
     'red-black-tree/views/rb-tree-view',
-    'shared/views/input-view' ],
-  function( $, RBTree, RBTreeView, InputView ) {
+    'shared/views/input-view',
+    'linked-list/views/list-view-utils' ],
+  function( $, RBTree, RBTreeView, InputView, Utils ) {
     'use strict';
 
     var tree, treeView, inputView, el;
@@ -16,12 +17,8 @@ define(
       tree = new RBTree();
       tree.insert( 1 );
 
-      var duration = 1000;
-      function insertAt( value, time ) {
-        return setTimeout(function() {
-          tree.insert( value );
-        }, time );
-      }
+      var insertAt = Utils.insertAtFn( tree ),
+          duration = 1000;
 
       insertAt( 2,     duration );
       insertAt( 3, 2 * duration );

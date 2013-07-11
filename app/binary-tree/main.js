@@ -3,8 +3,9 @@ define(
     'binary-tree/models/tree',
     'binary-tree/models/tree-node',
     'binary-tree/views/tree-view',
-    'shared/views/input-view' ],
-  function( $, Tree, TreeNode, TreeView, InputView ) {
+    'shared/views/input-view',
+    'linked-list/views/list-view-utils' ],
+  function( $, Tree, TreeNode, TreeView, InputView, Utils ) {
     'use strict';
 
     var tree, treeView, inputView, el;
@@ -37,20 +38,12 @@ define(
 
       console.log( tree.toJSON() );
 
-      setTimeout( function() {
-        console.log( 'added 87' );
-        tree.insert( 87 );
-        console.log( tree.toArray() );
-      }, 1000 );
+      var insertAt = Utils.insertAtFn( tree ),
+          duration = 1000;
 
-      setTimeout( function() {
-        tree.insert( 19 );
-        console.log( tree.toArray() );
-      }, 2000 );
-
-      setTimeout(function() {
-        tree.insert( 35 );
-      }, 3000 );
+      insertAt( 87, duration );
+      insertAt( 19, 2 * duration );
+      insertAt( 35, 3 * duration );
 
       treeView = new TreeView({
         el: '#tree',

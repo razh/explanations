@@ -2,8 +2,9 @@ define(
   [ 'jquery',
     'linked-list/models/linked-list',
     'linked-list/views/linked-list-view',
-    'shared/views/input-view' ],
-  function( $, LinkedList, LinkedListView, InputView ) {
+    'shared/views/input-view',
+    'linked-list/views/list-view-utils' ],
+  function( $, LinkedList, LinkedListView, InputView, Utils ) {
     'use strict';
 
     var list, listView, inputView, el;
@@ -16,6 +17,13 @@ define(
       list = new LinkedList();
       list.insert( 1 );
       list.insert( 2 );
+
+      var insertAt = Utils.insertAtFn( list ),
+          duration = 1000;
+
+      insertAt( 4, duration );
+      insertAt( 7, 2 * duration );
+      insertAt( 8, 3 * duration );
 
       listView = new LinkedListView({
         el: '#list',

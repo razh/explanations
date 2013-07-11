@@ -8,7 +8,8 @@ define(function( require ) {
       ListView  = require( 'linked-list/views/linked-list-view' ),
       Graph     = require( 'graph/collections/graph' ),
       GraphNode = require( 'graph/models/graph-node' ),
-      GraphView = require( 'graph/views/graph-view' );
+      GraphView = require( 'graph/views/graph-view' ),
+      Utils     = require( 'linked-list/views/list-view-utils' );
 
   var tree, treeView,
       list, listView,
@@ -24,12 +25,8 @@ define(function( require ) {
         model: tree
       });
 
-      var duration = 1000;
-      function insertAt( value, time ) {
-        return setTimeout(function() {
-          tree.insert( value );
-        }, time );
-      }
+      var insertAt = Utils.insertAtFn( tree ),
+          duration = 1000;
 
       insertAt( 1,      duration );
       insertAt( 10, 2 * duration );

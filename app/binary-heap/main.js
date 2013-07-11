@@ -2,8 +2,9 @@ define(
   [ 'jquery',
     'binary-heap/models/binary-heap',
     'binary-heap/views/binary-heap-view',
-    'binary-heap/views/heap-input-view' ],
-  function( $, BinaryHeap, BinaryHeapView, HeapInputView ) {
+    'binary-heap/views/heap-input-view',
+    'linked-list/views/list-view-utils' ],
+  function( $, BinaryHeap, BinaryHeapView, HeapInputView, Utils ) {
     'use strict';
 
     var binaryHeap, binaryHeapView, inputView, el;
@@ -16,12 +17,8 @@ define(
       binaryHeap = new BinaryHeap();
       binaryHeap.insert( 25 );
 
-      var duration = 1000;
-      function insertAt( value, time ) {
-        return setTimeout(function() {
-          binaryHeap.insert( value );
-        }, time );
-      }
+      var insertAt = Utils.insertAtFn( binaryHeap ),
+          duration = 1000;
 
       insertAt(  10,     duration );
       insertAt(   2, 2 * duration );
