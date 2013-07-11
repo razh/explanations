@@ -42,15 +42,26 @@
 .array table {
   width: auto;
   height: auto;
+  counter-reset: index -1;
 }
-/* line 7, ../sass/partials/_array.scss */
+/* line 9, ../sass/partials/_array.scss */
 .array .node {
   border: 2px solid #555555;
   width: 30px;
   height: 30px;
   text-align: center;
+  counter-increment: index;
 }
-/* line 14, ../sass/partials/_array.scss */
+/* line 17, ../sass/partials/_array.scss */
+.array .node:before {
+  content: counter(index);
+  position: absolute;
+  top: 60px;
+  color: #aaaaaa;
+  display: block;
+  width: 30px;
+}
+/* line 27, ../sass/partials/_array.scss */
 .array text {
   color: #555555;
 }
