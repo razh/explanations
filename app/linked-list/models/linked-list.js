@@ -60,14 +60,15 @@ define(
 
       toArray: function() {
         var array   = [],
-            current = this.get( 'head' ),
-            data;
+            current = this.get( 'head' );
 
         while ( current ) {
-          data = current.get( 'data' );
-          if ( data ) {
-            array.push( data );
-          }
+          array.push({
+            id: current.id,
+            data: current.get( 'data' )
+          });
+
+          current = current.get( 'next' );
         }
 
         return array;
