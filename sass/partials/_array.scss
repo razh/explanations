@@ -5,8 +5,13 @@
   }
 
   .node {
-    border: 2px solid black;
+    border: 2px solid $light-gray;
     width: 30px;
+    height: 30px;
     text-align: center;
+  }
+
+  text {
+    color: $light-gray;
   }
 }

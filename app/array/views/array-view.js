@@ -3,13 +3,13 @@ define(
     'backbone',
     'd3',
     'shared/views/d3-view',
+    'shared/views/svg-view',
     'linked-list/views/list-view-utils' ],
-  function( _, Backbone, d3, D3View, Utils ) {
+  function( _, Backbone, d3, D3View, SVGView, Utils ) {
     'use strict';
 
-    var id       = Utils.id,
-        data     = Utils.data,
-        duration = Utils.duration;
+    var data     = Utils.data,
+        duration = 0.5 * Utils.duration;
 
     var ArrayView = D3View.extend({
       initialize: function() {
@@ -36,13 +36,7 @@ define(
       },
 
       renderNodes: function() {
-        this.node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( this.nodes, id );
-
-        this.nodeEnter();
-        this.nodeUpdate();
-        this.nodeExit();
+        SVGView.prototype.renderNodes.call( this );
       },
 
       nodeEnter: function() {

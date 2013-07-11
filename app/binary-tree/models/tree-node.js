@@ -61,7 +61,12 @@ define(
         var leftArray  = left  ? left.toArray()  : [],
             rightArray = right ? right.toArray() : [];
 
-        return leftArray.concat( [ this.get( 'data' ) ], rightArray );
+        var jsonObject = {
+          id: this.id,
+          data: this.get( 'data' )
+        };
+
+        return leftArray.concat( [ jsonObject ], rightArray );
       },
 
       toJSON: function() {
