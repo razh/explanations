@@ -25,21 +25,10 @@ define(
           node8 = new TreeNode({ data:  8 }),
           node9 = new TreeNode({ data: 58 });
 
-      node0.get( 'children' ).push( node1, node2, node3, node4 );
-      node1.set( 'parent', node0 );
-      node2.set( 'parent', node0 );
-      node3.set( 'parent', node0 );
-
-      node3.get( 'children' ).push( node5, node6 );
-      node5.set( 'parent', node3 );
-      node6.set( 'parent', node3 );
-
-      node6.get( 'children' ).push( node7, node8 );
-      node7.set( 'parent', node6 );
-      node8.set( 'parent', node6 );
-
-      node7.get( 'children' ).push( node9 );
-      node9.set( 'parent', node7 );
+      node0.children( node1, node2, node3, node4 );
+      node3.children( node5, node6 );
+      node6.children( node7, node8 );
+      node7.children( node9 );
 
       treeView = new TreeView({
         el: '#tree',
