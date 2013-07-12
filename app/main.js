@@ -37,6 +37,7 @@ define(
       'red-black-tree': 'red-black-tree/main',
       'binary-heap': 'binary-heap/main',
       'graph': 'graph/main',
+      'digraph': 'digraph/main',
       'notes': {
         'binary-tree': 'binary-tree/main'
       }

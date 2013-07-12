@@ -141,21 +141,26 @@
 }
 
 /* line 3, ../sass/partials/_graph.scss */
-.graph .node circle {
+.graph .node circle, .digraph .node circle {
   fill: white;
   stroke: #555555;
   stroke-width: 2px;
 }
 /* line 9, ../sass/partials/_graph.scss */
-.graph .node text {
+.graph .node text, .digraph .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: #555555;
 }
 /* line 15, ../sass/partials/_graph.scss */
-.graph line {
+.graph line, .digraph line {
   fill: none;
   stroke: #555555;
   stroke-width: 2px;
+}
+
+/* line 4, ../sass/partials/_digraph.scss */
+.digraph marker path {
+  fill: #555555;
 }
 
 /* line 2, ../sass/partials/_text.scss */
@@ -227,7 +232,7 @@ footer p {
   height: 10em;
 }
 
-/* line 17, ../sass/screen.scss */
+/* line 18, ../sass/screen.scss */
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -236,18 +241,18 @@ a {
   padding: 0 7px;
 }
 
-/* line 25, ../sass/screen.scss */
+/* line 26, ../sass/screen.scss */
 a + a {
   border-left: 1px solid #ccc;
 }
 
-/* line 29, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 .nav {
   position: absolute;
   padding-top: 10px;
 }
 
-/* line 34, ../sass/screen.scss */
+/* line 35, ../sass/screen.scss */
 .full, .padded {
   position: absolute;
   top: 0;
@@ -257,7 +262,7 @@ a + a {
   z-index: -1;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 .padded {
   top: 50px;
   right: 50px;

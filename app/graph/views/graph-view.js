@@ -24,7 +24,7 @@ define(
 
         this.force = d3.layout.force()
           .charge( -150 )
-          .linkDistance( 50 )
+          .linkDistance( 75 )
           .size( [ this.width, this.height ] );
 
         this.tree = d3.layout.tree();

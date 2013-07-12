@@ -37,7 +37,7 @@ define(
       scaleFn:  Utils.scaleFn,
 
       duration: 500,
-      radius:   14
+      radius:   15
     };
   }
 );

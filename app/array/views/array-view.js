@@ -51,6 +51,8 @@ define(
         nodeEnter.append( 'text' )
           .text( data )
             .style( 'color', light );
+
+        return nodeEnter;
       },
 
       nodeUpdate: function() {
@@ -64,10 +66,12 @@ define(
 
         nodeUpdate.select( 'text' )
           .style( 'color', dark );
+
+        return nodeUpdate;
       },
 
       nodeExit: function() {
-        this.node.exit()
+        return this.node.exit()
           .remove();
       }
     });

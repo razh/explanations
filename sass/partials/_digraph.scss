@@ -1,0 +1,7 @@
+.digraph {
+  @extend .graph;
+
+  marker path {
+    fill: $light-gray;
+  }
+}
