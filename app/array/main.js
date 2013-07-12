@@ -1,11 +1,11 @@
 define(
   [ 'jquery',
     'binary-heap/models/binary-heap',
-    'binary-tree/models/tree',
+    'binary-tree/models/binary-tree',
     'linked-list/models/linked-list',
     'array/views/array-view',
     'linked-list/views/list-view-utils' ],
-  function( $, BinaryHeap, Tree, LinkedList, ArrayView, Utils ) {
+  function( $, BinaryHeap, BinaryTree, LinkedList, ArrayView, Utils ) {
     'use strict';
 
     var el,
@@ -44,7 +44,7 @@ define(
       }, 4 * duration );
 
       // Tree.
-      tree = new Tree();
+      tree = new BinaryTree();
 
       treeArrayView = new ArrayView({
         el: '#tree-array',

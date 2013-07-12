@@ -1,9 +1,9 @@
 define(
   [ 'd3',
     'shared/views/svg-view',
-    'binary-tree/views/tree-view',
+    'binary-tree/views/binary-tree-view',
     'linked-list/views/list-view-utils' ],
-  function( d3, SVGView, TreeView, Utils ) {
+  function( d3, SVGView, BinaryTreeView, Utils ) {
     'use strict';
 
     var id           = Utils.id,
@@ -116,7 +116,7 @@ define(
       },
 
       nodeInput: function( nodeEnter ) {
-        TreeView.prototype.nodeInput.call( this, nodeEnter );
+        BinaryTreeView.prototype.nodeInput.call( this, nodeEnter );
       },
 
       nodeUpdate: function() {

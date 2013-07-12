@@ -1,20 +1,20 @@
 define(
-  [ 'binary-tree/models/tree-node' ],
-  function( TreeNode ) {
+  [ 'binary-tree/models/binary-tree-node' ],
+  function( BinaryTreeNode ) {
     'use strict';
 
     var RED   = 0,
         BLACK = 1;
 
-    var RBTreeNode = TreeNode.extend({
+    var RBTreeNode = BinaryTreeNode.extend({
       defaults: function() {
-        var defaults = TreeNode.prototype.defaults();
+        var defaults = BinaryTreeNode.prototype.defaults();
         defaults.color = RED;
         return defaults;
       },
 
       toJSON: function() {
-        var jsonObject = TreeNode.prototype.toJSON.call( this );
+        var jsonObject = BinaryTreeNode.prototype.toJSON.call( this );
         jsonObject.color = this.get( 'color' );
         return jsonObject;
       },
@@ -49,7 +49,7 @@ define(
       },
 
       /*
-        Like TreeNode's transplant, but with nil.
+        Like BinaryTreeNode's transplant, but with nil.
        */
       transplant: function( tree, node ) {
         var parent = this.get( 'parent' );

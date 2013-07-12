@@ -1,19 +1,19 @@
 define(
   [ 'd3',
-    'binary-tree/views/tree-view' ],
-   function( d3, TreeView ) {
+    'binary-tree/views/binary-tree-view' ],
+   function( d3, BinaryTreeView ) {
     'use strict';
 
     var lightBlack = '#222',
-        darkRed    = '#bb0000';
+        darkRed    = '#b00';
 
     function color( d ) {
       return d.color ? lightBlack : darkRed;
     }
 
-    var RBTreeView = TreeView.extend({
+    var RBTreeView = BinaryTreeView.extend({
       nodeEnter: function() {
-        var nodeEnter = TreeView.prototype.nodeEnter.call( this );
+        var nodeEnter = BinaryTreeView.prototype.nodeEnter.call( this );
 
         nodeEnter.select( 'circle' )
           .style( 'fill', color );
@@ -22,7 +22,7 @@ define(
       },
 
       nodeUpdate: function() {
-        var nodeUpdate = TreeView.prototype.nodeUpdate.call( this );
+        var nodeUpdate = BinaryTreeView.prototype.nodeUpdate.call( this );
 
         nodeUpdate.select( 'circle' )
           .style( 'fill', color );

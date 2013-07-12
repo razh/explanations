@@ -3,7 +3,7 @@ define(
   function( Node ) {
     'use strict';
 
-    var TreeNode = Node.extend({
+    var BinaryTreeNode = Node.extend({
       defaults: function() {
         var defaults = Node.prototype.defaults();
         defaults.parent = null;
@@ -140,6 +140,6 @@ define(
 
     });
 
-    return TreeNode;
+    return BinaryTreeNode;
   }
 );

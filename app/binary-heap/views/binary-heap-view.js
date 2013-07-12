@@ -1,9 +1,9 @@
 define(
-  [ 'binary-tree/views/tree-view' ],
-  function( TreeView ) {
+  [ 'binary-tree/views/binary-tree-view' ],
+  function( BinaryTreeView ) {
     'use strict';
 
-    var BinaryHeapView = TreeView.extend({
+    var BinaryHeapView = BinaryTreeView.extend({
       // We can only interact with a binary heap with the heap-input-view controls.
       nodeInput: function() {}
     });

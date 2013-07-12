@@ -1,17 +1,17 @@
 define(
-  [ 'binary-tree/models/tree',
+  [ 'binary-tree/models/binary-tree',
     'red-black-tree/models/rb-tree-node',
     'red-black-tree/models/rb-nil-node' ],
-  function( Tree, RBTreeNode, Nil ) {
+  function( BinaryTree, RBTreeNode, Nil ) {
     'use strict';
 
     // Direction of rotations.
     var LEFT  = 0,
         RIGHT = 1;
 
-    var RBTree = Tree.extend({
+    var RBTree = BinaryTree.extend({
       defaults: function() {
-        var defaults = Tree.prototype.defaults();
+        var defaults = BinaryTree.prototype.defaults();
         defaults.nodeClass = RBTreeNode;
         defaults.nil = new Nil();
         defaults.root = defaults.nil;

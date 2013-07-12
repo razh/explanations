@@ -1,15 +1,15 @@
 define(function( require ) {
   'use strict';
 
-  var Template  = require( 'shared/template' ),
-      Tree      = require( 'binary-tree/models/tree' ),
-      TreeView  = require( 'binary-tree/views/tree-view' ),
-      List      = require( 'linked-list/models/linked-list' ),
-      ListView  = require( 'linked-list/views/linked-list-view' ),
-      Graph     = require( 'graph/collections/graph' ),
-      GraphNode = require( 'graph/models/graph-node' ),
-      GraphView = require( 'graph/views/graph-view' ),
-      Utils     = require( 'linked-list/views/list-view-utils' );
+  var Template       = require( 'shared/template' ),
+      BinaryTree     = require( 'binary-tree/models/binary-tree' ),
+      BinaryTreeView = require( 'binary-tree/views/binary-tree-view' ),
+      List           = require( 'linked-list/models/linked-list' ),
+      ListView       = require( 'linked-list/views/linked-list-view' ),
+      Graph          = require( 'graph/collections/graph' ),
+      GraphNode      = require( 'graph/models/graph-node' ),
+      GraphView      = require( 'graph/views/graph-view' ),
+      Utils          = require( 'linked-list/views/list-view-utils' );
 
   var tree, treeView,
       list, listView,
@@ -17,10 +17,10 @@ define(function( require ) {
 
   function initialize( args ) {
     Template.onLoad(function() {
-      tree = new Tree();
+      tree = new BinaryTree();
       tree.insert( 5 );
 
-      treeView = new TreeView({
+      treeView = new BinaryTreeView({
         el: '#tree-00',
         model: tree
       });

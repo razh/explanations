@@ -1,11 +1,10 @@
 define(
   [ 'jquery',
-    'binary-tree/models/tree',
-    'binary-tree/models/tree-node',
-    'binary-tree/views/tree-view',
+    'binary-tree/models/binary-tree',
+    'binary-tree/views/binary-tree-view',
     'shared/views/input-view',
     'linked-list/views/list-view-utils' ],
-  function( $, Tree, TreeNode, TreeView, InputView, Utils ) {
+  function( $, BinaryTree, BinaryTreeView, InputView, Utils ) {
     'use strict';
 
     var tree, treeView, inputView, el;
@@ -15,7 +14,7 @@ define(
         .append( '<div class="tree padded" id="tree"></div>' )
         .append( '<div class="input" id="input"></div>' );
 
-      tree = new Tree();
+      tree = new BinaryTree();
       tree.insert( 180 );
       tree.insert( 49 );
       tree.insert( 59 );
@@ -45,7 +44,7 @@ define(
       insertAt( 19, 2 * duration );
       insertAt( 35, 3 * duration );
 
-      treeView = new TreeView({
+      treeView = new BinaryTreeView({
         el: '#tree',
         model: tree
       });

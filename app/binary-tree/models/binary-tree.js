@@ -1,14 +1,14 @@
 define(
   [ 'backbone',
-    'binary-tree/models/tree-node' ],
-  function( Backbone, TreeNode ) {
+    'binary-tree/models/binary-tree-node' ],
+  function( Backbone, BinaryTreeNode ) {
     'use strict';
 
-    var Tree = Backbone.Model.extend({
+    var BinaryTree = Backbone.Model.extend({
       defaults: function() {
         return {
           root: null,
-          nodeClass: TreeNode
+          nodeClass: BinaryTreeNode
         };
       },
 
@@ -108,6 +108,6 @@ define(
       }
     });
 
-    return Tree;
+    return BinaryTree;
   }
 );
