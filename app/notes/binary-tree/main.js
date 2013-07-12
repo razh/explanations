@@ -21,7 +21,7 @@ define(function( require ) {
       tree.insert( 5 );
 
       treeView = new BinaryTreeView({
-        el: '#tree-00',
+        el: '#binary-tree-00',
         model: tree
       });
 
