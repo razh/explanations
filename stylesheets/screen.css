@@ -84,30 +84,31 @@
   stroke-width: 2px;
 }
 
-/* line 3, ../sass/partials/_binary-tree.scss */
-.tree .node circle, .binary-heap .node circle {
+/* line 3, ../sass/partials/_tree.scss */
+.tree .node circle, .binary-tree .node circle, .binary-heap .node circle {
   fill: white;
   stroke: #555555;
   stroke-width: 2px;
 }
-/* line 9, ../sass/partials/_binary-tree.scss */
-.tree .node text, .binary-heap .node text {
+/* line 9, ../sass/partials/_tree.scss */
+.tree .node text, .binary-tree .node text, .binary-heap .node text {
   font-family: Helvetica, Arial, sans-serif;
   fill: #555555;
 }
-/* line 16, ../sass/partials/_binary-tree.scss */
-.tree .delete-overlay circle, .binary-heap .delete-overlay circle {
-  fill: #555555;
-}
-/* line 20, ../sass/partials/_binary-tree.scss */
-.tree .delete-overlay text, .binary-heap .delete-overlay text {
-  fill: white;
-}
-/* line 25, ../sass/partials/_binary-tree.scss */
-.tree .link, .binary-heap .link {
+/* line 15, ../sass/partials/_tree.scss */
+.tree .link, .binary-tree .link, .binary-heap .link {
   fill: none;
   stroke: #555555;
   stroke-width: 2px;
+}
+
+/* line 5, ../sass/partials/_binary-tree.scss */
+.binary-tree .delete-overlay circle {
+  fill: #555555;
+}
+/* line 9, ../sass/partials/_binary-tree.scss */
+.binary-tree .delete-overlay text {
+  fill: white;
 }
 
 /* line 3, ../sass/partials/_red-black-tree.scss */
@@ -232,7 +233,7 @@ footer p {
   height: 10em;
 }
 
-/* line 18, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -241,18 +242,18 @@ a {
   padding: 0 7px;
 }
 
-/* line 26, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 a + a {
   border-left: 1px solid #ccc;
 }
 
-/* line 30, ../sass/screen.scss */
+/* line 31, ../sass/screen.scss */
 .nav {
   position: absolute;
   padding-top: 10px;
 }
 
-/* line 35, ../sass/screen.scss */
+/* line 36, ../sass/screen.scss */
 .full, .padded {
   position: absolute;
   top: 0;
@@ -262,7 +263,7 @@ a + a {
   z-index: -1;
 }
 
-/* line 44, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 .padded {
   top: 50px;
   right: 50px;

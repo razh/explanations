@@ -11,13 +11,14 @@ define(
         return defaults;
       },
 
-      insert: function( data ) {
-        var newNode = new TreeNode({ data: data });
+      toJSON: function() {
+        var jsonObject = Node.prototype.toJSON.call( this );
 
-        this.get( 'children' ).push( newNode );
-        newNode.set( 'parent', this );
+        jsonObject.children = this.get( 'children' ).map(function( child ) {
+          return child.toJSON();
+        });
 
-        return newNode;
+        return jsonObject;
       }
     });
 

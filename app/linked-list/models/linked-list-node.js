@@ -12,15 +12,15 @@ define(
       },
 
       toJSON: function() {
+        var jsonObject = Node.prototype.toJSON.call( this );
+
         var prev = this.get( 'prev' ),
             next = this.get( 'next' );
 
-        return {
-          id: this.id,
-          data: this.get( 'data' ),
-          prev: prev ? prev.id : null,
-          next: next ? next.toJSON() : null
-        };
+        jsonObject.prev = prev ? prev.id       : null;
+        jsonObject.next = next ? next.toJSON() : null;
+
+        return jsonObject;
       }
     });
 

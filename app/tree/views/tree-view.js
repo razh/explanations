@@ -109,6 +109,7 @@ define(
           .remove();
       },
 
+
       // Node states.
       nodeEnter: function() {
         var that = this,
@@ -138,7 +139,6 @@ define(
 
         return nodeEnter;
       },
-
 
       nodeUpdate: function() {
         var nodeUpdate = this.node.transition()

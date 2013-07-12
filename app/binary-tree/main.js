@@ -11,7 +11,7 @@ define(
 
     function initialize() {
       el = $( '#app' )
-        .append( '<div class="tree padded" id="tree"></div>' )
+        .append( '<div class="binary-tree padded" id="binary-tree"></div>' )
         .append( '<div class="input" id="input"></div>' );
 
       tree = new BinaryTree();
@@ -45,7 +45,7 @@ define(
       insertAt( 35, 3 * duration );
 
       treeView = new BinaryTreeView({
-        el: '#tree',
+        el: '#binary-tree',
         model: tree
       });
 

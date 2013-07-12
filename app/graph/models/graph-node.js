@@ -33,14 +33,14 @@ define(
       },
 
       toJSON: function() {
-        return {
-          id: this.id,
-          data: this.get( 'data' ),
-          weight: this.get( 'weight' ),
-          children: this.get( 'children' ).map(function( child ) {
-            return child.id;
-          })
-        };
+        var jsonObject = Node.prototype.toJSON.call( this );
+
+        jsonObject.weight = this.get( 'weight' );
+        jsonObject.children = this.get( 'children' ).map(function( child ) {
+          return child.id;
+        });
+
+        return jsonObject;
       }
     });
 

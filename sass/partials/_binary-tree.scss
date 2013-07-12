@@ -1,16 +1,5 @@
-.tree {
-  .node {
-    circle {
-      fill: white;
-      stroke: $light-gray;
-      stroke-width: $line-width;
-    }
-
-    text {
-      font-family: Helvetica, Arial, sans-serif;
-      fill: $light-gray;
-    }
-  }
+.binary-tree {
+  @extend .tree;
 
   .delete-overlay {
     circle {
@@ -20,11 +9,5 @@
     text {
       fill: white;
     }
-  }
-
-  .link {
-    fill: none;
-    stroke: $light-gray;
-    stroke-width: $line-width;
   }
 }

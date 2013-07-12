@@ -8,6 +8,11 @@ define(
         return {
           root: null,
         };
+      },
+
+      toJSON: function() {
+        var root = this.get( 'root' );
+        return root ? root.toJSON() : {};
       }
     });
 

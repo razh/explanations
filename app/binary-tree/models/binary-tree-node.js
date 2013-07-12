@@ -72,15 +72,15 @@ define(
       },
 
       toJSON: function() {
+        var jsonObject = Node.prototype.toJSON.call( this );
+
         var left  = this.get( 'left' ),
             right = this.get( 'right' );
 
-        return {
-          id: this.id,
-          data: this.get( 'data' ),
-          left:  left  ? left.toJSON()  : null,
-          right: right ? right.toJSON() : null
-        };
+        jsonObject.left =  left  ? left.toJSON()  : null;
+        jsonObject.right = right ? right.toJSON() : null;
+
+        return jsonObject;
       },
 
       /**

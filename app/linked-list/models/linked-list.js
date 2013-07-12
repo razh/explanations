@@ -1,7 +1,7 @@
 define(
   [ 'backbone',
-    'linked-list/models/list-node' ],
-  function( Backbone, ListNode ) {
+    'linked-list/models/linked-list-node' ],
+  function( Backbone, LinkedListNode ) {
     'use strict';
 
     var LinkedList = Backbone.Model.extend({
@@ -26,7 +26,7 @@ define(
       },
 
       insert: function( data ) {
-        var newNode = new ListNode({ data: data }),
+        var newNode = new LinkedListNode({ data: data }),
             head    = this.get( 'head' );
 
         newNode.set( 'next', head );
