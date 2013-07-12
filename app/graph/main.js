@@ -64,7 +64,8 @@ define(
         graph.remove( graph.at(4) );
       }, 2000 );
 
-      console.log( graph.nodes() );
+      // Nodes.
+      console.log( graph.toJSON() );
       console.log( graph.links() );
     }
 

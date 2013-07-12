@@ -47,11 +47,11 @@ define(
       },
 
       getNodes: function() {
-        return this.collection.nodes();
+        return this.collection ? this.collection.toJSON() : [];
       },
 
       getLinks: function() {
-        return this.collection.links();
+        return this.collection ? this.collection.links() : [];
       },
 
       setup: function() {

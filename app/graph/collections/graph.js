@@ -8,12 +8,6 @@ define(
     var Graph = Backbone.Collection.extend({
       model: GraphNode,
 
-      nodes: function() {
-        return this.map(function( node ) {
-          return node.toJSON();
-        });
-      },
-
       links: function() {
         var that  = this,
             links = [];

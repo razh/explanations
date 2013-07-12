@@ -63,7 +63,9 @@ define(
 
         var jsonObject = {
           id: this.id,
-          data: this.get( 'data' )
+          data: this.get( 'data' ),
+          left: left ? left.id : null,
+          right: right ? right.id : null
         };
 
         return leftArray.concat( [ jsonObject ], rightArray );

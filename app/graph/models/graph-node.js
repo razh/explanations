@@ -36,7 +36,10 @@ define(
         return {
           id: this.id,
           data: this.get( 'data' ),
-          weight: this.get( 'weight' )
+          weight: this.get( 'weight' ),
+          children: this.get( 'children' ).map(function( child ) {
+            return child.id;
+          })
         };
       }
     });

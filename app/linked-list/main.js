@@ -38,6 +38,8 @@ define(
       });
 
       inputView.render();
+
+      console.log( list.toJSON() );
     }
 
     function destroy() {
