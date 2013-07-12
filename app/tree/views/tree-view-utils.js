@@ -3,7 +3,7 @@ define(
   function( Utils ) {
     'use strict';
 
-    function children( d ) {
+    function binaryChildren( d ) {
       var childrenArray = [];
 
       if ( d && d.id ) {
@@ -16,18 +16,18 @@ define(
     }
 
     return {
-      children:    children,
-      radius:      20,
+      binaryChildren: binaryChildren,
+      radius:         20,
 
-      data:        Utils.data,
-      id:          Utils.id,
-      pairing:     Utils.pairing,
-      linkId:      Utils.linkId,
-      duration:    Utils.duration,
+      data:           Utils.data,
+      id:             Utils.id,
+      pairing:        Utils.pairing,
+      linkId:         Utils.linkId,
+      duration:       Utils.duration,
 
-      scaleFn:     Utils.scaleFn,
-      diagonalFn:  Utils.diagonalFn,
-      translateFn: Utils.translateFn,
+      scaleFn:        Utils.scaleFn,
+      diagonalFn:     Utils.diagonalFn,
+      translateFn:    Utils.translateFn,
     };
   }
 );

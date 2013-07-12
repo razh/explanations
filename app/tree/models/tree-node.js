@@ -9,6 +9,15 @@ define(
         defaults.parent   = null;
         defaults.children = [];
         return defaults;
+      },
+
+      insert: function( data ) {
+        var newNode = new TreeNode({ data: data });
+
+        this.get( 'children' ).push( newNode );
+        newNode.set( 'parent', this );
+
+        return newNode;
       }
     });
 

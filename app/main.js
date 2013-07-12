@@ -33,6 +33,7 @@ define(
     router.paths = {
       'array': 'array/main',
       'linked-list': 'linked-list/main',
+      'tree': 'tree/main',
       'binary-tree': 'binary-tree/main',
       'red-black-tree': 'red-black-tree/main',
       'binary-heap': 'binary-heap/main',
