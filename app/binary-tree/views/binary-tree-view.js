@@ -1,9 +1,8 @@
 define(
-  [ 'underscore',
-    'd3',
+  [ 'd3',
     'shared/views/svg-view',
     'binary-tree/views/tree-view-utils' ],
-  function( _, d3, SVGView, Utils ) {
+  function( d3, SVGView, Utils ) {
     'use strict';
 
     // Load utility functions/variables.
@@ -18,7 +17,7 @@ define(
         duration    = Utils.duration,
         radius      = Utils.radius;
 
-    var TreeView = SVGView.extend({
+    var BinaryTreeView = SVGView.extend({
       initialize: function() {
         SVGView.prototype.initialize.call( this );
 
@@ -199,6 +198,6 @@ define(
       },
     });
 
-    return TreeView;
+    return BinaryTreeView;
   }
 );

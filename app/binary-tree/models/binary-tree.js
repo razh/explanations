@@ -1,17 +1,10 @@
 define(
-  [ 'backbone',
+  [ 'tree/models/tree',
     'binary-tree/models/binary-tree-node' ],
-  function( Backbone, BinaryTreeNode ) {
+  function( Tree, BinaryTreeNode ) {
     'use strict';
 
-    var BinaryTree = Backbone.Model.extend({
-      defaults: function() {
-        return {
-          root: null,
-          nodeClass: BinaryTreeNode
-        };
-      },
-
+    var BinaryTree = Tree.extend({
       /*
         Inserts the given data and returns the containing node.
        */
@@ -28,9 +21,7 @@ define(
           }
         }
 
-        var Node    = this.get( 'nodeClass' ),
-            newNode = new Node({ data: data });
-
+        var newNode = new BinaryTreeNode({ data: data });
         newNode.set( 'parent', parent );
 
         if ( parent === null ) {

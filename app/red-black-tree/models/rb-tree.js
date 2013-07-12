@@ -12,7 +12,6 @@ define(
     var RBTree = BinaryTree.extend({
       defaults: function() {
         var defaults = BinaryTree.prototype.defaults();
-        defaults.nodeClass = RBTreeNode;
         defaults.nil = new Nil();
         defaults.root = defaults.nil;
         return defaults;
@@ -32,9 +31,7 @@ define(
           }
         }
 
-        var Node    = this.get( 'nodeClass' ),
-            newNode = new Node({ data: data });
-
+        var newNode = new RBTreeNode({ data: data });
         newNode.set( 'parent', parent );
 
         if ( parent === nil ) {
