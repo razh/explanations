@@ -49,3 +49,8 @@ a + a {
   bottom: 50px;
   left: 50px;
 }
+
+// Configure Prism CSS.
+pre.line-numbers {
+  padding-left: 0;
+}

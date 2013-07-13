@@ -270,3 +270,8 @@ a + a {
   bottom: 50px;
   left: 50px;
 }
+
+/* line 54, ../sass/screen.scss */
+pre.line-numbers {
+  padding-left: 0;
+}

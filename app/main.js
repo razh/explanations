@@ -40,6 +40,7 @@ define(
       'graph': 'graph/main',
       'digraph': 'digraph/main',
       'notes': {
+        'linked-list': 'linked-list/main',
         'binary-tree': 'binary-tree/main'
       }
     };

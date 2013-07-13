@@ -13,6 +13,12 @@ define(
       require( [ 'text!' + dir + '/' + name + '/index.html' ], function( template ) {
         el = $( '#app' ).append( _.template( template ) );
 
+        // Triggering content load lets Prism know we may have new code sections
+        // to highlight.
+        var domContentLoaded = document.createEvent( 'Event' );
+        domContentLoaded.initEvent( 'DOMContentLoaded', true, true );
+        window.document.dispatchEvent( domContentLoaded );
+
         if ( loadFn ) {
           loadFn();
         }
