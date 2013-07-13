@@ -4,8 +4,8 @@ define(function( require ) {
   var Template       = require( 'shared/template' ),
       BinaryTree     = require( 'binary-tree/models/binary-tree' ),
       BinaryTreeView = require( 'binary-tree/views/binary-tree-view' ),
-      List           = require( 'linked-list/models/linked-list' ),
-      ListView       = require( 'linked-list/views/linked-list-view' ),
+      LinkedList     = require( 'linked-list/models/linked-list' ),
+      LinkedListView = require( 'linked-list/views/linked-list-view' ),
       Graph          = require( 'graph/collections/graph' ),
       GraphNode      = require( 'graph/models/graph-node' ),
       GraphView      = require( 'graph/views/graph-view' ),
@@ -61,12 +61,12 @@ define(function( require ) {
       ]);
 
       // List test.
-      list = new List();
+      list = new LinkedList();
       list.insert( 2 );
       list.insert( 10 );
       list.insert( 15 );
 
-      listView = new ListView({
+      listView = new LinkedListView({
         el: '#list-00',
         model: list
       });
@@ -83,6 +83,9 @@ define(function( require ) {
 
     graph.reset();
     graphView.remove();
+
+    list.destroy();
+    listView.remove();
 
     Template.destroy();
   }
