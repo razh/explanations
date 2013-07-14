@@ -23,6 +23,7 @@ define(
 
       // Attach input handlers on to nodes.
       nodeInput: function( nodeEnter ) {
+        var that = this;
         // Mouse over event.
         nodeEnter.on( 'mouseover', function() {
           d3.select( this )
@@ -39,12 +40,12 @@ define(
         });
 
         nodeEnter.on( 'click', function( d ) {
-          var node = this.model.searchBy( 'id', d.id );
+          var node = that.model.searchBy( 'id', d.id );
           if ( node ) {
-            this.model.delete( node );
-            this.render();
+            that.model.delete( node );
+            that.render();
           }
-        }.bind( this ) );
+        });
       }
     });
 

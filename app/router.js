@@ -41,10 +41,11 @@ define(
         }
 
         if ( path ) {
+          var that = this;
           require( [ path ], function( module ) {
-            this.module = module;
-            this.module.initialize.call( this, args );
-          }.bind( this ) );
+            that.module = module;
+            that.module.initialize.call( that, args );
+          });
         }
       }
     });

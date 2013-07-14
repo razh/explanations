@@ -53,13 +53,15 @@ define(
       },
 
       render: function() {
+        var that = this;
+
         // Stash old state of nodes.
         this.oldNodesById = {};
         this.nodes.forEach(function( d ) {
           if ( d.id ) {
-            this.oldNodesById[ d.id ] = d;
+            that.oldNodesById[ d.id ] = d;
           }
-        }.bind( this ) );
+        });
 
         SVGView.prototype.render.call( this );
 
@@ -69,21 +71,24 @@ define(
 
       // Link states.
       linkEnter: function() {
+        var that     = this,
+            diagonal = this.diagonal;
+
         return this.link.enter()
           .append( 'path' )
             .style( 'fill-opacity', 0 ) // Stop hidden paths from being rendered.
             .filter( function( d ) { return d.target.id; } ) // Draw only paths that have an existing target.
               .attr( 'class', 'link' )
               .attr( 'd', function( d ) {
-                var source = this.oldNodesById[ d.source.id ];
+                var source = that.oldNodesById[ d.source.id ];
                 source = source ? source : d.source;
 
                 // Draw from the old source.
-                return this.diagonal({
+                return diagonal({
                   source: source,
                   target: source
                 });
-              }.bind( this ) )
+              })
               .style( 'stroke-opacity', 0 );
       },
 
@@ -107,7 +112,8 @@ define(
 
       // Node states.
       nodeEnter: function() {
-        var x = this.x,
+        var that = this,
+            x = this.x,
             y = this.y;
 
         var nodeEnter = this.node.enter()
@@ -116,10 +122,10 @@ define(
               .attr( 'class', 'node' )
               .attr( 'transform', function( d ) {
                 // Enter at the last position of the parent.
-                var parent = this.oldNodesById[ d.parent ? d.parent.id : d.id ];
+                var parent = that.oldNodesById[ d.parent ? d.parent.id : d.id ];
                 parent = parent ? parent : d;
                 return 'translate(' + x( parent ) + ', ' + y( parent ) + ')';
-              }.bind( this ) );
+              });
 
         nodeEnter.append( 'circle' )
           .attr( 'r', 0 );

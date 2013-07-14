@@ -88,21 +88,22 @@ define(
       render: function() {
         SVGView.prototype.render.call( this );
 
+        var that = this;
         this.force.on( 'tick', function() {
-          this.link
+          that.link
             .attr( 'x1', sourceX )
             .attr( 'y1', sourceY )
             .attr( 'x2', targetX )
             .attr( 'y2', targetY );
 
-          this.node.select( 'circle' )
+          that.node.select( 'circle' )
             .attr( 'cx', x )
             .attr( 'cy', y );
 
-          this.node.select( 'text' )
+          that.node.select( 'text' )
             .attr( 'x', x )
             .attr( 'y', y );
-        }.bind( this ) );
+        });
 
         return this;
       },
