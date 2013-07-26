@@ -86,6 +86,102 @@
     </div>
   </div>
 
+  <div class="row-fluid">
+    <div class="span8">
+      <pre class="line-numbers">
+        <code class="language-javascript">function Tree() {
+          this.root = null;
+        }</code></pre>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span8">
+      <pre class="line-numbers">
+        <code class="language-javascript">function TreeNode() {
+          this.data = null;
+
+          // References to other TreeNodes.
+          this.parent = null;
+          this.left = null;
+          this.right = null;
+        }</code></pre>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span8">
+      <pre class="line-numbers">
+        <code class="language-javascript">TreeNode.prototype.transplant = function(tree, node) {
+          var parent = this.parent;
+
+          if (!parent) {
+            tree.root = node;
+          } else if (this === parent.left) {
+            parent.left = node;
+          } else {
+            parent.right = node;
+          }
+
+          if (node) {
+            node.parent = parent;
+          }
+        };</code></pre>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span8">
+      <pre class="line-numbers">
+        <code class="language-javascript">Tree.prototype.insert = function(node) {
+          var current = this.root;
+          var parent;
+
+          while (current) {
+            parent = current;
+            if (node.data < current.data) {
+              current = current.left;
+            } else {
+              current = current.right;
+            }
+          }
+
+          node.parent = parent;
+          if (!parent) {
+            this.root = node;
+          } else if (node.data < parent.data) {
+            parent.left = node;
+          } else {
+            parent.right = node;
+          }
+        };</code></pre>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span8">
+      <pre class="line-numbers">
+        <code class="language-javascript">Tree.prototype.delete = function(node) {
+          if (!node.left) {
+            node.transplant(this, node.right);
+          } else if (!node.right) {
+            node.transplant(this, node.left);
+          } else {
+            var next = node.right.min();
+            if (next.parent !== node) {
+              next.transplant(this, next.right);
+              next.right = node.right;
+              next.right.parent = next;
+            }
+
+            node.transplant(this, next);
+            next.left = left;
+            left.parent = next;
+          }
+        };</code></pre>
+    </div>
+  </div>
+
 </div>
 
 <footer>
