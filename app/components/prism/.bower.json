@@ -1,0 +1,12 @@
+{
+  "name": "prism",
+  "homepage": "https://github.com/LeaVerou/prism",
+  "_release": "a7d0a3d07a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "gh-pages",
+    "commit": "a7d0a3d07a350c72c82ac007ba0dc2c1854aae96"
+  },
+  "_source": "https://github.com/LeaVerou/prism.git",
+  "_target": "gh-pages"
+}
