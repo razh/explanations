@@ -43,6 +43,76 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-lg-8">
+      <pre class="line-numbers">
+        <code class="language-javascript">function ListNode() {
+          this.data = null;
+
+          // References to other ListNodes.
+          this.prev = null;
+          this.next = null;
+        }</code></pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <pre class="line-numbers">
+        <code class="language-javascript">function List() {
+          // Reference to the start of the list.
+          this.head = null;
+        }</code></pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <pre class="line-numbers">
+        <code class="language-javascript">List.prototype.insert = function(node) {
+          node.next = this.head;
+          if (this.head) {
+            this.head.prev = node;
+          }
+
+          this.head = node;
+          node.prev = null;
+        };</code></pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <pre class="line-numbers">
+        <code class="language-javascript">List.prototype.delete = function(node) {
+          if (node.prev) {
+            node.prev.next = node.next;
+          } else {
+            this.head = node.next;
+          }
+
+          if (node.next) {
+            node.next.prev = node.prev;
+          }
+        };</code></pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <pre class="line-numbers">
+        <code class="language-javascript">List.prototype.search = function(value) {
+          var current = this.head;
+
+          while (current && current.data !== value) {
+            current = current.next;
+          }
+
+          return current;
+        };</code></pre>
+    </div>
+  </div>
+
 </div>
 
 <footer>

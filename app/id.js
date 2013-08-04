@@ -6,9 +6,7 @@ define(function() {
 
   return {
     nextUid: function() {
-      var currUid = uid;
-      uid++;
-      return currUid;
+      return uid++;
     }
   };
 });
