@@ -1,9 +1,9 @@
-define(
-  [ 'backbone' ],
-  function( Backbone ) {
+define([
+  'backbone'
+], function( Backbone ) {
+  'use strict';
 
-    var TreeView = Backbone.View.extend({});
+  var TreeView = Backbone.View.extend({});
 
-    return TreeView;
-  }
-);
+  return TreeView;
+});

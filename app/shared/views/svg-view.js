@@ -1,109 +1,108 @@
-define(
-  [ 'underscore',
-    'd3',
-    'shared/views/d3-view',
-    'linked-list/views/list-view-utils' ],
-  function( _, d3, D3View, Utils ) {
-    'use strict';
+define([
+  'underscore',
+  'd3',
+  'shared/views/d3-view',
+  'linked-list/views/list-view-utils'
+], function( _, d3, D3View, Utils ) {
+  'use strict';
 
-    var id     = Utils.id,
-        linkId = Utils.linkId;
+  var id     = Utils.id,
+      linkId = Utils.linkId;
 
-    /*
-      View interface for data structures comprised of nodes and links,
-      which is technically a graph.
-      Note that this uses d3's tree layout (change if necessary).
+  /*
+    View interface for data structures comprised of nodes and links,
+    which is technically a graph.
+    Note that this uses d3's tree layout (change if necessary).
+   */
+  var SVGView = D3View.extend({
+    initialize: function() {
+      D3View.prototype.initialize.call( this );
+
+      if ( this.model ) {
+        this.listenTo( this.model, 'change', this.render );
+      }
+
+      this.vis = this.vis.append( 'svg' );
+      this.vis.append( 'g' ).attr( 'id', 'links' );
+      this.vis.append( 'g' ).attr( 'id', 'nodes' );
+
+      this.link = null;
+      this.node = null;
+
+      this.links = [];
+      this.nodes = [];
+    },
+
+    resize: function() {
+      D3View.prototype.resize.call( this );
+
+      // Add margins.
+      var margin = this.options.margin;
+      this.vis.selectAll( 'g' )
+        .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
+    },
+
+    /**
+     * Returns nodes array to be used by d3.
      */
-    var SVGView = D3View.extend({
-      initialize: function() {
-        D3View.prototype.initialize.call( this );
+    getNodes: function() {
+      return this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
+    },
 
-        if ( this.model ) {
-          this.listenTo( this.model, 'change', this.render );
-        }
+    /**
+     * Returns links array to be used by d3.
+     * Call this after this.nodes(); it needs the newest version of this.nodes.
+     */
+    getLinks: function() {
+      return this.tree ? this.tree.links( this.nodes ) : [];
+    },
 
-        this.vis = this.vis.append( 'svg' );
-        this.vis.append( 'g' ).attr( 'id', 'links' );
-        this.vis.append( 'g' ).attr( 'id', 'nodes' );
+    /**
+     * Prepares view for rendering.
+     */
+    setup: function() {
+      this.nodes = this.getNodes();
+      this.links = this.getLinks();
+    },
 
-        this.link = null;
-        this.node = null;
+    render: function() {
+      this.setup();
 
-        this.links = [];
-        this.nodes = [];
-      },
+      this.renderLinks();
+      this.renderNodes();
 
-      resize: function() {
-        D3View.prototype.resize.call( this );
+      return this;
+    },
 
-        // Add margins.
-        var margin = this.options.margin;
-        this.vis.selectAll( 'g' )
-          .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
-      },
+    renderLinks: function() {
+      this.link = this.vis.select( '#links' )
+        .selectAll( '.link' )
+        .data( this.links, linkId );
 
-      /**
-       * Returns nodes array to be used by d3.
-       */
-      getNodes: function() {
-        return this.tree ? this.tree.nodes( this.model.toJSON() ) : [];
-      },
+      this.linkEnter();
+      this.linkUpdate();
+      this.linkExit();
+    },
 
-      /**
-       * Returns links array to be used by d3.
-       * Call this after this.nodes(); it needs the newest version of this.nodes.
-       */
-      getLinks: function() {
-        return this.tree ? this.tree.links( this.nodes ) : [];
-      },
+    renderNodes: function() {
+      this.node = this.vis.select( '#nodes' )
+        .selectAll( '.node' )
+        .data( this.nodes, id );
 
-      /**
-       * Prepares view for rendering.
-       */
-      setup: function() {
-        this.nodes = this.getNodes();
-        this.links = this.getLinks();
-      },
+      this.nodeEnter();
+      this.nodeUpdate();
+      this.nodeExit();
+    },
 
-      render: function() {
-        this.setup();
+    linkEnter: function() {},
+    linkUpdate: function() {},
+    linkExit: function() {},
 
-        this.renderLinks();
-        this.renderNodes();
-
-        return this;
-      },
-
-      renderLinks: function() {
-        this.link = this.vis.select( '#links' )
-          .selectAll( '.link' )
-          .data( this.links, linkId );
-
-        this.linkEnter();
-        this.linkUpdate();
-        this.linkExit();
-      },
-
-      renderNodes: function() {
-        this.node = this.vis.select( '#nodes' )
-          .selectAll( '.node' )
-          .data( this.nodes, id );
-
-        this.nodeEnter();
-        this.nodeUpdate();
-        this.nodeExit();
-      },
-
-      linkEnter: function() {},
-      linkUpdate: function() {},
-      linkExit: function() {},
-
-      nodeEnter: function() {},
-      nodeUpdate: function() {},
-      nodeExit: function() {}
-    });
+    nodeEnter: function() {},
+    nodeUpdate: function() {},
+    nodeExit: function() {}
+  });
 
 
-    return SVGView;
-  }
-);
+  return SVGView;
+});

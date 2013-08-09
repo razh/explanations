@@ -22,29 +22,28 @@ requirejs.config({
 });
 
 
-define(
-  [ 'backbone',
-    'router' ],
-  function( Backbone, Router ) {
-    'use strict';
+define([
+  'backbone',
+  'router'
+], function( Backbone, Router ) {
+  'use strict';
 
-    var router = new Router();
+  var router = new Router();
 
-    router.paths = {
-      'array': 'array/main',
+  router.paths = {
+    'array': 'array/main',
+    'linked-list': 'linked-list/main',
+    'tree': 'tree/main',
+    'binary-tree': 'binary-tree/main',
+    'red-black-tree': 'red-black-tree/main',
+    'binary-heap': 'binary-heap/main',
+    'graph': 'graph/main',
+    'digraph': 'digraph/main',
+    'notes': {
       'linked-list': 'linked-list/main',
-      'tree': 'tree/main',
-      'binary-tree': 'binary-tree/main',
-      'red-black-tree': 'red-black-tree/main',
-      'binary-heap': 'binary-heap/main',
-      'graph': 'graph/main',
-      'digraph': 'digraph/main',
-      'notes': {
-        'linked-list': 'linked-list/main',
-        'binary-tree': 'binary-tree/main'
-      }
-    };
+      'binary-tree': 'binary-tree/main'
+    }
+  };
 
-    Backbone.history.start();
-  }
-);
+  Backbone.history.start();
+});

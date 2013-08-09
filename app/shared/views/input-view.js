@@ -1,72 +1,71 @@
-define(
-  [ 'jquery',
-    'underscore',
-    'backbone',
-    'text!shared/templates/input-view.html' ],
-  function( $, _, Backbone, inputTemplate ) {
-    'use strict';
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'text!shared/templates/input-view.html'
+], function( $, _, Backbone, inputTemplate ) {
+  'use strict';
 
-    var InputView = Backbone.View.extend({
-      template: _.template( inputTemplate ),
+  var InputView = Backbone.View.extend({
+    template: _.template( inputTemplate ),
 
-      events: {
-        'click .input-button.insert': 'insert',
-        'click .input-button.delete': 'delete'
-      },
+    events: {
+      'click .input-button.insert': 'insert',
+      'click .input-button.delete': 'delete'
+    },
 
-      initialize: function() {
-        _.bindAll( this, 'render', 'onKeyDown' );
-        $( document ).bind( 'keydown', this.onKeyDown );
-        this.listenTo( this.model, 'change', this.render );
-      },
+    initialize: function() {
+      _.bindAll( this, 'render', 'onKeyDown' );
+      $( document ).bind( 'keydown', this.onKeyDown );
+      this.listenTo( this.model, 'change', this.render );
+    },
 
-      render: function() {
-        this.$el.html( this.template() );
-        return this;
-      },
+    render: function() {
+      this.$el.html( this.template() );
+      return this;
+    },
 
-      insert: function() {
-        var numbers = this.getInput();
-        numbers.forEach( function( number ) {
-          if ( !isNaN( number ) ) {
-            this.model.insert( number );
-          }
-        }, this ); // Set context to this.
-
-        // We trigger changes here because we want the model to be free of event references.
-        this.model.trigger( 'change' );
-      },
-
-      delete: function() {
-        var numbers = this.getInput();
-        numbers.forEach( function( number ) {
-          if ( !isNaN( number ) ) {
-            var node = this.model.search( number );
-            if ( node ) {
-              this.model.delete( node );
-            }
-          }
-        }, this );
-
-        // And trigger changes here as well.
-        this.model.trigger( 'change' );
-      },
-
-      getInput: function() {
-        var valuesArray = this.$( '.input-value' ).val().split( ',' );
-        return valuesArray.map( function( value ) {
-          return parseInt( value, 10 );
-        });
-      },
-
-      onKeyDown: function( event ) {
-        // Enter.
-        if ( event.which === 13 ) {
-          this.insert();
+    insert: function() {
+      var numbers = this.getInput();
+      numbers.forEach( function( number ) {
+        if ( !isNaN( number ) ) {
+          this.model.insert( number );
         }
-      }
-    });
+      }, this ); // Set context to this.
 
-    return InputView;
-  }
-);
+      // We trigger changes here because we want the model to be free of event references.
+      this.model.trigger( 'change' );
+    },
+
+    delete: function() {
+      var numbers = this.getInput();
+      numbers.forEach( function( number ) {
+        if ( !isNaN( number ) ) {
+          var node = this.model.search( number );
+          if ( node ) {
+            this.model.delete( node );
+          }
+        }
+      }, this );
+
+      // And trigger changes here as well.
+      this.model.trigger( 'change' );
+    },
+
+    getInput: function() {
+      var valuesArray = this.$( '.input-value' ).val().split( ',' );
+      return valuesArray.map( function( value ) {
+        return parseInt( value, 10 );
+      });
+    },
+
+    onKeyDown: function( event ) {
+      // Enter.
+      if ( event.which === 13 ) {
+        this.insert();
+      }
+    }
+  });
+
+  return InputView;
+});

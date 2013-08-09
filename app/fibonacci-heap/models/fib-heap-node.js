@@ -1,12 +1,11 @@
-define(
-  [ 'shared/models/node' ],
-  function( Node ) {
-    'use strict';
+define([
+  'shared/models/node'
+], function( Node ) {
+  'use strict';
 
-    var FibHeapNode = Node.extend({
+  var FibHeapNode = Node.extend({
 
-    });
+  });
 
-    return FibHeapNode;
-  }
-);
+  return FibHeapNode;
+});

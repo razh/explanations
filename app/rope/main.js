@@ -1,12 +1,11 @@
-define(
-  [ 'jquery',
-    'underscore',
-    'backbone' ],
-  function( $, _, Backbone ) {
-    'use strict';
+define([
+  'jquery',
+  'underscore',
+  'backbone'
+], function( $, _, Backbone ) {
+  'use strict';
 
-    console.log( $ );
-    console.log( _ );
-    console.log( Backbone );
-  }
-);
+  console.log( $ );
+  console.log( _ );
+  console.log( Backbone );
+});
