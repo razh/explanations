@@ -11,11 +11,11 @@
   "dependencies": {
     "backbone": "git://github.com/documentcloud/backbone.git#~1.0.0",
     "bootstrap": "git://github.com/twbs/bootstrap.git#~3.0.0-rc1",
-    "d3": "git://github.com/mbostock/d3.git#~3.2.8",
     "jasmine": "git://github.com/pivotal/jasmine.git#~1.3.1",
     "prism": "https://github.com/LeaVerou/prism.git#gh-pages",
     "requirejs-text": "git://github.com/requirejs/text.git#~2.0.10",
     "requirejs": "git://github.com/jrburke/requirejs.git#~2.1.8",
-    "underscore": "git://github.com/documentcloud/underscore.git#~1.5.1"
+    "underscore": "git://github.com/documentcloud/underscore.git#~1.5.1",
+    "d3": "~3.3.0"
   }
 }
