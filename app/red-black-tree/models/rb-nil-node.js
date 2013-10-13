@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'red-black-tree/models/rb-tree-node'
 ], function( RBTreeNode ) {

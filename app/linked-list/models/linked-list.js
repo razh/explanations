@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'backbone',
   'linked-list/models/linked-list-node'

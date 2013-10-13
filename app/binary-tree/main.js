@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'jquery',
   'binary-tree/models/binary-tree',

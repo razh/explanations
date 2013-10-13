@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'linked-list/views/list-view-utils'
 ], function( Utils ) {

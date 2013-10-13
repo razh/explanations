@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'binary-tree/models/binary-tree',
   'red-black-tree/models/rb-tree-node',

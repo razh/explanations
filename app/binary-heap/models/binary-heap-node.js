@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'shared/models/node'
 ], function( Node ) {

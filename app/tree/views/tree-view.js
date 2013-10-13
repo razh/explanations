@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'd3',
   'shared/views/svg-view',

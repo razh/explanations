@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'backbone',
   'fibonacci-heap/models/fib-heap-node'

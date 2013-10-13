@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'd3',
   'binary-tree/views/binary-tree-view'

@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'jquery',
   'red-black-tree/models/rb-tree',

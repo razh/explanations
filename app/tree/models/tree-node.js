@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'shared/models/node'
 ], function( Node ) {
@@ -17,7 +18,7 @@ define([
      * child's parent.
      */
     children: function() {
-      var args = Array.prototype.slice.call( arguments );
+      var args = [].slice.call( arguments );
 
       var that     = this,
           children = this.get( 'children' );

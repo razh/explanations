@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'underscore',
   'shared/models/node'
@@ -18,7 +19,7 @@ define([
     to: function() {
       // The children array is unique and sorted.
       var children = this.get( 'children' ),
-          args     = Array.prototype.slice.call( arguments );
+          args     = [].slice.call( arguments );
 
       var that = this;
       args.forEach(function( arg ) {

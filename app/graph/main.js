@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'jquery',
   'graph/collections/graph',

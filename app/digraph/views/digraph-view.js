@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'graph/views/graph-view',
   'graph/views/graph-view-utils'

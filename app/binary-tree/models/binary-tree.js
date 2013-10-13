@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'tree/models/tree',
   'binary-tree/models/binary-tree-node'
@@ -91,7 +92,7 @@ define([
 
     // Handles functions called on this tree's root.
     rootFn: function() {
-      var args = Array.prototype.slice.call( arguments ),
+      var args = [].slice.call( arguments ),
           fn   = args.shift();
 
       var root = this.get( 'root' );

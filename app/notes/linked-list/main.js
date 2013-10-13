@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'shared/template',
   'linked-list/models/linked-list',

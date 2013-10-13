@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'binary-tree/views/binary-tree-view'
 ], function( BinaryTreeView ) {

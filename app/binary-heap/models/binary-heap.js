@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'backbone',
   'binary-heap/models/binary-heap-node'
