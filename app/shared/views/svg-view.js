@@ -15,8 +15,8 @@ define([
     Note that this uses d3's tree layout (change if necessary).
    */
   var SVGView = D3View.extend({
-    initialize: function() {
-      D3View.prototype.initialize.call( this );
+    initialize: function( options ) {
+      D3View.prototype.initialize.call( this, options );
 
       if ( this.model ) {
         this.listenTo( this.model, 'change', this.render );
@@ -37,7 +37,7 @@ define([
       D3View.prototype.resize.call( this );
 
       // Add margins.
-      var margin = this.options.margin;
+      var margin = this.margin;
       this.vis.selectAll( 'g' )
         .attr( 'transform', 'translate(' + margin.left + ', ' + margin.top + ')' );
     },

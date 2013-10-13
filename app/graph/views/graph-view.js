@@ -18,8 +18,8 @@ define([
       radius   = Utils.radius;
 
   var GraphView = SVGView.extend({
-    initialize: function() {
-      SVGView.prototype.initialize.call( this );
+    initialize: function( options ) {
+      SVGView.prototype.initialize.call( this, options );
       this.listenTo( this.collection, 'change add remove', this.render );
 
       this.force = d3.layout.force()
@@ -30,7 +30,7 @@ define([
       this.tree = d3.layout.tree();
 
       // The graph view takes up the whole space.
-      this.options.margin = {
+      this.margin = {
         top:    0,
         right:  0,
         bottom: 0,

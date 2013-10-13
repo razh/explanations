@@ -15,8 +15,8 @@ define([
       dark  = '#555';
 
   var ArrayView = D3View.extend({
-    initialize: function() {
-      D3View.prototype.initialize.call( this );
+    initialize: function( options ) {
+      D3View.prototype.initialize.call( this, options );
       this.listenTo( this.model, 'change', this.render );
 
       this.vis = this.vis.append( 'table' );

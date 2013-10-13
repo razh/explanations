@@ -6,19 +6,14 @@ define([
   'use strict';
 
   var D3View = Backbone.View.extend({
-    options: function() {
-      return {
-        // Default margins.
-        margin: {
-          top:    25,
-          right:  25,
-          bottom: 25,
-          left:   25
-        }
-      };
+    margin: {
+      top:    25,
+      right:  25,
+      bottom: 25,
+      left:   25
     },
 
-    initialize: function() {
+    initialize: function( options ) {
       _.bindAll( this, 'render' );
 
       // Select d3 element.
@@ -30,13 +25,17 @@ define([
 
       // Scaling functions.
       this.x = this.y = null;
+
+      if ( options && !_.isUndefined( options.margin ) ) {
+        this.margin = options.margin;
+      }
     },
 
     /**
      * Resizes the view to fit the viewport.
      */
     resize: function() {
-      var margin = this.options.margin;
+      var margin = this.margin;
 
       this.outerWidth  = this.el ? this.el.clientWidth  : 0;
       this.outerHeight = this.el ? this.el.clientHeight : 0;

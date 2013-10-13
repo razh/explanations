@@ -10,8 +10,8 @@ define([
       binaryChildren = Utils.binaryChildren;
 
   var BinaryTreeView = TreeView.extend({
-    initialize: function() {
-      TreeView.prototype.initialize.call( this );
+    initialize: function( options ) {
+      TreeView.prototype.initialize.call( this, options );
       this.tree = this.tree.children( binaryChildren );
     },
 

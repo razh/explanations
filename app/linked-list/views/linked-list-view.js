@@ -20,8 +20,8 @@ define([
       height       = Utils.height;
 
   var LinkedListView = SVGView.extend({
-    initialize: function() {
-      SVGView.prototype.initialize.call( this );
+    initialize: function( options ) {
+      SVGView.prototype.initialize.call( this, options );
 
       // d3 configuration.
       this.tree = d3.layout.tree()

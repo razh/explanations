@@ -32,7 +32,7 @@ define([
       });
 
       // Normal remove.
-      Backbone.Collection.prototype.remove.call( this, node );
+      return Backbone.Collection.prototype.remove.call( this, node );
     }
   });
 

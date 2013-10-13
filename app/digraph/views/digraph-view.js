@@ -5,8 +5,8 @@ define([
   'use strict';
 
   var DigraphView = GraphView.extend({
-    initialize: function() {
-      GraphView.prototype.initialize.call( this );
+    initialize: function( options ) {
+      GraphView.prototype.initialize.call( this, options );
 
       this.vis.append( 'defs' )
         .append( 'marker' )
