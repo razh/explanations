@@ -1,58 +1,68 @@
 /**
- * prism.js Funky theme
- * Based on “Polyfilling the gaps” talk slides http://lea.verou.me/polyfilling-the-gaps/
+ * prism.js Dark theme for JavaScript, CSS and HTML
+ * Based on the slides of the talk “/Reg(exp){2}lained/”
  * @author Lea Verou
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
+	color: white;
+	text-shadow: 0 -.1em .2em black;
 	font-family: Consolas, Monaco, 'Andale Mono', monospace;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
-	
+
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
 	tab-size: 4;
-	
+
 	-webkit-hyphens: none;
 	-moz-hyphens: none;
 	-ms-hyphens: none;
 	hyphens: none;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-	padding: .4em .8em;
-	margin: .5em 0;
-	overflow: auto;
-	background: url('data:image/svg+xml;charset=utf-8,<svg%20version%3D"1.1"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20width%3D"100"%20height%3D"100"%20fill%3D"rgba(0%2C0%2C0%2C.2)">%0D%0A<polygon%20points%3D"0%2C50%2050%2C0%200%2C0"%20%2F>%0D%0A<polygon%20points%3D"0%2C100%2050%2C100%20100%2C50%20100%2C0"%20%2F>%0D%0A<%2Fsvg>');
-	background-size: 1em 1em;
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
 }
 
-code[class*="language-"] {
-	background: black;
-	color: white;
-	box-shadow: -.3em 0 0 .3em black, .3em 0 0 .3em black;
+pre[class*="language-"],
+:not(pre) > code[class*="language-"] {
+	background: hsl(30,20%,25%);
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border: .3em solid hsl(30,20%,40%);
+	border-radius: .5em;
+	box-shadow: 1px 1px .5em black inset;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .2em;
+	padding: .15em .2em .05em;
 	border-radius: .3em;
-	box-shadow: none;
+	border: .13em solid hsl(30,20%,40%);
+	box-shadow: 1px 1px .3em -.1em black inset;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #aaa;
+	color: hsl(30,20%,50%);
 }
 
 .token.punctuation {
-	color: #999;
+	opacity: .7;
 }
 
 .namespace {
@@ -62,33 +72,38 @@ code[class*="language-"] {
 .token.property,
 .token.tag,
 .token.boolean,
-.token.number {
-	color: #0cf;
+.token.number,
+.token.constant,
+.token.symbol {
+	color: hsl(350, 40%, 70%);
 }
 
 .token.selector,
 .token.attr-name,
-.token.string {
-	color: yellow;
+.token.string,
+.token.builtin {
+	color: hsl(75, 70%, 60%);
 }
 
 .token.operator,
 .token.entity,
 .token.url,
-.language-css .token.string {
-	color: yellowgreen;
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: hsl(40, 90%, 60%);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: deeppink;
+	color: hsl(350, 40%, 70%);
 }
 
 
 .token.regex,
 .token.important {
-	color: orange;
+	color: #e90;
 }
 
 .token.important {

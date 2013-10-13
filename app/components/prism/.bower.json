@@ -23,13 +23,14 @@
     "code.js",
     "components.js"
   ],
-  "_release": "gh-pages",
+  "_release": "d7b3cc846d",
   "_resolution": {
     "type": "branch",
     "branch": "gh-pages",
-    "commit": "58bab7a8e5f55b1a5d384b812c9c702a35560916"
+    "commit": "d7b3cc846d54b3dd823562df1239bc217e07ab23"
   },
-  "_source": "https://github.com/LeaVerou/prism.git",
+  "_source": "git://github.com/LeaVerou/prism.git",
   "_target": "gh-pages",
-  "_originalSource": "https://github.com/LeaVerou/prism.git"
+  "_originalSource": "prism",
+  "_direct": true
 }
